@@ -71,7 +71,7 @@ export default function Header({ onOpenForm, scrollToSection }: HeaderProps) {
           {/* Logo */}
           <div className="flex-shrink-0">
             <img
-              src="/7.jpg"
+              src="/logo-selvandentro_tulum.webp"
               alt="Selvadentro"
               className="h-12 w-auto"
             />
