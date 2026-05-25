@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, Loader2, Home, TrendingUp, Flower, Clock, DollarSign, Check } from 'lucide-react';
+import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
+import type { Value as PhoneValue } from 'react-phone-number-input';
 import { captureTrackingParams, getStoredTrackingParams } from '../utils/tracking';
 import { submitToGHL, FormData } from '../utils/webhook';
 
@@ -126,7 +128,11 @@ export default function MultiStepForm() {
         } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
           newErrors.email = 'Please enter a valid email';
         }
-        if (!formData.phone.trim()) newErrors.phone = 'Phone is required';
+        if (!formData.phone.trim()) {
+          newErrors.phone = 'Phone is required';
+        } else if (!isValidPhoneNumber(formData.phone)) {
+          newErrors.phone = 'Please enter a valid phone number (include country code)';
+        }
         break;
     }
 
@@ -363,15 +369,24 @@ export default function MultiStepForm() {
               <label className="block text-sm font-medium text-stone-700 mb-2">
                 Phone <span className="text-red-500">*</span>
               </label>
-              <input
-                type="tel"
-                value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-olive ${
+              <div
+                className={`phone-input-shell px-4 py-3 border-2 rounded-lg bg-white transition focus-within:ring-2 focus-within:ring-brand-olive ${
                   errors.phone ? 'border-red-500' : 'border-stone-200'
                 }`}
-                placeholder="+1 (555) 000-0000"
-              />
+              >
+                <PhoneInput
+                  international
+                  defaultCountry="US"
+                  countryCallingCodeEditable={false}
+                  value={(formData.phone || undefined) as PhoneValue | undefined}
+                  onChange={(value) =>
+                    setFormData({ ...formData, phone: (value as string) || '' })
+                  }
+                  placeholder="555 000 0000"
+                  autoComplete="tel"
+                  numberInputProps={{ 'aria-label': 'Phone' }}
+                />
+              </div>
               {errors.phone && <p className="text-sm text-red-600 mt-1">{errors.phone}</p>}
             </div>
 

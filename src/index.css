@@ -78,29 +78,23 @@
   }
 }
 
-/* react-phone-number-input — match brand input styling on squeeze pages */
-.squeeze-phone-shell {
+/* react-phone-number-input — shared internal styling.
+   Wrap PhoneInput in: <div class="phone-input-shell [Tailwind classes for outer look]">.
+   The outer wrapper (border, padding, focus ring) is set with Tailwind utilities
+   on each consumer so squeeze (border-1) and OG multi-step (border-2) can differ. */
+.phone-input-shell {
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 0.75rem 1rem;
-  border: 1px solid rgb(214 211 209); /* stone-300 */
-  border-radius: 0.5rem;
-  background: #fff;
-  transition: border-color 0.15s, box-shadow 0.15s;
 }
-.squeeze-phone-shell:focus-within {
-  border-color: #65713F; /* brand-olive */
-  box-shadow: 0 0 0 3px rgba(101, 113, 63, 0.18);
-}
-.squeeze-phone-shell .PhoneInput {
+.phone-input-shell .PhoneInput {
   width: 100%;
   gap: 0.5rem;
 }
-.squeeze-phone-shell .PhoneInputCountry {
+.phone-input-shell .PhoneInputCountry {
   margin-right: 0.5rem;
 }
-.squeeze-phone-shell .PhoneInputInput {
+.phone-input-shell .PhoneInputInput {
   flex: 1;
   border: none;
   outline: none;
@@ -110,6 +104,6 @@
   color: inherit;
   min-width: 0;
 }
-.squeeze-phone-shell .PhoneInputInput::placeholder {
+.phone-input-shell .PhoneInputInput::placeholder {
   color: rgb(168 162 158); /* stone-400 */
 }

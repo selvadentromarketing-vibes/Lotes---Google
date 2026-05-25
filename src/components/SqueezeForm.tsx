@@ -120,7 +120,7 @@ export default function SqueezeForm({ angle, ctaLabel }: SqueezeFormProps) {
           <span className="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1">
             Teléfono <span className="text-brand-copper">*</span>
           </span>
-          <div className="squeeze-phone-shell">
+          <div className="phone-input-shell px-4 py-3 border border-stone-300 rounded-lg bg-white transition focus-within:border-brand-olive focus-within:ring-2 focus-within:ring-brand-olive/30">
             <PhoneInput
               international
               defaultCountry="MX"
