@@ -1,5 +1,7 @@
 import { useState, FormEvent } from 'react';
 import { Loader2, CheckCircle2 } from 'lucide-react';
+import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
+import type { Value as PhoneValue } from 'react-phone-number-input';
 import {
   SqueezeAngle,
   submitSqueezeLead,
@@ -21,7 +23,7 @@ const splitName = (full: string): { first: string; last: string } => {
 
 export default function SqueezeForm({ angle, ctaLabel }: SqueezeFormProps) {
   const [fullName, setFullName] = useState('');
-  const [phone, setPhone] = useState('');
+  const [phone, setPhone] = useState<PhoneValue | undefined>(undefined);
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -30,15 +32,14 @@ export default function SqueezeForm({ angle, ctaLabel }: SqueezeFormProps) {
     e.preventDefault();
     setErrorMessage(null);
 
-    if (!fullName.trim() || !phone.trim() || !email.trim()) {
+    if (!fullName.trim() || !phone || !email.trim()) {
       setErrorMessage('Por favor completa todos los campos.');
       return;
     }
 
-    // Light phone validation: at least 8 digits
-    const digits = phone.replace(/\D/g, '');
-    if (digits.length < 8) {
-      setErrorMessage('Por favor ingresa un teléfono válido.');
+    // libphonenumber-backed validation via react-phone-number-input
+    if (!isValidPhoneNumber(phone)) {
+      setErrorMessage('Por favor ingresa un teléfono válido (incluye lada).');
       return;
     }
 
@@ -53,7 +54,7 @@ export default function SqueezeForm({ angle, ctaLabel }: SqueezeFormProps) {
         first_name: first,
         last_name: last,
         email: email.trim(),
-        phone: phone.trim(),
+        phone, // E.164 format from react-phone-number-input, e.g. +5219841374927
       },
       tracking,
     );
@@ -119,16 +120,18 @@ export default function SqueezeForm({ angle, ctaLabel }: SqueezeFormProps) {
           <span className="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1">
             Teléfono <span className="text-brand-copper">*</span>
           </span>
-          <input
-            type="tel"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-olive/40 focus:border-brand-olive transition"
-            placeholder="+52 984 ..."
-            autoComplete="tel"
-            inputMode="tel"
-            required
-          />
+          <div className="squeeze-phone-shell">
+            <PhoneInput
+              international
+              defaultCountry="MX"
+              countryCallingCodeEditable={false}
+              value={phone}
+              onChange={setPhone}
+              placeholder="984 137 4927"
+              autoComplete="tel"
+              numberInputProps={{ 'aria-label': 'Teléfono', required: true }}
+            />
+          </div>
         </label>
 
         <label className="block">
