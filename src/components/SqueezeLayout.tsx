@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { CheckCircle2 } from 'lucide-react';
 import VSL from './VSL';
 import SqueezeForm from './SqueezeForm';
-import PlaceholderTestimonials from './PlaceholderTestimonials';
+import Testimonials from './Testimonials';
 import { SqueezeContent, SQUEEZE_VSL_MEDIA_ID } from '../config/squeezeContent';
 import { captureTrackingParams } from '../utils/tracking';
 
@@ -112,8 +112,8 @@ export default function SqueezeLayout({ content }: SqueezeLayoutProps) {
         </div>
       </section>
 
-      {/* TESTIMONIALS (placeholder) */}
-      <PlaceholderTestimonials />
+      {/* TESTIMONIALS — real buyer quotes (Ricardo Garza, Shawn) */}
+      <Testimonials />
 
       {/* CLOSING CTA — secondary form trigger for users who scroll past the hero one */}
       <section className="py-16 px-4 sm:px-6 bg-brand-dark-green text-center">
