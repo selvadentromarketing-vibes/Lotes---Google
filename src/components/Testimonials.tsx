@@ -11,7 +11,7 @@ export default function Testimonials() {
     },
     {
       quote:
-        'In a world moving too fast, Selvadentro Tulum feels like peace built into the jungle.',
+        'En un mundo que avanza demasiado rápido, Selvadentro Tulum se siente como paz construida en la selva.',
       name: 'Shawn',
     },
   ];
