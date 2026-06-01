@@ -54,7 +54,7 @@ export default function SqueezeForm({ angle, ctaLabel }: SqueezeFormProps) {
         first_name: first,
         last_name: last,
         email: email.trim(),
-        phone, // E.164 format from react-phone-number-input, e.g. +5219841374927
+        phone, // E.164 format from react-phone-number-input, e.g. +5219994890828
       },
       tracking,
     );
@@ -69,7 +69,7 @@ export default function SqueezeForm({ angle, ctaLabel }: SqueezeFormProps) {
     } else {
       setStatus('error');
       setErrorMessage(
-        'No pudimos enviar tu solicitud. Por favor intenta de nuevo o llámanos al +52 984 137 4927.',
+        'No pudimos enviar tu solicitud. Por favor intenta de nuevo o llámanos al +52 999 489 0828.',
       );
     }
   };
@@ -128,7 +128,7 @@ export default function SqueezeForm({ angle, ctaLabel }: SqueezeFormProps) {
               countryCallingCodeEditable={false}
               value={phone}
               onChange={setPhone}
-              placeholder="984 137 4927"
+              placeholder="999 489 0828"
               autoComplete="tel"
               numberInputProps={{ 'aria-label': 'Teléfono', required: true }}
             />

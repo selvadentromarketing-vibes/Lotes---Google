@@ -383,7 +383,7 @@ export default function MultiStepFormES() {
                   onChange={(value) =>
                     setFormData({ ...formData, phone: (value as string) || '' })
                   }
-                  placeholder="984 137 4927"
+                  placeholder="999 489 0828"
                   autoComplete="tel"
                   numberInputProps={{ 'aria-label': 'Teléfono' }}
                 />
