@@ -11,6 +11,7 @@ import SqueezeEscape from './pages/SqueezeEscape';
 import SqueezeOportunidadPerdida from './pages/SqueezeOportunidadPerdida';
 import SqueezeAccesibilidad from './pages/SqueezeAccesibilidad';
 import SqueezeSeguridad from './pages/SqueezeSeguridad';
+import SqueezeThankYou from './pages/SqueezeThankYou';
 
 function App() {
   return (
@@ -27,6 +28,8 @@ function App() {
         <Route path="/oportunidad-perdida" element={<SqueezeOportunidadPerdida />} />
         <Route path="/accesibilidad" element={<SqueezeAccesibilidad />} />
         <Route path="/seguridad" element={<SqueezeSeguridad />} />
+        {/* Per-angle thank-you pages — one URL per angle for ad-platform tracking */}
+        <Route path="/gracias/:angle" element={<SqueezeThankYou />} />
       </Routes>
     </Router>
   );

@@ -61,9 +61,10 @@ export default function SqueezeForm({ angle, ctaLabel }: SqueezeFormProps) {
 
     if (result.success) {
       setStatus('success');
-      // Defer navigation so success message is visible briefly + Pixel/gtag flush.
+      // Per-angle thank-you URL so Meta + Google Ads can fire conversion pixels
+      // distinct per angle (e.g., /gracias/escape vs /gracias/oportunidad-perdida).
       setTimeout(() => {
-        window.location.href = '/es/thank-you';
+        window.location.href = `/gracias/${angle}`;
       }, 800);
     } else {
       setStatus('error');
