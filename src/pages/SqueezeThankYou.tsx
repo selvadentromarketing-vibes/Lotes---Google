@@ -103,10 +103,11 @@ export default function SqueezeThankYou() {
               href={`https://wa.me/5219994890828?text=${whatsappMessage}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-olive text-white rounded-full hover:bg-brand-dark-green transition-all font-medium shadow-lg hover:shadow-xl"
+              className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-4 bg-brand-olive text-white rounded-full hover:bg-brand-dark-green transition-all font-medium shadow-lg hover:shadow-xl whitespace-nowrap"
             >
               <MessageCircle className="w-5 h-5" />
-              Enviar mensaje por WhatsApp
+              <span className="sm:hidden">Mensaje por WhatsApp</span>
+              <span className="hidden sm:inline">Enviar mensaje por WhatsApp</span>
             </a>
 
             <a
