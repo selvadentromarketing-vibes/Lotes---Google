@@ -13,6 +13,20 @@
 
     <script src="https://t.contentsquare.net/uxa/213def49ed92d.js"></script>
 
+    <!-- Meta Pixel — base init + automatic PageView. noscript fallback lives in <body>. -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '680727997874671');
+      fbq('track', 'PageView');
+    </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Selvadentro Tulum — Residential Lots in the Jungle | Tierra de Cenotes</title>
@@ -34,6 +48,9 @@
     <meta name="twitter:image" content="/og-image.jpg" />
   </head>
   <body>
+    <!-- Meta Pixel — noscript fallback for clients with JS disabled. -->
+    <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=680727997874671&ev=PageView&noscript=1" /></noscript>
+
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

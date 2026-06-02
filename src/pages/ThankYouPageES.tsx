@@ -9,6 +9,10 @@ export default function ThankYouPageES() {
         send_to: 'AW-16717627054/4jnsCKrQ3dQbEK79yqM-',
       });
     }
+    // Meta Pixel Lead event — pixel base is installed in index.html.
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      (window as any).fbq('track', 'Lead');
+    }
   }, []);
 
   const whatsappMessage = encodeURIComponent(

@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import TrebolaLandingPage from './pages/TrebolaLandingPage';
 import ThankYouPage from './pages/ThankYouPage';
 import TrebolaLandingPageES from './pages/TrebolaLandingPageES';
@@ -13,9 +14,29 @@ import SqueezeAccesibilidad from './pages/SqueezeAccesibilidad';
 import SqueezeSeguridad from './pages/SqueezeSeguridad';
 import SqueezeThankYou from './pages/SqueezeThankYou';
 
+// Fire Meta Pixel PageView on SPA route changes.
+// Initial page load already fires PageView from the script in index.html;
+// the ref skips the first run so we don't double-fire.
+function MetaPixelRouteTracker() {
+  const location = useLocation();
+  const isInitial = useRef(true);
+  useEffect(() => {
+    if (isInitial.current) {
+      isInitial.current = false;
+      return;
+    }
+    const w = window as Window & { fbq?: (...args: unknown[]) => void };
+    if (typeof w.fbq === 'function') {
+      w.fbq('track', 'PageView');
+    }
+  }, [location.pathname]);
+  return null;
+}
+
 function App() {
   return (
     <Router>
+      <MetaPixelRouteTracker />
       <Routes>
         <Route path="/" element={<TrebolaLandingPage />} />
         <Route path="/2" element={<LandingPage2 />} />
