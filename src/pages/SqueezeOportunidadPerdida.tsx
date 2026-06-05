@@ -1,6 +1,7 @@
 import SqueezeLayout from '../components/SqueezeLayout';
-import { SQUEEZE_CONTENT } from '../config/squeezeContent';
+import type { SqueezeLang } from '../config/squeezeContent';
 
-export default function SqueezeOportunidadPerdida() {
-  return <SqueezeLayout content={SQUEEZE_CONTENT['oportunidad-perdida']} />;
+interface Props { lang?: SqueezeLang; }
+export default function SqueezeOportunidadPerdida({ lang = 'es' }: Props) {
+  return <SqueezeLayout angle="oportunidad-perdida" lang={lang} />;
 }

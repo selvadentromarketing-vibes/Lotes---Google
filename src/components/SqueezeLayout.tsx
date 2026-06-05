@@ -3,15 +3,27 @@ import { CheckCircle2 } from 'lucide-react';
 import VSL from './VSL';
 import SqueezeForm from './SqueezeForm';
 import Testimonials from './Testimonials';
-import { SqueezeContent, SQUEEZE_VSL_MEDIA_ID } from '../config/squeezeContent';
+import {
+  SQUEEZE_CONTENT,
+  SQUEEZE_VSL_MEDIA_ID,
+  SQUEEZE_LAYOUT_T,
+  type SqueezeLang,
+} from '../config/squeezeContent';
+import type { SqueezeAngle } from '../utils/squeezeWebhook';
 import { captureTrackingParams } from '../utils/tracking';
 
 interface SqueezeLayoutProps {
-  content: SqueezeContent;
+  angle: SqueezeAngle;
+  lang?: SqueezeLang;
 }
 
-export default function SqueezeLayout({ content }: SqueezeLayoutProps) {
-  // Capture UTM/gclid into localStorage on first paint so form submission sees them.
+export default function SqueezeLayout({ angle, lang = 'es' }: SqueezeLayoutProps) {
+  const content = SQUEEZE_CONTENT[angle][lang];
+  const t = SQUEEZE_LAYOUT_T[lang];
+  const otherLang: SqueezeLang = lang === 'es' ? 'en' : 'es';
+  const swapPath = lang === 'es' ? `/en/${angle}` : `/${angle}`;
+  const copyrightSuffix = lang === 'en' ? 'All rights reserved' : 'Todos los derechos reservados';
+
   useEffect(() => {
     captureTrackingParams();
     document.title = `${content.headline} | Selvadentro Tulum`;
@@ -19,7 +31,7 @@ export default function SqueezeLayout({ content }: SqueezeLayoutProps) {
 
   return (
     <div className="min-h-screen bg-[#ECE5D8] font-lexend">
-      {/* MINIMAL HEADER — single logo, no nav (squeeze pages stay friction-free) */}
+      {/* MINIMAL HEADER */}
       <header className="absolute top-0 left-0 right-0 z-30 px-4 sm:px-6 lg:px-10 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <a href="https://lotes.selvadentrotulum.com/" aria-label="Selvadentro">
@@ -31,16 +43,25 @@ export default function SqueezeLayout({ content }: SqueezeLayoutProps) {
               height="44"
             />
           </a>
-          <a
-            href="tel:+529994890828"
-            className="hidden sm:inline-block text-white/85 hover:text-white text-sm tracking-wide"
-          >
-            +52 999 489 0828
-          </a>
+          <div className="flex items-center gap-3 sm:gap-5">
+            <a
+              href={swapPath}
+              className="text-[11px] font-semibold tracking-widest text-white/75 hover:text-white px-2 transition"
+              title={`Switch to ${otherLang.toUpperCase()}`}
+            >
+              {lang.toUpperCase()} · <span className="text-brand-copper underline">{otherLang.toUpperCase()}</span>
+            </a>
+            <a
+              href="tel:+529994890828"
+              className="hidden sm:inline-block text-white/85 hover:text-white text-sm tracking-wide"
+            >
+              +52 999 489 0828
+            </a>
+          </div>
         </div>
       </header>
 
-      {/* HERO + VSL + FORM (above the fold on desktop) */}
+      {/* HERO + VSL + FORM */}
       <section
         className="relative pt-24 pb-16 sm:pt-28 sm:pb-20 px-4 sm:px-6 lg:px-10 overflow-hidden"
         style={{
@@ -51,7 +72,6 @@ export default function SqueezeLayout({ content }: SqueezeLayoutProps) {
       >
         <div className="relative max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-5 gap-10 lg:gap-12 items-start">
-            {/* LEFT — copy + VSL */}
             <div className="lg:col-span-3 text-white">
               <span className="inline-block text-brand-copper text-xs sm:text-sm font-semibold tracking-widest uppercase mb-4">
                 {content.eyebrow}
@@ -66,12 +86,10 @@ export default function SqueezeLayout({ content }: SqueezeLayoutProps) {
                 {content.subhead}
               </p>
 
-              {/* VSL */}
               <div className="mb-8 max-w-2xl">
-                <VSL mediaId={SQUEEZE_VSL_MEDIA_ID} language="es" />
+                <VSL mediaId={SQUEEZE_VSL_MEDIA_ID} language={lang} />
               </div>
 
-              {/* USP highlights */}
               <ul className="space-y-2.5 max-w-xl">
                 {content.highlights.map((h, i) => (
                   <li key={i} className="flex items-start gap-3 text-white/90 text-sm sm:text-base">
@@ -82,48 +100,43 @@ export default function SqueezeLayout({ content }: SqueezeLayoutProps) {
               </ul>
             </div>
 
-            {/* RIGHT — form (sticky on desktop, inline on mobile) */}
             <div className="lg:col-span-2">
               <div className="lg:sticky lg:top-24">
-                <SqueezeForm angle={content.slug} ctaLabel={content.ctaLabel} />
+                <SqueezeForm angle={content.slug} ctaLabel={content.ctaLabel} lang={lang} />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* TRUST STRIP — between hero and testimonials */}
+      {/* TRUST STRIP */}
       <section className="bg-brand-dark-green py-6 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-center gap-x-8 sm:gap-x-12 gap-y-3 text-center">
           <div className="text-white/85">
             <span className="font-cardo text-2xl font-bold text-brand-copper">20+</span>
-            <span className="ml-2 text-xs sm:text-sm uppercase tracking-wider">años en bienes raíces</span>
+            <span className="ml-2 text-xs sm:text-sm uppercase tracking-wider">{t.trustYears}</span>
           </div>
           <div className="hidden sm:block w-px h-8 bg-white/20" />
           <div className="text-white/85">
             <span className="font-cardo text-2xl font-bold text-brand-copper">12</span>
-            <span className="ml-2 text-xs sm:text-sm uppercase tracking-wider">proyectos entregados</span>
+            <span className="ml-2 text-xs sm:text-sm uppercase tracking-wider">{t.trustProjects}</span>
           </div>
           <div className="hidden sm:block w-px h-8 bg-white/20" />
           <div className="text-white/85">
             <span className="font-cardo text-2xl font-bold text-brand-copper">100%</span>
-            <span className="ml-2 text-xs sm:text-sm uppercase tracking-wider">escrituras</span>
+            <span className="ml-2 text-xs sm:text-sm uppercase tracking-wider">{t.trustDeeded}</span>
           </div>
         </div>
       </section>
 
-      {/* TESTIMONIALS — real buyer quotes (Ricardo Garza, Shawn) */}
-      <Testimonials />
+      {/* TESTIMONIALS */}
+      <Testimonials lang={lang} />
 
-      {/* CLOSING CTA — secondary form trigger for users who scroll past the hero one */}
+      {/* CLOSING CTA */}
       <section className="py-16 px-4 sm:px-6 bg-brand-dark-green text-center">
         <div className="max-w-2xl mx-auto text-white">
-          <h2 className="font-cardo text-3xl sm:text-4xl font-bold mb-3">
-            ¿Listo para asegurar tu lote?
-          </h2>
-          <p className="text-white/80 mb-6">
-            Solo quedan 8 lotes al precio de Fase 1. Cada 10 lotes vendidos, el precio sube 1%.
-          </p>
+          <h2 className="font-cardo text-3xl sm:text-4xl font-bold mb-3">{t.closingTitle}</h2>
+          <p className="text-white/80 mb-6">{t.closingBody}</p>
           <a
             href="#top"
             onClick={(e) => {
@@ -137,10 +150,10 @@ export default function SqueezeLayout({ content }: SqueezeLayoutProps) {
         </div>
       </section>
 
-      {/* FOOTER — minimal */}
+      {/* FOOTER */}
       <footer className="bg-[#1F2A22] text-white/60 text-xs py-6 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-          <span>© {new Date().getFullYear()} Selvadentro Tulum · Todos los derechos reservados</span>
+          <span>© {new Date().getFullYear()} Selvadentro Tulum · {copyrightSuffix}</span>
           <span>
             <a href="tel:+529994890828" className="hover:text-white">+52 999 489 0828</a>
             <span className="mx-2">·</span>

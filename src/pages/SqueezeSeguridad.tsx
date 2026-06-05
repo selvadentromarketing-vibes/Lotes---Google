@@ -1,6 +1,7 @@
 import SqueezeLayout from '../components/SqueezeLayout';
-import { SQUEEZE_CONTENT } from '../config/squeezeContent';
+import type { SqueezeLang } from '../config/squeezeContent';
 
-export default function SqueezeSeguridad() {
-  return <SqueezeLayout content={SQUEEZE_CONTENT.seguridad} />;
+interface Props { lang?: SqueezeLang; }
+export default function SqueezeSeguridad({ lang = 'es' }: Props) {
+  return <SqueezeLayout angle="seguridad" lang={lang} />;
 }

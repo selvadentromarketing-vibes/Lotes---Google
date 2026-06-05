@@ -44,13 +44,20 @@ function App() {
         <Route path="/es" element={<TrebolaLandingPageES />} />
         <Route path="/es/2" element={<LandingPage2ES />} />
         <Route path="/es/thank-you" element={<ThankYouPageES />} />
-        {/* Squeeze variants — Spanish-first */}
-        <Route path="/escape" element={<SqueezeEscape />} />
-        <Route path="/oportunidad-perdida" element={<SqueezeOportunidadPerdida />} />
-        <Route path="/accesibilidad" element={<SqueezeAccesibilidad />} />
-        <Route path="/seguridad" element={<SqueezeSeguridad />} />
+        {/* Squeeze variants — Spanish at root (legacy, matches Meta ad URLs)
+            and English under /en/. Both share the same SqueezeLayout that
+            picks copy from squeezeContent based on the `lang` prop. */}
+        <Route path="/escape" element={<SqueezeEscape lang="es" />} />
+        <Route path="/oportunidad-perdida" element={<SqueezeOportunidadPerdida lang="es" />} />
+        <Route path="/accesibilidad" element={<SqueezeAccesibilidad lang="es" />} />
+        <Route path="/seguridad" element={<SqueezeSeguridad lang="es" />} />
+        <Route path="/en/escape" element={<SqueezeEscape lang="en" />} />
+        <Route path="/en/oportunidad-perdida" element={<SqueezeOportunidadPerdida lang="en" />} />
+        <Route path="/en/accesibilidad" element={<SqueezeAccesibilidad lang="en" />} />
+        <Route path="/en/seguridad" element={<SqueezeSeguridad lang="en" />} />
         {/* Per-angle thank-you pages — one URL per angle for ad-platform tracking */}
-        <Route path="/gracias/:angle" element={<SqueezeThankYou />} />
+        <Route path="/gracias/:angle" element={<SqueezeThankYou lang="es" />} />
+        <Route path="/en/gracias/:angle" element={<SqueezeThankYou lang="en" />} />
       </Routes>
     </Router>
   );

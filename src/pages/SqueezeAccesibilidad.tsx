@@ -1,6 +1,7 @@
 import SqueezeLayout from '../components/SqueezeLayout';
-import { SQUEEZE_CONTENT } from '../config/squeezeContent';
+import type { SqueezeLang } from '../config/squeezeContent';
 
-export default function SqueezeAccesibilidad() {
-  return <SqueezeLayout content={SQUEEZE_CONTENT.accesibilidad} />;
+interface Props { lang?: SqueezeLang; }
+export default function SqueezeAccesibilidad({ lang = 'es' }: Props) {
+  return <SqueezeLayout angle="accesibilidad" lang={lang} />;
 }

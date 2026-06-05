@@ -1,6 +1,7 @@
 import SqueezeLayout from '../components/SqueezeLayout';
-import { SQUEEZE_CONTENT } from '../config/squeezeContent';
+import type { SqueezeLang } from '../config/squeezeContent';
 
-export default function SqueezeEscape() {
-  return <SqueezeLayout content={SQUEEZE_CONTENT.escape} />;
+interface Props { lang?: SqueezeLang; }
+export default function SqueezeEscape({ lang = 'es' }: Props) {
+  return <SqueezeLayout angle="escape" lang={lang} />;
 }
