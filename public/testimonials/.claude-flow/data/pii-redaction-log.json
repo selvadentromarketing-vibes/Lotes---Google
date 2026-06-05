@@ -1,0 +1,13 @@
+[
+  {
+    "timestamp": "2026-06-05T18:14:53.509Z",
+    "tool": "bash",
+    "redacted": [
+      {
+        "type": "Possible Mnemonic Seed",
+        "count": 1
+      }
+    ],
+    "inputLength": 168
+  }
+]

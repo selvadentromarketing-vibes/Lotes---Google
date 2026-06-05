@@ -2,43 +2,59 @@ import { SQUEEZE_LAYOUT_T, type SqueezeLang } from '../config/squeezeContent';
 
 /**
  * Real buyer testimonials for the squeeze landings.
- * Sourced from Selvadentro 2026-05 — names + quotes only, no photos by request.
+ * Sourced from Selvadentro 2026-05.
+ *
+ * The cards are pre-designed images with quote + name baked in
+ * (created by Selvadentro's design team). Files live in
+ * `public/testimonials/`. Quote text + name in `QUOTES` below is
+ * kept only as alt text for accessibility / SEO.
+ *
+ * Language note: Shawn's card is English, Ricardo's is Spanish.
+ * Both are shown on both /es and /en pages — the mismatch reads
+ * as "in the buyer's own words" rather than a bug. Swap to
+ * matched-language versions once design provides them.
  */
 
 interface TestimonialsProps {
   lang?: SqueezeLang;
 }
 
-const QUOTES: Record<SqueezeLang, { quote: string; name: string }[]> = {
+type TestimonialRow = {
+  src: string;
+  alt: string;
+  name: string;
+};
+
+const TESTIMONIALS: Record<SqueezeLang, TestimonialRow[]> = {
   es: [
     {
-      quote:
-        'La seguridad que sentí en el proyecto y la experiencia de recorrer Selvadentro hicieron que tomara la decisión.',
+      src: '/testimonials/ricardo-garza.webp',
+      alt: 'Ricardo Garza — "La seguridad que sentí en el proyecto y la experiencia de recorrer Selvadentro hicieron que tomara la decisión."',
       name: 'Ricardo Garza',
     },
     {
-      quote:
-        'En un mundo que avanza demasiado rápido, Selvadentro Tulum se siente como paz construida en la selva.',
+      src: '/testimonials/shawn.webp',
+      alt: 'Shawn — "In a world moving too fast, Selvadentro Tulum feels like peace built into the jungle."',
       name: 'Shawn',
     },
   ],
   en: [
     {
-      quote:
-        'The security I felt with the project and the experience of walking through Selvadentro made the decision for me.',
-      name: 'Ricardo Garza',
+      src: '/testimonials/shawn.webp',
+      alt: 'Shawn — "In a world moving too fast, Selvadentro Tulum feels like peace built into the jungle."',
+      name: 'Shawn',
     },
     {
-      quote:
-        'In a world moving too fast, Selvadentro Tulum feels like peace built into the jungle.',
-      name: 'Shawn',
+      src: '/testimonials/ricardo-garza.webp',
+      alt: 'Ricardo Garza — "The security I felt with the project and the experience of walking through Selvadentro made the decision for me."',
+      name: 'Ricardo Garza',
     },
   ],
 };
 
 export default function Testimonials({ lang = 'es' }: TestimonialsProps) {
   const t = SQUEEZE_LAYOUT_T[lang];
-  const testimonials = QUOTES[lang];
+  const rows = TESTIMONIALS[lang];
 
   return (
     <section className="py-16 px-4 sm:px-6 bg-[#F8F5EF]">
@@ -49,27 +65,22 @@ export default function Testimonials({ lang = 'es' }: TestimonialsProps) {
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
-          {testimonials.map((row, i) => (
-            <div
+          {rows.map((row, i) => (
+            <figure
               key={i}
-              className="relative bg-white rounded-2xl p-8 sm:p-10 shadow-sm border border-stone-100"
+              className="rounded-2xl overflow-hidden shadow-sm border border-stone-100 bg-white"
             >
-              <span
-                className="font-cardo text-6xl text-brand-copper/30 leading-none absolute top-4 left-6 select-none"
-                aria-hidden="true"
-              >
-                &ldquo;
-              </span>
-              <p className="font-cardo text-lg sm:text-xl leading-relaxed text-brand-dark-green/90 italic pt-6">
-                {row.quote}
-              </p>
-              <div className="mt-6 flex items-center gap-3">
-                <div className="h-px w-8 bg-brand-copper" />
-                <span className="text-xs tracking-[0.2em] uppercase text-brand-dark-green font-semibold">
-                  {row.name}
-                </span>
-              </div>
-            </div>
+              <img
+                src={row.src}
+                alt={row.alt}
+                loading="lazy"
+                decoding="async"
+                width={1024}
+                height={1280}
+                className="w-full h-auto block"
+              />
+              <figcaption className="sr-only">{row.alt}</figcaption>
+            </figure>
           ))}
         </div>
       </div>
