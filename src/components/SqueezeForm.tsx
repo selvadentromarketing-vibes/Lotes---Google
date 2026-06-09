@@ -49,6 +49,7 @@ export default function SqueezeForm({ angle, ctaLabel, lang = 'es' }: SqueezeFor
       angle,
       { first_name: first, last_name: last, email: email.trim(), phone },
       tracking,
+      lang, // 'es' | 'en' → GHL maps to Español / Inglés
     );
 
     if (result.success) {

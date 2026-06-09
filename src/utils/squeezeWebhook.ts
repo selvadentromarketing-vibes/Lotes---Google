@@ -17,6 +17,16 @@ export type SqueezeAngle =
   | 'accesibilidad'
   | 'seguridad';
 
+/** Page language → GHL dropdown value. Matches the GHL field exactly
+ *  (Spanish words, including for English/French): Inglés / Español / Francés / Otro. */
+export type PageLang = 'es' | 'en' | 'fr' | 'other';
+const LANGUAGE_FOR_GHL: Record<PageLang, 'Inglés' | 'Español' | 'Francés' | 'Otro'> = {
+  es: 'Español',
+  en: 'Inglés',
+  fr: 'Francés',
+  other: 'Otro',
+};
+
 export interface SqueezeFormData {
   first_name: string;
   last_name: string;
@@ -62,6 +72,7 @@ export const submitSqueezeLead = async (
   angle: SqueezeAngle,
   formData: SqueezeFormData,
   tracking: TrackingParams,
+  lang: PageLang = 'es',
 ): Promise<SqueezeSubmissionResult> => {
   const payload = {
     // Contact basics
@@ -71,14 +82,15 @@ export const submitSqueezeLead = async (
     email: formData.email,
     phone: formData.phone,
     country: 'Mexico',
-    language: 'Spanish',
+    // GHL dropdown values — Spanish words, including for English (Inglés).
+    language: LANGUAGE_FOR_GHL[lang],
 
     // Squeeze attribution
     angle,
     source_label: `squeeze-${angle}`,
     form_name: `squeeze-${angle}-form`,
 
-    // Tracking
+    // Tracking — UTMs
     landing_page: tracking.landing_page,
     page_url: tracking.landing_page,
     utm_source: tracking.utm_source,
@@ -86,12 +98,22 @@ export const submitSqueezeLead = async (
     utm_campaign: tracking.utm_campaign,
     utm_term: tracking.utm_term,
     utm_content: tracking.utm_content,
-    gclid: tracking.gclid,
 
-    // GHL-mapped fields (mirrors existing webhook.ts conventions)
+    // Tracking — click IDs
+    gclid: tracking.gclid,
+    fbclid: tracking.fbclid,
+
+    // Tracking — ad structure (from FB {{ad.id}} etc., or Google equivalents)
+    ad_id: tracking.ad_id,
+    ad_source_id: tracking.ad_id, // GHL field is "Ad Source ID" — duplicate so it maps no matter which name they bound
+    adset_id: tracking.adset_id,
+    campaign_id: tracking.campaign_id,
+    search_term: tracking.search_term,
+
+    // GHL-mapped contact fields (mirrors existing webhook.ts conventions)
     'contact.source': tracking.utm_source || 'Meta Ads - Squeeze',
     'contact.campaign': tracking.utm_campaign,
-    'contact.ad_ctwa_clid': tracking.gclid,
+    'contact.ad_ctwa_clid': tracking.fbclid || tracking.gclid,
     campaign_label: tracking.utm_campaign || 'Direct',
 
     // Tags
