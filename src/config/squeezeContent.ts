@@ -56,7 +56,7 @@ export const SQUEEZE_CONTENT: Record<SqueezeAngle, ContentByLang> = {
     es: {
       slug: 'oportunidad-perdida',
       eyebrow: 'La ventana se está cerrando',
-      headline: 'En 2020, un lote en Aldea Zama costaba X. Hoy cuesta 3X.',
+      headline: 'En 2012, un lote en Aldea Zama costaba $100 USD x m². Hoy cuesta $650 USD por m².',
       subhead: 'Los lotes en Selvadentro están en esa misma ventana. Fase 1 desde $70,000 USD.',
       heroImage: 'https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?w=1800&q=80',
       ctaLabel: 'Ver precios de Fase 1',
@@ -69,7 +69,7 @@ export const SQUEEZE_CONTENT: Record<SqueezeAngle, ContentByLang> = {
     en: {
       slug: 'oportunidad-perdida',
       eyebrow: 'The window is closing',
-      headline: 'In 2020 an Aldea Zama lot cost X. Today it costs 3X.',
+      headline: 'In 2012, an Aldea Zama lot cost $100 USD/m². Today it costs $650 USD/m².',
       subhead: 'Selvadentro lots are in that same window. Phase 1 starting at $70,000 USD.',
       heroImage: 'https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?w=1800&q=80',
       ctaLabel: 'See Phase 1 pricing',
@@ -114,7 +114,7 @@ export const SQUEEZE_CONTENT: Record<SqueezeAngle, ContentByLang> = {
     es: {
       slug: 'seguridad',
       eyebrow: 'Inversión respaldada',
-      headline: 'Escritura pública garantizada.',
+      headline: 'Terrenos residenciales con certeza jurídica completa',
       subhead: 'Desarrollador con 12 proyectos entregados. No es una promesa, es un track record.',
       heroImage: 'https://images.unsplash.com/photo-1574707722362-44b59c9c5f4d?w=1800&q=80',
       ctaLabel: 'Hablar con un asesor',
@@ -127,7 +127,7 @@ export const SQUEEZE_CONTENT: Record<SqueezeAngle, ContentByLang> = {
     en: {
       slug: 'seguridad',
       eyebrow: 'A backed investment',
-      headline: 'Public deed guaranteed.',
+      headline: 'Residential lots with complete legal certainty',
       subhead: 'Developer with 12 delivered projects. Not a promise — a track record.',
       heroImage: 'https://images.unsplash.com/photo-1574707722362-44b59c9c5f4d?w=1800&q=80',
       ctaLabel: 'Talk to an advisor',
@@ -164,6 +164,15 @@ export const SQUEEZE_LAYOUT_T: Record<SqueezeLang, {
   placeholderPhone: string;
   fieldEmail: string;
   placeholderEmail: string;
+  fieldBudget: string;
+  placeholderBudget: string;
+  fieldTimeline: string;
+  placeholderTimeline: string;
+  timelineImmediately: string;
+  devBlockEyebrow: string;
+  devBlockTitle: string;
+  devBlockBody: string;
+  devBlockProjectsLabel: string;
   submitting: string;
   consent: string;
   errorMissing: string;
@@ -200,6 +209,16 @@ export const SQUEEZE_LAYOUT_T: Record<SqueezeLang, {
     placeholderPhone: '999 489 0828',
     fieldEmail: 'Email',
     placeholderEmail: 'tu@email.com',
+    fieldBudget: 'Presupuesto',
+    placeholderBudget: 'Selecciona un rango',
+    fieldTimeline: 'Plazo de inversión',
+    placeholderTimeline: 'Selecciona un plazo',
+    timelineImmediately: 'Inmediatamente',
+    devBlockEyebrow: 'Quién está detrás',
+    devBlockTitle: 'Más de 20 años entregando comunidades en el sureste mexicano',
+    devBlockBody:
+      'Nuestro portafolio incluye Aldea Zama en Tulum y el Yucatán Country Club en Mérida — comunidades que hoy son referencia en plusvalía y entrega. Cuando inviertes con Selvadentro, inviertes con un track record real, no con una promesa.',
+    devBlockProjectsLabel: 'Proyectos de referencia',
     submitting: 'Enviando...',
     consent: 'Al enviar aceptas que un asesor de Selvadentro te contacte. No compartimos tus datos.',
     errorMissing: 'Por favor completa todos los campos.',
@@ -216,8 +235,7 @@ export const SQUEEZE_LAYOUT_T: Record<SqueezeLang, {
     thankYouWhatsappShort: 'Mensaje por WhatsApp',
     thankYouWhatsappLong: 'Enviar mensaje por WhatsApp',
     thankYouHomeCta: 'Conocer Selvadentro',
-    thankYouWhatsappMessage:
-      '¡Hola! Solicité información sobre Selvadentro. ¿Me compartes disponibilidad y precios de Fase 1?',
+    thankYouWhatsappMessage: 'Hola, me interesa conocer más sobre Selvadentro Tulum',
     thankYouNextTitle: '¿Qué sigue?',
     thankYouNext1: 'Un asesor revisará disponibilidad de lotes según tus preferencias.',
     thankYouNext2: 'Te contactaremos por WhatsApp o llamada en menos de 24 horas.',
@@ -239,6 +257,16 @@ export const SQUEEZE_LAYOUT_T: Record<SqueezeLang, {
     placeholderPhone: '999 489 0828',
     fieldEmail: 'Email',
     placeholderEmail: 'you@email.com',
+    fieldBudget: 'Budget range',
+    placeholderBudget: 'Select a range',
+    fieldTimeline: 'Investment timeline',
+    placeholderTimeline: 'Select a timeline',
+    timelineImmediately: 'Immediately',
+    devBlockEyebrow: 'Who’s behind Selvadentro',
+    devBlockTitle: 'Over 20 years delivering communities across southeast Mexico',
+    devBlockBody:
+      'Our portfolio includes Aldea Zama in Tulum and Yucatán Country Club in Mérida — communities that today set the benchmark for appreciation and delivery. When you invest with Selvadentro, you invest with a real track record, not a promise.',
+    devBlockProjectsLabel: 'Reference projects',
     submitting: 'Sending...',
     consent: 'By submitting you agree that a Selvadentro advisor will contact you. We never share your data.',
     errorMissing: 'Please fill out every field.',
@@ -255,8 +283,7 @@ export const SQUEEZE_LAYOUT_T: Record<SqueezeLang, {
     thankYouWhatsappShort: 'WhatsApp message',
     thankYouWhatsappLong: 'Message us on WhatsApp',
     thankYouHomeCta: 'Discover Selvadentro',
-    thankYouWhatsappMessage:
-      'Hi! I requested information about Selvadentro. Can you share Phase 1 availability and pricing?',
+    thankYouWhatsappMessage: 'Hi, I’d like to learn more about Selvadentro Tulum',
     thankYouNextTitle: 'What’s next?',
     thankYouNext1: 'An advisor will review lot availability based on your preferences.',
     thankYouNext2: 'We’ll reach out by WhatsApp or phone within 24 hours.',

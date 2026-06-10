@@ -36,11 +36,9 @@ export default function SqueezeLayout({ angle, lang = 'es' }: SqueezeLayoutProps
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <a href="https://lotes.selvadentrotulum.com/" aria-label="Selvadentro">
             <img
-              src="/logo-selvandentro_tulum.webp"
+              src="/logo-selvandentro_tulum-cream.webp"
               alt="Selvadentro Tulum"
-              className="h-9 sm:h-11 w-auto"
-              width="180"
-              height="44"
+              className="h-10 sm:h-12 w-auto"
             />
           </a>
           <div className="flex items-center gap-3 sm:gap-5">
@@ -131,6 +129,37 @@ export default function SqueezeLayout({ angle, lang = 'es' }: SqueezeLayoutProps
 
       {/* TESTIMONIALS */}
       <Testimonials lang={lang} />
+
+      {/* DEVELOPER TRACK RECORD */}
+      <section className="py-14 sm:py-16 px-4 sm:px-6 bg-[#ECE5D8]">
+        <div className="max-w-4xl mx-auto text-center">
+          <span className="inline-block text-brand-copper text-xs sm:text-sm font-semibold tracking-widest uppercase mb-3">
+            {t.devBlockEyebrow}
+          </span>
+          <h2 className="font-cardo text-2xl sm:text-3xl lg:text-4xl font-bold text-brand-dark-green leading-tight mb-4">
+            {t.devBlockTitle}
+          </h2>
+          <p className="text-stone-700 leading-relaxed max-w-2xl mx-auto mb-7 text-base sm:text-lg">
+            {t.devBlockBody}
+          </p>
+          <div className="inline-flex flex-col sm:flex-row items-center gap-4 sm:gap-8 px-6 py-4 bg-white/70 rounded-2xl border border-brand-dark-green/10">
+            <span className="text-[11px] font-semibold uppercase tracking-widest text-brand-dark-green/70">
+              {t.devBlockProjectsLabel}
+            </span>
+            <div className="flex items-center gap-5 sm:gap-7">
+              <span className="font-cardo text-base sm:text-lg font-bold text-brand-dark-green">
+                Aldea Zama
+                <span className="block text-[11px] font-lexend font-normal uppercase tracking-wider text-stone-500">Tulum</span>
+              </span>
+              <span className="w-px h-8 bg-brand-dark-green/20" />
+              <span className="font-cardo text-base sm:text-lg font-bold text-brand-dark-green">
+                Yucatán Country Club
+                <span className="block text-[11px] font-lexend font-normal uppercase tracking-wider text-stone-500">Mérida</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* CLOSING CTA */}
       <section className="py-16 px-4 sm:px-6 bg-brand-dark-green text-center">

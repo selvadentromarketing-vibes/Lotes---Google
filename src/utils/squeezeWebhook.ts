@@ -27,11 +27,36 @@ const LANGUAGE_FOR_GHL: Record<PageLang, 'Inglés' | 'Español' | 'Francés' | '
   other: 'Otro',
 };
 
+/** Budget ranges — values must match the GHL "Budget Range" dropdown exactly. */
+export const BUDGET_OPTIONS = [
+  '$75K - $100K',
+  '$100K – $150K',
+  '$150K – $200K',
+  '$200K +',
+  '$1M - $2M',
+  '$2M - $3M',
+  '$3M - $5M',
+  '+$5M',
+] as const;
+export type BudgetOption = typeof BUDGET_OPTIONS[number];
+
+/** Investment timeline — values must match the GHL "Investment Timeline" dropdown exactly. */
+export const TIMELINE_OPTIONS = [
+  'Immediately',
+  '0-3 meses',
+  '3-6 meses',
+  '6-12 meses',
+  '12+ meses',
+] as const;
+export type TimelineOption = typeof TIMELINE_OPTIONS[number];
+
 export interface SqueezeFormData {
   first_name: string;
   last_name: string;
   email: string;
   phone: string;
+  budget: BudgetOption;
+  timeline: TimelineOption;
 }
 
 export interface SqueezeSubmissionResult {
@@ -84,6 +109,12 @@ export const submitSqueezeLead = async (
     country: 'Mexico',
     // GHL dropdown values — Spanish words, including for English (Inglés).
     language: LANGUAGE_FOR_GHL[lang],
+
+    // Qualifier dropdowns (values must match GHL custom-field dropdowns exactly)
+    budget: formData.budget,
+    budget_range: formData.budget, // GHL field alias
+    timeline: formData.timeline,
+    investment_timeline: formData.timeline, // GHL field alias
 
     // Squeeze attribution
     angle,

@@ -2,7 +2,14 @@ import { useState, FormEvent } from 'react';
 import { Loader2, CheckCircle2 } from 'lucide-react';
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import type { Value as PhoneValue } from 'react-phone-number-input';
-import { SqueezeAngle, submitSqueezeLead } from '../utils/squeezeWebhook';
+import {
+  SqueezeAngle,
+  submitSqueezeLead,
+  BUDGET_OPTIONS,
+  TIMELINE_OPTIONS,
+  type BudgetOption,
+  type TimelineOption,
+} from '../utils/squeezeWebhook';
 import { captureTrackingParams } from '../utils/tracking';
 import { SQUEEZE_LAYOUT_T, type SqueezeLang } from '../config/squeezeContent';
 
@@ -25,6 +32,8 @@ export default function SqueezeForm({ angle, ctaLabel, lang = 'es' }: SqueezeFor
   const [fullName, setFullName] = useState('');
   const [phone, setPhone] = useState<PhoneValue | undefined>(undefined);
   const [email, setEmail] = useState('');
+  const [budget, setBudget] = useState<BudgetOption | ''>('');
+  const [timeline, setTimeline] = useState<TimelineOption | ''>('');
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -32,7 +41,7 @@ export default function SqueezeForm({ angle, ctaLabel, lang = 'es' }: SqueezeFor
     e.preventDefault();
     setErrorMessage(null);
 
-    if (!fullName.trim() || !phone || !email.trim()) {
+    if (!fullName.trim() || !phone || !email.trim() || !budget || !timeline) {
       setErrorMessage(t.errorMissing);
       return;
     }
@@ -47,7 +56,7 @@ export default function SqueezeForm({ angle, ctaLabel, lang = 'es' }: SqueezeFor
 
     const result = await submitSqueezeLead(
       angle,
-      { first_name: first, last_name: last, email: email.trim(), phone },
+      { first_name: first, last_name: last, email: email.trim(), phone, budget, timeline },
       tracking,
       lang, // 'es' | 'en' → GHL maps to Español / Inglés
     );
@@ -87,7 +96,9 @@ export default function SqueezeForm({ angle, ctaLabel, lang = 'es' }: SqueezeFor
 
       <div className="space-y-3">
         <label className="block">
-          <span className="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1">{t.fieldName}</span>
+          <span className="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1">
+            {t.fieldName} <span className="text-brand-copper">*</span>
+          </span>
           <input
             type="text"
             value={fullName}
@@ -118,7 +129,9 @@ export default function SqueezeForm({ angle, ctaLabel, lang = 'es' }: SqueezeFor
         </label>
 
         <label className="block">
-          <span className="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1">{t.fieldEmail}</span>
+          <span className="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1">
+            {t.fieldEmail} <span className="text-brand-copper">*</span>
+          </span>
           <input
             type="email"
             value={email}
@@ -128,6 +141,50 @@ export default function SqueezeForm({ angle, ctaLabel, lang = 'es' }: SqueezeFor
             autoComplete="email"
             required
           />
+        </label>
+
+        <label className="block">
+          <span className="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1">
+            {t.fieldBudget} <span className="text-brand-copper">*</span>
+          </span>
+          <select
+            value={budget}
+            onChange={(e) => setBudget(e.target.value as BudgetOption | '')}
+            className="w-full px-4 py-3 border border-stone-300 rounded-lg bg-white text-stone-900 focus:outline-none focus:ring-2 focus:ring-brand-olive/40 focus:border-brand-olive transition appearance-none bg-no-repeat bg-[right_1rem_center] bg-[length:1rem] pr-10"
+            style={{
+              backgroundImage:
+                "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23737373'><path fill-rule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 11.06l3.71-3.83a.75.75 0 111.08 1.04l-4.25 4.39a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z' clip-rule='evenodd'/></svg>\")",
+            }}
+            required
+          >
+            <option value="" disabled>{t.placeholderBudget}</option>
+            {BUDGET_OPTIONS.map((opt) => (
+              <option key={opt} value={opt}>{opt}</option>
+            ))}
+          </select>
+        </label>
+
+        <label className="block">
+          <span className="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1">
+            {t.fieldTimeline} <span className="text-brand-copper">*</span>
+          </span>
+          <select
+            value={timeline}
+            onChange={(e) => setTimeline(e.target.value as TimelineOption | '')}
+            className="w-full px-4 py-3 border border-stone-300 rounded-lg bg-white text-stone-900 focus:outline-none focus:ring-2 focus:ring-brand-olive/40 focus:border-brand-olive transition appearance-none bg-no-repeat bg-[right_1rem_center] bg-[length:1rem] pr-10"
+            style={{
+              backgroundImage:
+                "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23737373'><path fill-rule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 11.06l3.71-3.83a.75.75 0 111.08 1.04l-4.25 4.39a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z' clip-rule='evenodd'/></svg>\")",
+            }}
+            required
+          >
+            <option value="" disabled>{t.placeholderTimeline}</option>
+            {TIMELINE_OPTIONS.map((opt) => (
+              <option key={opt} value={opt}>
+                {opt === 'Immediately' ? t.timelineImmediately : opt}
+              </option>
+            ))}
+          </select>
         </label>
       </div>
 
