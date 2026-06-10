@@ -19,17 +19,10 @@ interface SqueezeFormProps {
   lang?: SqueezeLang;
 }
 
-const splitName = (full: string): { first: string; last: string } => {
-  const trimmed = full.trim().replace(/\s+/g, ' ');
-  if (!trimmed) return { first: '', last: '' };
-  const parts = trimmed.split(' ');
-  if (parts.length === 1) return { first: parts[0], last: '' };
-  return { first: parts[0], last: parts.slice(1).join(' ') };
-};
-
 export default function SqueezeForm({ angle, ctaLabel, lang = 'es' }: SqueezeFormProps) {
   const t = SQUEEZE_LAYOUT_T[lang];
-  const [fullName, setFullName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [phone, setPhone] = useState<PhoneValue | undefined>(undefined);
   const [email, setEmail] = useState('');
   const [budget, setBudget] = useState<BudgetOption | ''>('');
@@ -41,7 +34,7 @@ export default function SqueezeForm({ angle, ctaLabel, lang = 'es' }: SqueezeFor
     e.preventDefault();
     setErrorMessage(null);
 
-    if (!fullName.trim() || !phone || !email.trim() || !budget || !timeline) {
+    if (!firstName.trim() || !lastName.trim() || !phone || !email.trim() || !budget || !timeline) {
       setErrorMessage(t.errorMissing);
       return;
     }
@@ -51,12 +44,18 @@ export default function SqueezeForm({ angle, ctaLabel, lang = 'es' }: SqueezeFor
     }
 
     setStatus('submitting');
-    const { first, last } = splitName(fullName);
     const tracking = captureTrackingParams();
 
     const result = await submitSqueezeLead(
       angle,
-      { first_name: first, last_name: last, email: email.trim(), phone, budget, timeline },
+      {
+        first_name: firstName.trim(),
+        last_name: lastName.trim(),
+        email: email.trim(),
+        phone,
+        budget,
+        timeline,
+      },
       tracking,
       lang, // 'es' | 'en' → GHL maps to Español / Inglés
     );
@@ -95,20 +94,36 @@ export default function SqueezeForm({ angle, ctaLabel, lang = 'es' }: SqueezeFor
       <p className="text-sm text-stone-600 mb-5">{t.formSubtitle}</p>
 
       <div className="space-y-3">
-        <label className="block">
-          <span className="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1">
-            {t.fieldName} <span className="text-brand-copper">*</span>
-          </span>
-          <input
-            type="text"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-            className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-olive/40 focus:border-brand-olive transition"
-            placeholder={t.placeholderName}
-            autoComplete="name"
-            required
-          />
-        </label>
+        <div className="grid grid-cols-2 gap-3">
+          <label className="block">
+            <span className="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1">
+              {t.fieldFirstName} <span className="text-brand-copper">*</span>
+            </span>
+            <input
+              type="text"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-olive/40 focus:border-brand-olive transition"
+              placeholder={t.placeholderFirstName}
+              autoComplete="given-name"
+              required
+            />
+          </label>
+          <label className="block">
+            <span className="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1">
+              {t.fieldLastName} <span className="text-brand-copper">*</span>
+            </span>
+            <input
+              type="text"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-olive/40 focus:border-brand-olive transition"
+              placeholder={t.placeholderLastName}
+              autoComplete="family-name"
+              required
+            />
+          </label>
+        </div>
 
         <label className="block">
           <span className="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1">

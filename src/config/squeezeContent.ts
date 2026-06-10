@@ -158,8 +158,10 @@ export const SQUEEZE_LAYOUT_T: Record<SqueezeLang, {
   closingBody: string;
   formTitle: string;
   formSubtitle: string;
-  fieldName: string;
-  placeholderName: string;
+  fieldFirstName: string;
+  placeholderFirstName: string;
+  fieldLastName: string;
+  placeholderLastName: string;
   fieldPhone: string;
   placeholderPhone: string;
   fieldEmail: string;
@@ -203,8 +205,10 @@ export const SQUEEZE_LAYOUT_T: Record<SqueezeLang, {
     closingBody: 'Solo quedan 8 lotes al precio de Fase 1. Cada 10 lotes vendidos, el precio sube 1%.',
     formTitle: 'Ver disponibilidad',
     formSubtitle: 'Te llamamos en menos de 24 horas con precios y plan de pagos.',
-    fieldName: 'Nombre completo',
-    placeholderName: 'Tu nombre',
+    fieldFirstName: 'Nombre',
+    placeholderFirstName: 'Tu nombre',
+    fieldLastName: 'Apellido',
+    placeholderLastName: 'Tu apellido',
     fieldPhone: 'Teléfono',
     placeholderPhone: '999 489 0828',
     fieldEmail: 'Email',
@@ -251,8 +255,10 @@ export const SQUEEZE_LAYOUT_T: Record<SqueezeLang, {
     closingBody: 'Only 8 lots remain at Phase 1 pricing. The price rises 1% every 10 lots sold.',
     formTitle: 'Check availability',
     formSubtitle: 'We call you within 24 hours with pricing and payment plan.',
-    fieldName: 'Full name',
-    placeholderName: 'Your name',
+    fieldFirstName: 'First name',
+    placeholderFirstName: 'Your first name',
+    fieldLastName: 'Last name',
+    placeholderLastName: 'Your last name',
     fieldPhone: 'Phone',
     placeholderPhone: '999 489 0828',
     fieldEmail: 'Email',
