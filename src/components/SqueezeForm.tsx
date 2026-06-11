@@ -5,7 +5,8 @@ import type { Value as PhoneValue } from 'react-phone-number-input';
 import {
   SqueezeAngle,
   submitSqueezeLead,
-  BUDGET_OPTIONS,
+  BUDGET_OPTIONS_USD,
+  BUDGET_OPTIONS_MXN,
   TIMELINE_OPTIONS,
   type BudgetOption,
   type TimelineOption,
@@ -21,6 +22,8 @@ interface SqueezeFormProps {
 
 export default function SqueezeForm({ angle, ctaLabel, lang = 'es' }: SqueezeFormProps) {
   const t = SQUEEZE_LAYOUT_T[lang];
+  // ES audience thinks in pesos; EN audience thinks in dollars.
+  const budgetOptions = lang === 'es' ? BUDGET_OPTIONS_MXN : BUDGET_OPTIONS_USD;
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [phone, setPhone] = useState<PhoneValue | undefined>(undefined);
@@ -173,7 +176,7 @@ export default function SqueezeForm({ angle, ctaLabel, lang = 'es' }: SqueezeFor
             required
           >
             <option value="" disabled>{t.placeholderBudget}</option>
-            {BUDGET_OPTIONS.map((opt) => (
+            {budgetOptions.map((opt) => (
               <option key={opt} value={opt}>{opt}</option>
             ))}
           </select>

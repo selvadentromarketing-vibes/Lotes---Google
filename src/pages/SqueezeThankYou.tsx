@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { CheckCircle2, MessageCircle, Home } from 'lucide-react';
+import { CheckCircle2, MessageCircle, MessageSquare, Home } from 'lucide-react';
 import { SQUEEZE_LAYOUT_T, type SqueezeLang } from '../config/squeezeContent';
 
 /**
@@ -73,6 +73,7 @@ export default function SqueezeThankYou({ lang = 'es' }: Props) {
   }, [safeAngle, angleLabel, t]);
 
   const whatsappMessage = encodeURIComponent(t.thankYouWhatsappMessage);
+  const smsMessage = encodeURIComponent(t.thankYouSmsMessage);
   const homeLink = lang === 'en' ? '/en' : '/';
 
   return (
@@ -86,7 +87,7 @@ export default function SqueezeThankYou({ lang = 'es' }: Props) {
           <h1 className="font-cardo text-3xl sm:text-4xl font-bold text-brand-dark-green mb-4">{t.thankYouTitle}</h1>
           <p className="text-lg text-stone-600 mb-8">{t.thankYouBody}</p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-6 sm:mb-8">
             <a
               href={`https://wa.me/5219994890828?text=${whatsappMessage}`}
               target="_blank"
@@ -99,12 +100,23 @@ export default function SqueezeThankYou({ lang = 'es' }: Props) {
             </a>
 
             <a
+              href={`sms:+529994890828?body=${smsMessage}`}
+              className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-4 bg-brand-copper text-white rounded-full hover:bg-brand-copper/90 transition-all font-medium shadow-lg hover:shadow-xl whitespace-nowrap"
+            >
+              <MessageSquare className="w-5 h-5" />
+              <span className="sm:hidden">{t.thankYouSmsShort}</span>
+              <span className="hidden sm:inline">{t.thankYouSmsLong}</span>
+            </a>
+          </div>
+
+          <div className="flex justify-center mb-12">
+            <a
               href="https://selvadentrotulum.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-brand-dark-green/20 text-brand-dark-green rounded-full hover:bg-brand-dark-green/5 transition-all font-medium"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3 border-2 border-brand-dark-green/20 text-brand-dark-green rounded-full hover:bg-brand-dark-green/5 transition-all font-medium text-sm"
             >
-              <Home className="w-5 h-5" />
+              <Home className="w-4 h-4" />
               {t.thankYouHomeCta}
             </a>
           </div>

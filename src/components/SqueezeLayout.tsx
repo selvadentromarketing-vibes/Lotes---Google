@@ -186,8 +186,8 @@ export default function SqueezeLayout({ angle, lang = 'es' }: SqueezeLayoutProps
           <span>
             <a href="tel:+529994890828" className="hover:text-white">+52 999 489 0828</a>
             <span className="mx-2">·</span>
-            <a href="mailto:d.comercial@selvadentrotulum.com" className="hover:text-white">
-              d.comercial@selvadentrotulum.com
+            <a href="mailto:info@selvadentrotulum.com" className="hover:text-white">
+              info@selvadentrotulum.com
             </a>
           </span>
         </div>

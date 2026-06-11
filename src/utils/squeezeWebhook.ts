@@ -27,17 +27,22 @@ const LANGUAGE_FOR_GHL: Record<PageLang, 'Inglés' | 'Español' | 'Francés' | '
   other: 'Otro',
 };
 
-/** Budget ranges — values must match the GHL "Budget Range" dropdown exactly. */
-export const BUDGET_OPTIONS = [
+/** Budget ranges — values must match the GHL "Budget Range" dropdown exactly.
+ *  Spanish landing pages show MXN tiers; English landing pages show USD tiers.
+ *  Both write to the same GHL custom field. */
+export const BUDGET_OPTIONS_USD = [
   '$75K - $100K',
   '$100K – $150K',
   '$150K – $200K',
   '$200K +',
+] as const;
+export const BUDGET_OPTIONS_MXN = [
   '$1M - $2M',
   '$2M - $3M',
   '$3M - $5M',
   '+$5M',
 ] as const;
+export const BUDGET_OPTIONS = [...BUDGET_OPTIONS_USD, ...BUDGET_OPTIONS_MXN] as const;
 export type BudgetOption = typeof BUDGET_OPTIONS[number];
 
 /** Investment timeline — values must match the GHL "Investment Timeline" dropdown exactly. */

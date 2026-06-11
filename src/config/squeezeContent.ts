@@ -34,7 +34,7 @@ export const SQUEEZE_CONTENT: Record<SqueezeAngle, ContentByLang> = {
       ctaLabel: 'Ver disponibilidad y precios',
       highlights: [
         '9 cenotes naturales · solo 35% edificable',
-        '+134% apreciación confirmada (Fase 1 → 4)',
+        '+134% de apreciación confirmada en el desarrollo',
         '48 meses · 0% interés · escritura pública garantizada',
       ],
     },
@@ -47,7 +47,7 @@ export const SQUEEZE_CONTENT: Record<SqueezeAngle, ContentByLang> = {
       ctaLabel: 'See availability and pricing',
       highlights: [
         '9 natural cenotes · only 35% buildable',
-        '+134% confirmed appreciation (Phase 1 → 4)',
+        '+134% confirmed appreciation across the development',
         '48 months · 0% interest · public deed guaranteed',
       ],
     },
@@ -56,26 +56,26 @@ export const SQUEEZE_CONTENT: Record<SqueezeAngle, ContentByLang> = {
     es: {
       slug: 'oportunidad-perdida',
       eyebrow: 'La ventana se está cerrando',
-      headline: 'En 2012, un lote en Aldea Zama costaba $100 USD x m². Hoy cuesta $650 USD por m².',
-      subhead: 'Los lotes en Selvadentro están en esa misma ventana. Fase 1 desde $70,000 USD.',
+      headline: 'En 2012, un lote de 800 m² en Aldea Zama costaba $80,000 USD. Hoy cuesta $520,000 USD.',
+      subhead: 'Los lotes en Selvadentro están en esa misma ventana. Desde $70,000 USD.',
       heroImage: 'https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?w=1800&q=80',
-      ctaLabel: 'Ver precios de Fase 1',
+      ctaLabel: 'Ver disponibilidad y precios',
       highlights: [
-        '+134% apreciación Fase 1 → 4 (confirmada)',
-        'Solo 8 lotes restantes al precio de Fase 1',
+        '+134% de apreciación confirmada en el desarrollo',
+        'Solo 8 lotes restantes al precio de hoy',
         'Desarrollador con 12 proyectos entregados',
       ],
     },
     en: {
       slug: 'oportunidad-perdida',
       eyebrow: 'The window is closing',
-      headline: 'In 2012, an Aldea Zama lot cost $100 USD/m². Today it costs $650 USD/m².',
-      subhead: 'Selvadentro lots are in that same window. Phase 1 starting at $70,000 USD.',
+      headline: 'In 2012, an 800 m² Aldea Zama lot cost $80,000 USD. Today it costs $520,000 USD.',
+      subhead: 'Selvadentro lots are in that same window. Starting at $70,000 USD.',
       heroImage: 'https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?w=1800&q=80',
-      ctaLabel: 'See Phase 1 pricing',
+      ctaLabel: 'See availability and pricing',
       highlights: [
-        '+134% Phase 1 → 4 appreciation (confirmed)',
-        'Only 8 lots left at Phase 1 pricing',
+        '+134% confirmed appreciation across the development',
+        "Only 8 lots left at today's pricing",
         'Developer with 12 delivered projects',
       ],
     },
@@ -88,7 +88,7 @@ export const SQUEEZE_CONTENT: Record<SqueezeAngle, ContentByLang> = {
       subhead:
         'Tu terreno en Tulum por menos de lo que imaginas. Desde $70,000 USD con financiamiento directo del desarrollador.',
       heroImage: 'https://images.unsplash.com/photo-1602002418679-a4e2e2c5dd25?w=1800&q=80',
-      ctaLabel: 'Calcular mi plan de pagos',
+      ctaLabel: 'Ver disponibilidad y precios',
       highlights: [
         'Financiamiento directo · 0% interés · 48 meses',
         'Enganche desde 20% · sin trámites bancarios',
@@ -102,7 +102,7 @@ export const SQUEEZE_CONTENT: Record<SqueezeAngle, ContentByLang> = {
       subhead:
         'Your lot in Tulum for less than you imagine. From $70,000 USD with direct developer financing.',
       heroImage: 'https://images.unsplash.com/photo-1602002418679-a4e2e2c5dd25?w=1800&q=80',
-      ctaLabel: 'Calculate my payment plan',
+      ctaLabel: 'See availability and pricing',
       highlights: [
         'Direct financing · 0% interest · 48 months',
         '20% down · no bank paperwork',
@@ -117,7 +117,7 @@ export const SQUEEZE_CONTENT: Record<SqueezeAngle, ContentByLang> = {
       headline: 'Terrenos residenciales con certeza jurídica completa',
       subhead: 'Desarrollador con 12 proyectos entregados. No es una promesa, es un track record.',
       heroImage: 'https://images.unsplash.com/photo-1574707722362-44b59c9c5f4d?w=1800&q=80',
-      ctaLabel: 'Hablar con un asesor',
+      ctaLabel: 'Ver disponibilidad y precios',
       highlights: [
         '20+ años en bienes raíces en la Riviera Maya',
         '12 proyectos entregados · 100% escrituras',
@@ -130,7 +130,7 @@ export const SQUEEZE_CONTENT: Record<SqueezeAngle, ContentByLang> = {
       headline: 'Residential lots with complete legal certainty',
       subhead: 'Developer with 12 delivered projects. Not a promise — a track record.',
       heroImage: 'https://images.unsplash.com/photo-1574707722362-44b59c9c5f4d?w=1800&q=80',
-      ctaLabel: 'Talk to an advisor',
+      ctaLabel: 'See availability and pricing',
       highlights: [
         '20+ years in Riviera Maya real estate',
         '12 projects delivered · 100% deeded',
@@ -188,8 +188,11 @@ export const SQUEEZE_LAYOUT_T: Record<SqueezeLang, {
   thankYouBody: string;
   thankYouWhatsappShort: string;
   thankYouWhatsappLong: string;
+  thankYouSmsShort: string;
+  thankYouSmsLong: string;
   thankYouHomeCta: string;
   thankYouWhatsappMessage: string;
+  thankYouSmsMessage: string;
   thankYouNextTitle: string;
   thankYouNext1: string;
   thankYouNext2: string;
@@ -202,7 +205,7 @@ export const SQUEEZE_LAYOUT_T: Record<SqueezeLang, {
     trustProjects: 'proyectos entregados',
     trustDeeded: 'escrituras',
     closingTitle: '¿Listo para asegurar tu lote?',
-    closingBody: 'Solo quedan 8 lotes al precio de Fase 1. Cada 10 lotes vendidos, el precio sube 1%.',
+    closingBody: 'Solo quedan 8 lotes al precio de hoy. Cada 10 lotes vendidos, el precio sube 1%.',
     formTitle: 'Ver disponibilidad',
     formSubtitle: 'Te llamamos en menos de 24 horas con precios y plan de pagos.',
     fieldFirstName: 'Nombre',
@@ -236,10 +239,13 @@ export const SQUEEZE_LAYOUT_T: Record<SqueezeLang, {
     thankYouTitle: 'Solicitud recibida',
     thankYouBody:
       'Un asesor de Selvadentro se pondrá en contacto contigo en menos de 24 horas con disponibilidad, precios y opciones de plan de pago.',
-    thankYouWhatsappShort: 'Mensaje por WhatsApp',
+    thankYouWhatsappShort: 'WhatsApp',
     thankYouWhatsappLong: 'Enviar mensaje por WhatsApp',
+    thankYouSmsShort: 'SMS',
+    thankYouSmsLong: 'Enviar SMS',
     thankYouHomeCta: 'Conocer Selvadentro',
     thankYouWhatsappMessage: 'Hola, me interesa conocer más sobre Selvadentro Tulum',
+    thankYouSmsMessage: 'Hola, me interesa conocer más sobre Selvadentro Tulum',
     thankYouNextTitle: '¿Qué sigue?',
     thankYouNext1: 'Un asesor revisará disponibilidad de lotes según tus preferencias.',
     thankYouNext2: 'Te contactaremos por WhatsApp o llamada en menos de 24 horas.',
@@ -252,7 +258,7 @@ export const SQUEEZE_LAYOUT_T: Record<SqueezeLang, {
     trustProjects: 'projects delivered',
     trustDeeded: 'deeded',
     closingTitle: 'Ready to lock in your lot?',
-    closingBody: 'Only 8 lots remain at Phase 1 pricing. The price rises 1% every 10 lots sold.',
+    closingBody: "Only 8 lots remain at today's pricing. The price rises 1% every 10 lots sold.",
     formTitle: 'Check availability',
     formSubtitle: 'We call you within 24 hours with pricing and payment plan.',
     fieldFirstName: 'First name',
@@ -286,10 +292,13 @@ export const SQUEEZE_LAYOUT_T: Record<SqueezeLang, {
     thankYouTitle: 'Request received',
     thankYouBody:
       'A Selvadentro advisor will contact you within 24 hours with availability, pricing, and payment plan options.',
-    thankYouWhatsappShort: 'WhatsApp message',
+    thankYouWhatsappShort: 'WhatsApp',
     thankYouWhatsappLong: 'Message us on WhatsApp',
+    thankYouSmsShort: 'SMS',
+    thankYouSmsLong: 'Send us an SMS',
     thankYouHomeCta: 'Discover Selvadentro',
     thankYouWhatsappMessage: 'Hi, I’d like to learn more about Selvadentro Tulum',
+    thankYouSmsMessage: 'Hi, I’d like to learn more about Selvadentro Tulum',
     thankYouNextTitle: 'What’s next?',
     thankYouNext1: 'An advisor will review lot availability based on your preferences.',
     thankYouNext2: 'We’ll reach out by WhatsApp or phone within 24 hours.',
