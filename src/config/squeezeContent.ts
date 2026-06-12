@@ -83,29 +83,29 @@ export const SQUEEZE_CONTENT: Record<SqueezeAngle, ContentByLang> = {
   accesibilidad: {
     es: {
       slug: 'accesibilidad',
-      eyebrow: 'Más accesible de lo que crees',
-      headline: '48 meses sin intereses.',
+      eyebrow: 'Plan de pagos directo con el desarrollador',
+      headline: 'Tu terreno en Tulum, a 48 mensualidades.',
       subhead:
-        'Tu terreno en Tulum por menos de lo que imaginas. Desde $70,000 USD con financiamiento directo del desarrollador.',
+        'Págalo a plazos directamente con nosotros, sin intereses, sin bancos y sin trámites de crédito. Desde $70,000 USD.',
       heroImage: 'https://images.unsplash.com/photo-1602002418679-a4e2e2c5dd25?w=1800&q=80',
       ctaLabel: 'Ver disponibilidad y precios',
       highlights: [
-        'Financiamiento directo · 0% interés · 48 meses',
-        'Enganche desde 20% · sin trámites bancarios',
+        'Pagas directo con el desarrollador · sin bancos · sin créditos',
+        '48 mensualidades · 0% interés · enganche desde 20%',
         'Escritura pública garantizada al término',
       ],
     },
     en: {
       slug: 'accesibilidad',
-      eyebrow: 'More accessible than you think',
-      headline: '48 months, no interest.',
+      eyebrow: 'Payment plan direct with the developer',
+      headline: 'Your lot in Tulum, in 48 monthly payments.',
       subhead:
-        'Your lot in Tulum for less than you imagine. From $70,000 USD with direct developer financing.',
+        'Pay it off in installments directly with us — no interest, no banks, no credit applications. From $70,000 USD.',
       heroImage: 'https://images.unsplash.com/photo-1602002418679-a4e2e2c5dd25?w=1800&q=80',
       ctaLabel: 'See availability and pricing',
       highlights: [
-        'Direct financing · 0% interest · 48 months',
-        '20% down · no bank paperwork',
+        'Pay direct to the developer · no banks · no credit checks',
+        '48 monthly payments · 0% interest · 20% down',
         'Public deed guaranteed at completion',
       ],
     },
