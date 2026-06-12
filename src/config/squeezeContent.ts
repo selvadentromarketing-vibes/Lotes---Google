@@ -30,7 +30,7 @@ export const SQUEEZE_CONTENT: Record<SqueezeAngle, ContentByLang> = {
       eyebrow: 'Selvadentro · Tulum',
       headline: 'Tu propio terreno en la selva de Tulum.',
       subhead: 'Con cenotes naturales. Desde $70,000 USD. Financiamiento a 48 meses sin intereses.',
-      heroImage: 'https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?w=1800&q=80',
+      heroImage: '/hero-selvandentro_tulum.webp',
       ctaLabel: 'Ver disponibilidad y precios',
       highlights: [
         '9 cenotes naturales · solo 35% edificable',
@@ -43,7 +43,7 @@ export const SQUEEZE_CONTENT: Record<SqueezeAngle, ContentByLang> = {
       eyebrow: 'Selvadentro · Tulum',
       headline: 'Your own lot in the Tulum jungle.',
       subhead: 'With natural cenotes. From $70,000 USD. 48-month financing, 0% interest.',
-      heroImage: 'https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?w=1800&q=80',
+      heroImage: '/hero-selvandentro_tulum.webp',
       ctaLabel: 'See availability and pricing',
       highlights: [
         '9 natural cenotes · only 35% buildable',
@@ -58,7 +58,7 @@ export const SQUEEZE_CONTENT: Record<SqueezeAngle, ContentByLang> = {
       eyebrow: 'La ventana se está cerrando',
       headline: 'En 2012, un lote de 800 m² en Aldea Zama costaba $80,000 USD. Hoy cuesta $520,000 USD.',
       subhead: 'Los lotes en Selvadentro están en esa misma ventana. Desde $70,000 USD.',
-      heroImage: 'https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?w=1800&q=80',
+      heroImage: '/hero-selvandentro_tulum.webp',
       ctaLabel: 'Ver disponibilidad y precios',
       highlights: [
         '+134% de apreciación confirmada en el desarrollo',
@@ -71,7 +71,7 @@ export const SQUEEZE_CONTENT: Record<SqueezeAngle, ContentByLang> = {
       eyebrow: 'The window is closing',
       headline: 'In 2012, an 800 m² Aldea Zama lot cost $80,000 USD. Today it costs $520,000 USD.',
       subhead: 'Selvadentro lots are in that same window. Starting at $70,000 USD.',
-      heroImage: 'https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?w=1800&q=80',
+      heroImage: '/hero-selvandentro_tulum.webp',
       ctaLabel: 'See availability and pricing',
       highlights: [
         '+134% confirmed appreciation across the development',
@@ -87,7 +87,7 @@ export const SQUEEZE_CONTENT: Record<SqueezeAngle, ContentByLang> = {
       headline: 'Tu terreno en Tulum, a 48 mensualidades.',
       subhead:
         'Págalo a plazos directamente con nosotros, sin intereses, sin bancos y sin trámites de crédito. Desde $70,000 USD.',
-      heroImage: 'https://images.unsplash.com/photo-1602002418679-a4e2e2c5dd25?w=1800&q=80',
+      heroImage: '/hero-selvandentro_tulum.webp',
       ctaLabel: 'Ver disponibilidad y precios',
       highlights: [
         'Pagas directo con el desarrollador · sin bancos · sin créditos',
@@ -101,7 +101,7 @@ export const SQUEEZE_CONTENT: Record<SqueezeAngle, ContentByLang> = {
       headline: 'Your lot in Tulum, in 48 monthly payments.',
       subhead:
         'Pay it off in installments directly with us — no interest, no banks, no credit applications. From $70,000 USD.',
-      heroImage: 'https://images.unsplash.com/photo-1602002418679-a4e2e2c5dd25?w=1800&q=80',
+      heroImage: '/hero-selvandentro_tulum.webp',
       ctaLabel: 'See availability and pricing',
       highlights: [
         'Pay direct to the developer · no banks · no credit checks',
@@ -116,7 +116,7 @@ export const SQUEEZE_CONTENT: Record<SqueezeAngle, ContentByLang> = {
       eyebrow: 'Inversión respaldada',
       headline: 'Terrenos residenciales con certeza jurídica completa',
       subhead: 'Desarrollador con 12 proyectos entregados. No es una promesa, es un track record.',
-      heroImage: 'https://images.unsplash.com/photo-1574707722362-44b59c9c5f4d?w=1800&q=80',
+      heroImage: '/hero-selvandentro_tulum.webp',
       ctaLabel: 'Ver disponibilidad y precios',
       highlights: [
         '20+ años en bienes raíces en la Riviera Maya',
@@ -129,7 +129,7 @@ export const SQUEEZE_CONTENT: Record<SqueezeAngle, ContentByLang> = {
       eyebrow: 'A backed investment',
       headline: 'Residential lots with complete legal certainty',
       subhead: 'Developer with 12 delivered projects. Not a promise — a track record.',
-      heroImage: 'https://images.unsplash.com/photo-1574707722362-44b59c9c5f4d?w=1800&q=80',
+      heroImage: '/hero-selvandentro_tulum.webp',
       ctaLabel: 'See availability and pricing',
       highlights: [
         '20+ years in Riviera Maya real estate',

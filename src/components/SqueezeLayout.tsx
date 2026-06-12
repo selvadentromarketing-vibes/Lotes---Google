@@ -139,6 +139,14 @@ export default function SqueezeLayout({ angle, lang = 'es' }: SqueezeLayoutProps
           <h2 className="font-cardo text-2xl sm:text-3xl lg:text-4xl font-bold text-brand-dark-green leading-tight mb-4">
             {t.devBlockTitle}
           </h2>
+          <div className="flex justify-center mb-6">
+            <img
+              src="/development_company_logo-jjf_creando.webp"
+              alt="JJF Creando"
+              className="h-16 sm:h-20 w-auto"
+              loading="lazy"
+            />
+          </div>
           <p className="text-stone-700 leading-relaxed max-w-2xl mx-auto mb-7 text-base sm:text-lg">
             {t.devBlockBody}
           </p>
