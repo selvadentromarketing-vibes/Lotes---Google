@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { CheckCircle2, MessageCircle, Home } from 'lucide-react';
+import { CheckCircle2, MessageCircle, MessageSquare, Home } from 'lucide-react';
 
 export default function ThankYouPageES() {
   useEffect(() => {
@@ -17,6 +17,9 @@ export default function ThankYouPageES() {
 
   const whatsappMessage = encodeURIComponent(
     "Hola! Solicité lotes + precios + plan de pago. ¿Me compartes disponibilidad y próximos pasos?"
+  );
+  const smsMessage = encodeURIComponent(
+    "Hola, me interesa conocer más sobre Selvadentro Tulum"
   );
 
   return (
@@ -35,24 +38,36 @@ export default function ThankYouPageES() {
             Un asesor de Selvadentro se pondrá en contacto contigo pronto con disponibilidad, precios y opciones de plan de pago.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-6 sm:mb-8">
             <a
               href={`https://wa.me/5219994890828?text=${whatsappMessage}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-olive text-white rounded-full hover:bg-brand-dark-green transition-all font-medium shadow-lg hover:shadow-xl"
+              className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-4 bg-brand-olive text-white rounded-full hover:bg-brand-dark-green transition-all font-medium shadow-lg hover:shadow-xl whitespace-nowrap"
             >
               <MessageCircle className="w-5 h-5" />
-              Enviar mensaje por WhatsApp
+              <span className="sm:hidden">WhatsApp</span>
+              <span className="hidden sm:inline">Enviar mensaje por WhatsApp</span>
             </a>
 
+            <a
+              href={`sms:+12108791979?body=${smsMessage}`}
+              className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-4 bg-brand-copper text-white rounded-full hover:bg-brand-copper/90 transition-all font-medium shadow-lg hover:shadow-xl whitespace-nowrap"
+            >
+              <MessageSquare className="w-5 h-5" />
+              <span className="sm:hidden">SMS</span>
+              <span className="hidden sm:inline">Enviar SMS</span>
+            </a>
+          </div>
+
+          <div className="flex justify-center mb-12">
             <a
               href="https://selvadentrotulum.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-brand-dark-green/20 text-brand-dark-green rounded-full hover:bg-brand-dark-green/5 transition-all font-medium"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3 border-2 border-brand-dark-green/20 text-brand-dark-green rounded-full hover:bg-brand-dark-green/5 transition-all font-medium text-sm"
             >
-              <Home className="w-5 h-5" />
+              <Home className="w-4 h-4" />
               Volver a Selvadentro
             </a>
           </div>

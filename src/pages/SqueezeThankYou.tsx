@@ -100,7 +100,7 @@ export default function SqueezeThankYou({ lang = 'es' }: Props) {
             </a>
 
             <a
-              href={`sms:+529994890828?body=${smsMessage}`}
+              href={`sms:+12108791979?body=${smsMessage}`}
               className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-4 bg-brand-copper text-white rounded-full hover:bg-brand-copper/90 transition-all font-medium shadow-lg hover:shadow-xl whitespace-nowrap"
             >
               <MessageSquare className="w-5 h-5" />
