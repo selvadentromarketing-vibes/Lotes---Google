@@ -45,6 +45,21 @@ export const BUDGET_OPTIONS_MXN = [
 export const BUDGET_OPTIONS = [...BUDGET_OPTIONS_USD, ...BUDGET_OPTIONS_MXN] as const;
 export type BudgetOption = typeof BUDGET_OPTIONS[number];
 
+/**
+ * Force every phone we send to GHL into E.164 format with the country code prefix
+ * baked in. The PhoneInput component already returns E.164, but this is a defensive
+ * belt for any case where the value reaches us as a bare local number — GHL needs
+ * the `+<country><number>` shape to dial / WhatsApp / match contacts reliably.
+ */
+const normalizeE164 = (raw: string | undefined, defaultCountryCode = '+52'): string => {
+  if (!raw) return '';
+  const trimmed = raw.replace(/[\s()\-.]/g, '').trim();
+  if (trimmed.startsWith('+')) return trimmed;
+  const digits = trimmed.replace(/\D/g, '');
+  if (!digits) return '';
+  return `${defaultCountryCode}${digits}`;
+};
+
 /** Investment timeline — values must match the GHL "Investment Timeline" dropdown exactly. */
 export const TIMELINE_OPTIONS = [
   'Immediately',
@@ -110,7 +125,7 @@ export const submitSqueezeLead = async (
     last_name: formData.last_name,
     name: `${formData.first_name} ${formData.last_name}`.trim(),
     email: formData.email,
-    phone: formData.phone,
+    phone: normalizeE164(formData.phone),
     country: 'Mexico',
     // GHL dropdown values — Spanish words, including for English (Inglés).
     language: LANGUAGE_FOR_GHL[lang],

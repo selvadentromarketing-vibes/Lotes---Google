@@ -2,6 +2,20 @@ import { TrackingParams, trackFormSubmission } from './tracking';
 
 const GHL_WEBHOOK_URL = "https://services.leadconnectorhq.com/hooks/crN2IhAuOBAl7D8324yI/webhook-trigger/6e1b31c7-4794-4642-95e6-29cbbd754081";
 
+/**
+ * Guarantee the phone we send GHL is in E.164 with the country code prefixed.
+ * PhoneInput already does this, but this is a defensive belt for any case where
+ * the value reaches us as a bare local number.
+ */
+const normalizeE164 = (raw: string | undefined, defaultCountryCode = '+52'): string => {
+  if (!raw) return '';
+  const trimmed = raw.replace(/[\s()\-.]/g, '').trim();
+  if (trimmed.startsWith('+')) return trimmed;
+  const digits = trimmed.replace(/\D/g, '');
+  if (!digits) return '';
+  return `${defaultCountryCode}${digits}`;
+};
+
 export interface FormData {
   first_name: string;
   last_name: string;
@@ -19,7 +33,7 @@ export const submitToGHL = async (formData: FormData, trackingParams: TrackingPa
     first_name: formData.first_name,
     last_name: formData.last_name,
     email: formData.email,
-    phone: formData.phone,
+    phone: normalizeE164(formData.phone),
     country: formData.country,
     language: formData.language || "English",
     "what_attracts_you_most_to_tulum_nature_cenotes_culture_lifestyle_etc": formData.intent,
