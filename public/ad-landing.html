@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="theme-color" content="#465241"/>
+  <title>Selvadentro Tulum &mdash; Land of Cenotes</title>
+  <link rel="alternate" hreflang="en" href="https://lotes.selvadentrotulum.com/ad-landing.html"/>
+  <link rel="alternate" hreflang="es" href="https://lotes.selvadentrotulum.com/es/ad-landing.html"/>
+  <link rel="alternate" hreflang="x-default" href="https://lotes.selvadentrotulum.com/ad-landing.html"/>
+  <meta name="description" content="Residential lots inside a private community surrounded by 9 natural cenotes. Watch our story and book a private call."/>
+  <link rel="icon" href="/favicon.ico" sizes="any"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Selvadentro Tulum — Land of Cenotes"/>
+  <meta property="og:description" content="Residential lots inside a private community surrounded by 9 natural cenotes."/>
+  <meta property="og:image" content="/og-image.jpg"/>
+  <meta property="og:site_name" content="Selvadentro Tulum"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Selvadentro Tulum — Land of Cenotes"/>
+  <meta name="twitter:image" content="/og-image.jpg"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Work+Sans:wght@300;400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/></noscript>
+  <style>
+    * { box-sizing: border-box; }
+    body { background: #F8F5EF; color: #465241; font-family: "Work Sans", sans-serif; margin: 0; min-height: 100vh; display: flex; flex-direction: column; }
+    .serif { font-family: "Cardo", serif; }
+    html[lang="en"] .es { display: none; }
+    html[lang="es"] .en { display: none; }
+
+    /* === Header / Nav (verde oscuro Selvadentro) === */
+    nav { background: #465241; border-bottom: 1px solid rgba(0,0,0,0.12); }
+    .nav-inner { max-width: 980px; margin: 0 auto; padding: 14px 22px; display: flex; align-items: center; justify-content: space-between; }
+    .logo-img { display: block; height: 44px; width: auto; user-select: none; pointer-events: none; }
+    .nav-lang { color: rgba(248,245,239,0.7); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.05em; text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
+    .nav-lang:hover { color: #F8F5EF; }
+
+    main { flex: 1; padding: 48px 22px 64px; display: flex; align-items: center; justify-content: center; }
+    .stage { max-width: 880px; width: 100%; text-align: center; }
+    .eyebrow { font-family: "Work Sans", sans-serif; text-transform: uppercase; letter-spacing: 0.22em; font-size: 0.72rem; color: #A86A30; margin: 0 0 16px; }
+    h1 { font-family: "Cardo", serif; font-weight: 700; line-height: 1.14; letter-spacing: -0.01em; font-size: clamp(2rem, 4.8vw, 3.4rem); color: #465241; margin: 0 0 36px; }
+    h1 em { color: #CF8543; font-style: normal; }
+
+    .video-frame { position: relative; border-radius: 18px; overflow: hidden; box-shadow: 0 20px 50px rgba(14,25,14,0.16); background: #0E190E; aspect-ratio: 16 / 9; margin: 0 auto 36px; }
+    .video-frame video { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .cta-primary { background: linear-gradient(135deg, #CF8543, #A86A30); color: #FFFFFF; font-family: "Work Sans", sans-serif; font-weight: 600; font-size: 1rem; letter-spacing: 0.02em; padding: 18px 38px; border-radius: 999px; border: none; text-decoration: none; display: inline-block; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.25s ease; box-shadow: 0 10px 28px rgba(207,133,67,0.22); }
+    .cta-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(207,133,67,0.34); background: linear-gradient(135deg, #D99558, #CF8543); }
+    .cta-primary:focus-visible { outline: 2px solid #465241; outline-offset: 4px; }
+    @keyframes pulse-cta { 0%,100%{ box-shadow:0 8px 28px rgba(207,133,67,0.22); } 50%{ box-shadow:0 8px 42px rgba(207,133,67,0.46); } }
+    .cta-primary { animation: pulse-cta 3s ease-in-out infinite; }
+    .cta-primary:hover { animation: none; }
+
+    /* Secondary CTAs (WhatsApp / SMS) */
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 18px; }
+    .cta-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #FFFFFF; color: #465241;
+      font-family: "Work Sans", sans-serif; font-weight: 500;
+      font-size: 0.92rem; padding: 12px 22px;
+      border-radius: 999px;
+      border: 1.5px solid rgba(70,82,65,0.2);
+      text-decoration: none; cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+    .cta-secondary:hover { background: #F8F5EF; transform: translateY(-1px); }
+    .cta-secondary:focus-visible { outline: 2px solid #465241; outline-offset: 3px; }
+    .cta-secondary svg { width: 18px; height: 18px; flex-shrink: 0; }
+    .cta-whatsapp svg { color: #25D366; }
+    .cta-whatsapp:hover { border-color: #25D366; color: #1E9C50; }
+    .cta-sms svg { color: #A86A30; }
+    .cta-sms:hover { border-color: #A86A30; color: #A86A30; }
+
+    footer { background: #465241; padding: 22px 22px 26px; text-align: center; }
+    footer p { margin: 0; font-size: 0.74rem; color: rgba(245,240,230,0.55); }
+    footer a { color: rgba(207,133,67,0.78); text-decoration: none; }
+
+    @media (max-width: 639px) {
+      main { padding: 28px 16px 40px; }
+      h1 { margin-bottom: 28px; }
+      .video-frame { margin-bottom: 28px; border-radius: 14px; }
+      .cta-primary { display: block; width: 100%; padding: 16px 24px; }
+      .cta-secondary { padding: 11px 16px; font-size: 0.88rem; flex: 1 1 0; justify-content: center; }
+      .cta-row { gap: 10px; }
+    }
+    @media (prefers-reduced-motion: reduce) { .cta-primary { animation: none; } }
+
+    /* === Modal del calendario === */
+    .modal { position: fixed; inset: 0; z-index: 50; display: none; }
+    .modal[aria-hidden="false"] { display: block; }
+    .modal-backdrop { position: absolute; inset: 0; background: rgba(14,25,14,0.65); backdrop-filter: blur(3px); }
+    .modal-panel {
+      position: absolute; inset: 24px; max-width: 760px; margin: auto;
+      background: #F8F5EF; border-radius: 18px; overflow: hidden;
+      display: flex; flex-direction: column;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+      animation: modalIn 0.22s ease-out;
+    }
+    @keyframes modalIn { from { opacity:0; transform: translateY(8px) scale(.98);} to { opacity:1; transform: translateY(0) scale(1);} }
+    .modal-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; background: #FFFFFF; border-bottom: 1px solid #E5DDD0; flex-shrink: 0; }
+    .modal-title { font-family: "Cardo", serif; font-size: 1.25rem; color: #465241; margin: 0; font-weight: 700; }
+    .modal-close { background: transparent; border: 0; font-size: 26px; line-height: 1; color: #465241; cursor: pointer; padding: 4px 12px; border-radius: 999px; transition: background 0.2s; }
+    .modal-close:hover { background: rgba(70,82,65,0.08); }
+    .modal-body { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; background: #FFFFFF; }
+    .modal-body iframe { display: block; width: 100%; min-height: 920px; border: 0; }
+    @media (max-width: 640px) {
+      .modal-panel { inset: 0; border-radius: 0; }
+      .modal-body iframe { min-height: 1100px; }
+    }
+  </style>
+  <!-- Meta Pixel -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','680727997874671');
+  fbq('track','PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=680727997874671&ev=PageView&noscript=1"/></noscript>
+  <!-- End Meta Pixel -->
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <img class="logo-img" src="/logo-selvandentro_tulum-cream.webp" alt="Selvadentro Tulum" width="200" height="113"/>
+    <a href="es/ad-landing.html" hreflang="es" class="nav-lang">Español</a>
+  </div>
+</nav>
+
+<main>
+  <div class="stage">
+    <p class="eyebrow">
+      <span class="en">Tulum, Q. Roo &middot; Land of Cenotes</span>
+      <span class="es">Tulum, Q. Roo &middot; Tierra de Cenotes</span>
+    </p>
+    <h1>
+      <span class="en">Your lot in Tulum, <em>surrounded by 9 natural cenotes.</em></span>
+      <span class="es">Tu lote en Tulum, <em>rodeado de 9 cenotes naturales.</em></span>
+    </h1>
+
+    <div class="video-frame">
+      <!--
+        Coloca el archivo en la raíz del proyecto como:
+          - video-conceptual.mp4
+          - video-conceptual-poster.jpg (1920x1080)
+      -->
+      <video controls preload="metadata" playsinline poster="/video-conceptual-poster.jpg">
+        <source src="/video-conceptual.mp4" type="video/mp4"/>
+        <span class="en">Your browser does not support HTML5 video.</span>
+        <span class="es">Tu navegador no soporta v&iacute;deo HTML5.</span>
+      </video>
+    </div>
+
+    <button type="button" class="cta-primary" data-open-scheduler>
+      <span class="en">Book a Private Call</span>
+      <span class="es">Agendar una llamada privada</span>
+    </button>
+
+    <div class="cta-row">
+      <a
+        class="cta-secondary cta-whatsapp"
+        href="https://wa.me/529994890828?text=Hi%2C%20I%27d%20like%20more%20information%20about%20Selvadentro"
+        target="_blank" rel="noopener noreferrer"
+        data-track-cta="whatsapp">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.297-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+      <a
+        class="cta-secondary cta-sms"
+        href="sms:+12108791979?body=Hi%2C%20I%27d%20like%20more%20information%20about%20Selvadentro"
+        data-track-cta="sms">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        SMS
+      </a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>
+    <a href="tel:+529994890828">+52 999 489 0828</a>
+    &nbsp;&middot;&nbsp;
+    <a href="mailto:info@selvadentrotulum.com">info@selvadentrotulum.com</a>
+  </p>
+</footer>
+
+<!-- ========================================================
+     MODAL CON CALENDARIO DE GOHIGHLEVEL
+     Para cambiar el código del calendario, reemplaza el valor
+     de data-src en el <iframe> de abajo por la URL que te dé
+     GoHighLevel (Calendars → Share → Embed code → copia el src).
+     ======================================================== -->
+<div id="scheduler-modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-backdrop" data-close-scheduler></div>
+  <div class="modal-panel" role="document">
+    <div class="modal-header">
+      <h2 id="modal-title" class="modal-title">
+        <span class="en">Schedule a Call</span>
+        <span class="es">Agendar una llamada</span>
+      </h2>
+      <button type="button" class="modal-close" data-close-scheduler aria-label="Cerrar">&times;</button>
+    </div>
+    <div class="modal-body">
+      <iframe
+        id="xNw7eQAGdwNbjtyPEXwh_ad_landing"
+        data-ghl-iframe
+        src="https://api.leadconnectorhq.com/widget/booking/xNw7eQAGdwNbjtyPEXwh"
+        title="Selvadentro · Calendar"
+        scrolling="no">
+      </iframe>
+    </div>
+  </div>
+</div>
+
+<!-- GoHighLevel embed auto-resize script (must live outside the modal so it runs at page load) -->
+<script src="https://link.msgsndr.com/js/form_embed.js" type="text/javascript" async></script>
+
+<script>
+(function() {
+  var modal = document.getElementById('scheduler-modal');
+  var openers = document.querySelectorAll('[data-open-scheduler]');
+  var closers = document.querySelectorAll('[data-close-scheduler]');
+  var lastFocus = null;
+
+  function openModal() {
+    lastFocus = document.activeElement;
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    var closeBtn = modal.querySelector('.modal-close');
+    if (closeBtn) closeBtn.focus({ preventScroll: true });
+    if (typeof window.fbq === 'function') { window.fbq('track', 'Lead'); }
+  }
+
+  function closeModal() {
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (lastFocus && typeof lastFocus.focus === 'function') {
+      lastFocus.focus({ preventScroll: true });
+    }
+  }
+
+  openers.forEach(function(b) { b.addEventListener('click', openModal); });
+  closers.forEach(function(b) { b.addEventListener('click', closeModal); });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') closeModal();
+  });
+
+  document.querySelectorAll('[data-track-cta]').forEach(function(el) {
+    el.addEventListener('click', function() {
+      if (typeof window.fbq === 'function') { window.fbq('track', 'Lead'); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
