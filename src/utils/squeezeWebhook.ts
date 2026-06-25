@@ -84,34 +84,13 @@ export interface SqueezeSubmissionResult {
   error?: unknown;
 }
 
-// `gtag` is already declared in ./tracking.ts — don't redeclare or types conflict.
-declare global {
-  interface Window {
-    fbq?: (...args: unknown[]) => void;
-  }
-}
-
-const fireLeadEvents = (angle: SqueezeAngle, formData: SqueezeFormData) => {
-  // Google Analytics / Google Ads conversion
-  if (typeof window.gtag === 'function') {
-    window.gtag('event', 'generate_lead', {
-      currency: 'USD',
-      value: 0,
-      event_category: 'Squeeze',
-      event_label: `squeeze-${angle}`,
-      angle,
-    });
-  }
-  // Meta Pixel
-  if (typeof window.fbq === 'function') {
-    window.fbq('track', 'Lead', {
-      content_name: `squeeze-${angle}`,
-      content_category: 'squeeze',
-    });
-  }
-  // Defensive: avoid unused-var lint by referencing email/phone shapes
-  void formData;
-};
+/**
+ * NOTE: Pixel + gtag Lead events are fired from SqueezeThankYou.tsx, NOT here.
+ * Firing in both places caused every submission to count as TWO leads in
+ * Meta Ads Manager and TWO generate_lead events in GA4. The thank-you page
+ * is the canonical conversion location: it only renders after a successful
+ * submit, and it survives the post-submit redirect cleanly.
+ */
 
 export const submitSqueezeLead = async (
   angle: SqueezeAngle,
@@ -182,7 +161,7 @@ export const submitSqueezeLead = async (
       throw new Error(`Squeeze webhook returned ${response.status}`);
     }
 
-    fireLeadEvents(angle, formData);
+    // Pixel + gtag Lead events fire from SqueezeThankYou.tsx — not here.
     return { success: true };
   } catch (error) {
     console.error('Squeeze submission failed:', error);
