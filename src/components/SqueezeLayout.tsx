@@ -190,7 +190,12 @@ export default function SqueezeLayout({ angle, lang = 'es' }: SqueezeLayoutProps
       {/* FOOTER */}
       <footer className="bg-[#1F2A22] text-white/60 text-xs py-6 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-          <span>© {new Date().getFullYear()} Selvadentro Tulum · {copyrightSuffix}</span>
+          <span>
+            © {new Date().getFullYear()} Selvadentro Tulum · {copyrightSuffix} ·{' '}
+            <a href="https://tothemaxmedia.com" target="_blank" rel="noopener" className="hover:text-white">
+              Built by To The Max Media
+            </a>
+          </span>
           <span>
             <a href="tel:+529994890828" className="hover:text-white">+52 999 489 0828</a>
             <span className="mx-2">·</span>

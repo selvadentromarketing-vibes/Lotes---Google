@@ -79,7 +79,8 @@
     <!-- Meta Pixel — noscript fallback for clients with JS disabled. -->
     <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=680727997874671&ev=PageView&noscript=1" /></noscript>
 
-    <div id="root"></div>
+    <!-- Pre-hydration shell: crawlable agency credit in initial HTML; React replaces #root children on mount. -->
+    <div id="root"><footer><p style="font-size:12px;color:#8a8a7d;text-align:center;padding:24px 0">© 2026 Selvadentro Tulum · <a href="https://tothemaxmedia.com" rel="noopener">Built by To The Max Media</a></p></footer></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

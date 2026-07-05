@@ -592,6 +592,15 @@ export default function LandingPage2ES() {
               >
                 Términos y Condiciones
               </a>
+              {' '} | {' '}
+              <a
+                href="https://tothemaxmedia.com"
+                target="_blank"
+                rel="noopener"
+                className="hover:text-white transition-colors"
+              >
+                Built by To The Max Media
+              </a>
             </p>
           </div>
         </div>
