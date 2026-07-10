@@ -40,12 +40,25 @@ export const submitToGHL = async (formData: FormData, trackingParams: TrackingPa
     "horizonte_de_inversion": formData.timeline,
     "presupuesto__budget": formData.budget_range,
     "contact.source": trackingParams.utm_source || "Google Ads",
-    "contact.ad_ctwa_clid": trackingParams.gclid,
+    "contact.ad_ctwa_clid": trackingParams.gclid || trackingParams.fbclid,
     "contact.campaign": trackingParams.utm_campaign,
+    // Full tracking set — same hidden fields the squeeze pages send
+    // (tracking.ts was already capturing these; they just weren't sent).
+    utm_source: trackingParams.utm_source,
     utm_medium: trackingParams.utm_medium,
+    utm_campaign: trackingParams.utm_campaign,
     utm_term: trackingParams.utm_term,
     utm_content: trackingParams.utm_content,
+    gclid: trackingParams.gclid,
+    fbclid: trackingParams.fbclid,
+    ad_id: trackingParams.ad_id,
+    ad_source_id: trackingParams.ad_id, // GHL "Ad Source ID" alias
+    adset_id: trackingParams.adset_id,
+    campaign_id: trackingParams.campaign_id,
+    search_term: trackingParams.search_term,
     landing_page: trackingParams.landing_page,
+    page_url: trackingParams.landing_page,
+    form_name: "lotes-main-form",
     source_label: "Google Ads",
     campaign_label: trackingParams.utm_campaign || "Direct",
   };
