@@ -147,6 +147,7 @@ export const SQUEEZE_CONTENT: Record<SqueezeAngle, ContentByLang> = {
       heroImage: '/hero-selvandentro_tulum.webp',
       ctaLabel: 'Ver terrenos disponibles',
       highlights: [
+        'Lotes de 900 m² (9,700 sq ft) — espacio para casa, jardín y privacidad',
         'Plusvalía sostenida en una de las zonas más cotizadas de Tulum',
         'Tierra frente a cenotes: activo que no se fabrica',
         'Escritura pública garantizada',
@@ -160,6 +161,7 @@ export const SQUEEZE_CONTENT: Record<SqueezeAngle, ContentByLang> = {
       heroImage: '/hero-selvandentro_tulum.webp',
       ctaLabel: 'See available lots',
       highlights: [
+        '9,700 sq ft lots (~900 m²) — room for a home, garden, and privacy',
         "Sustained appreciation in one of Tulum's most sought-after zones",
         "Cenote-front land: an asset they're not making more of",
         'Public deed guaranteed',
