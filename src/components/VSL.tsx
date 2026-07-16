@@ -6,6 +6,41 @@ interface VSLProps {
   language?: 'en' | 'es';
 }
 
+const SWATCH = (id: string) => `https://fast.wistia.com/embed/medias/${id}/swatch`;
+
+/**
+ * Fetch the HD first-frame thumbnail for a Wistia media via oEmbed.
+ * Returns the low-res swatch until the request resolves, so the facade
+ * always paints something immediately.
+ */
+function useWistiaPoster(mediaId: string): string {
+  const [url, setUrl] = useState(() => SWATCH(mediaId));
+  useEffect(() => {
+    setUrl(SWATCH(mediaId));
+    let cancelled = false;
+    fetch(
+      `https://fast.wistia.com/oembed?url=https://home.wistia.com/medias/${mediaId}&format=json`,
+    )
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data: { thumbnail_url?: string } | null) => {
+        if (cancelled || !data?.thumbnail_url) return;
+        // oEmbed hands back a resized crop; bump it to 1920x1080 for retina heros.
+        const hd = data.thumbnail_url.replace(
+          /image_crop_resized=\d+x\d+/,
+          'image_crop_resized=1920x1080',
+        );
+        setUrl(hd);
+      })
+      .catch(() => {
+        /* keep swatch */
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [mediaId]);
+  return url;
+}
+
 /**
  * Wistia VSL embed with click-to-load thumbnail facade.
  * The Wistia player script + embed module (~700KB combined) only download
@@ -50,6 +85,7 @@ function WistiaPlayer({ mediaId }: { mediaId: string }) {
 
 export default function VSL({ mediaId }: VSLProps) {
   const [loaded, setLoaded] = useState(false);
+  const posterUrl = useWistiaPoster(mediaId);
 
   if (loaded) {
     return (
@@ -68,7 +104,7 @@ export default function VSL({ mediaId }: VSLProps) {
         aria-label="Play video"
         style={{
           aspectRatio: '16 / 9',
-          backgroundImage: `url('https://fast.wistia.com/embed/medias/${mediaId}/swatch')`,
+          backgroundImage: `url('${posterUrl}')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
