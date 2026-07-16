@@ -138,6 +138,34 @@ export const SQUEEZE_CONTENT: Record<SqueezeAngle, ContentByLang> = {
       ],
     },
   },
+  premium: {
+    es: {
+      slug: 'premium',
+      eyebrow: 'INVERSIÓN PATRIMONIAL EN TULUM',
+      headline: 'Tu patrimonio, con los pies en la selva.',
+      subhead: 'Terrenos privados frente a cenotes, desde $150,000 USD. Solo quedan 5 en Suspiro.',
+      heroImage: '/hero-selvandentro_tulum.webp',
+      ctaLabel: 'Ver terrenos disponibles',
+      highlights: [
+        'Plusvalía sostenida en una de las zonas más cotizadas de Tulum',
+        'Tierra frente a cenotes: activo que no se fabrica',
+        'Escritura pública garantizada',
+      ],
+    },
+    en: {
+      slug: 'premium',
+      eyebrow: 'LEGACY INVESTMENT IN TULUM',
+      headline: 'Your legacy, rooted in the jungle.',
+      subhead: 'Private cenote-front lots, from $150,000 USD. Only 5 left in Suspiro.',
+      heroImage: '/hero-selvandentro_tulum.webp',
+      ctaLabel: 'See available lots',
+      highlights: [
+        "Sustained appreciation in one of Tulum's most sought-after zones",
+        "Cenote-front land: an asset they're not making more of",
+        'Public deed guaranteed',
+      ],
+    },
+  },
 };
 
 export const SQUEEZE_SLUGS: SqueezeAngle[] = [
@@ -145,6 +173,7 @@ export const SQUEEZE_SLUGS: SqueezeAngle[] = [
   'oportunidad-perdida',
   'accesibilidad',
   'seguridad',
+  'premium',
 ];
 
 export const SQUEEZE_VSL_MEDIA_ID = 'jn8el9or7a';

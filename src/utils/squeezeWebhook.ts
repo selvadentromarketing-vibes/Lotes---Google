@@ -15,7 +15,8 @@ export type SqueezeAngle =
   | 'escape'
   | 'oportunidad-perdida'
   | 'accesibilidad'
-  | 'seguridad';
+  | 'seguridad'
+  | 'premium';
 
 /** Page language → GHL dropdown value. Matches the GHL field exactly
  *  (Spanish words, including for English/French): Inglés / Español / Francés / Otro. */

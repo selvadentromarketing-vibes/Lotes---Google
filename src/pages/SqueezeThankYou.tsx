@@ -19,6 +19,7 @@ const VALID_ANGLES = new Set([
   'oportunidad-perdida',
   'accesibilidad',
   'seguridad',
+  'premium',
 ]);
 
 const ANGLE_LABEL: Record<string, string> = {
@@ -26,6 +27,7 @@ const ANGLE_LABEL: Record<string, string> = {
   'oportunidad-perdida': 'Oportunidad Perdida',
   accesibilidad: 'Accesibilidad',
   seguridad: 'Seguridad',
+  premium: 'Premium',
 };
 
 declare global {

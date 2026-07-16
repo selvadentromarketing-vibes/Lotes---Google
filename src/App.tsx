@@ -12,6 +12,7 @@ import SqueezeEscape from './pages/SqueezeEscape';
 import SqueezeOportunidadPerdida from './pages/SqueezeOportunidadPerdida';
 import SqueezeAccesibilidad from './pages/SqueezeAccesibilidad';
 import SqueezeSeguridad from './pages/SqueezeSeguridad';
+import SqueezePremium from './pages/SqueezePremium';
 import SqueezeThankYou from './pages/SqueezeThankYou';
 
 // Fire Meta Pixel PageView on SPA route changes.
@@ -51,10 +52,12 @@ function App() {
         <Route path="/oportunidad-perdida" element={<SqueezeOportunidadPerdida lang="es" />} />
         <Route path="/accesibilidad" element={<SqueezeAccesibilidad lang="es" />} />
         <Route path="/seguridad" element={<SqueezeSeguridad lang="es" />} />
+        <Route path="/premium" element={<SqueezePremium lang="es" />} />
         <Route path="/en/escape" element={<SqueezeEscape lang="en" />} />
         <Route path="/en/oportunidad-perdida" element={<SqueezeOportunidadPerdida lang="en" />} />
         <Route path="/en/accesibilidad" element={<SqueezeAccesibilidad lang="en" />} />
         <Route path="/en/seguridad" element={<SqueezeSeguridad lang="en" />} />
+        <Route path="/en/premium" element={<SqueezePremium lang="en" />} />
         {/* Per-angle thank-you pages — one URL per angle for ad-platform tracking */}
         <Route path="/gracias/:angle" element={<SqueezeThankYou lang="es" />} />
         <Route path="/en/gracias/:angle" element={<SqueezeThankYou lang="en" />} />
