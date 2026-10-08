@@ -192,6 +192,24 @@ export default function SqueezeLayout({ angle, lang = 'es' }: SqueezeLayoutProps
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
           <span>
             © {new Date().getFullYear()} Selvadentro Tulum · {copyrightSuffix} ·{' '}
+            <a
+              href="https://selvadentrotulum.com/privacy-policy/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white underline"
+            >
+              {t.privacyPolicy}
+            </a>
+            {' '}·{' '}
+            <a
+              href="https://selvadentrotulum.com/terms-and-conditions/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white underline"
+            >
+              {t.termsConditions}
+            </a>
+            {' '}·{' '}
             <a href="https://tothemaxmedia.com" target="_blank" rel="noopener" className="hover:text-white">
               Built by To The Max Media
             </a>

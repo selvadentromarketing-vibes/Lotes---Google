@@ -223,6 +223,17 @@ export default function SqueezeForm({ angle, ctaLabel, lang = 'es' }: SqueezeFor
         )}
       </button>
 
+      <p className="mt-3 text-[11px] text-stone-500 text-center leading-relaxed">
+        {t.consentPrivacy}{' '}
+        <a
+          href="https://selvadentrotulum.com/privacy-policy/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline hover:text-brand-dark-green transition-colors"
+        >
+          {t.privacyPolicy}
+        </a>
+      </p>
       <p className="mt-3 text-[11px] text-stone-500 text-center leading-relaxed">{t.consent}</p>
     </form>
   );

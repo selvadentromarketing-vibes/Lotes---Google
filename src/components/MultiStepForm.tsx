@@ -510,6 +510,20 @@ export default function MultiStepForm() {
           </button>
         )}
       </div>
+
+      {currentStep === totalSteps && (
+        <p className="mt-3 text-[11px] text-stone-500 text-center leading-relaxed">
+          By submitting you agree to our{' '}
+          <a
+            href="https://selvadentrotulum.com/privacy-policy/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-brand-dark-green transition-colors"
+          >
+            Privacy Policy
+          </a>
+        </p>
+      )}
     </div>
   );
 }

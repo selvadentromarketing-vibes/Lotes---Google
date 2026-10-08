@@ -208,6 +208,9 @@ export const SQUEEZE_LAYOUT_T: Record<SqueezeLang, {
   devBlockProjectsLabel: string;
   submitting: string;
   consent: string;
+  consentPrivacy: string;
+  privacyPolicy: string;
+  termsConditions: string;
   errorMissing: string;
   errorPhone: string;
   errorSubmit: string;
@@ -259,6 +262,9 @@ export const SQUEEZE_LAYOUT_T: Record<SqueezeLang, {
     devBlockProjectsLabel: 'Proyectos de referencia',
     submitting: 'Enviando...',
     consent: 'Al enviar aceptas que un asesor de Selvadentro te contacte. No compartimos tus datos.',
+    consentPrivacy: 'Al enviar aceptas nuestra',
+    privacyPolicy: 'Política de Privacidad',
+    termsConditions: 'Términos y Condiciones',
     errorMissing: 'Por favor completa todos los campos.',
     errorPhone: 'Por favor ingresa un teléfono válido (incluye lada).',
     errorSubmit:
@@ -312,6 +318,9 @@ export const SQUEEZE_LAYOUT_T: Record<SqueezeLang, {
     devBlockProjectsLabel: 'Reference projects',
     submitting: 'Sending...',
     consent: 'By submitting you agree that a Selvadentro advisor will contact you. We never share your data.',
+    consentPrivacy: 'By submitting you agree to our',
+    privacyPolicy: 'Privacy Policy',
+    termsConditions: 'Terms & Conditions',
     errorMissing: 'Please fill out every field.',
     errorPhone: 'Please enter a valid phone number (include country code).',
     errorSubmit:
