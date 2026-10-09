@@ -1,4 +1,4 @@
-import { useState, FormEvent } from 'react';
+import { useEffect, useState, FormEvent } from 'react';
 import { Loader2, CheckCircle2 } from 'lucide-react';
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import type { Value as PhoneValue } from 'react-phone-number-input';
@@ -12,6 +12,7 @@ import {
   type TimelineOption,
 } from '../utils/squeezeWebhook';
 import { captureTrackingParams } from '../utils/tracking';
+import { reportsLeadToGoogleAds, loadGoogleAdsTag, trackGoogleAdsLead } from '../utils/googleAdsLead';
 import { SQUEEZE_LAYOUT_T, type SqueezeLang } from '../config/squeezeContent';
 
 interface SqueezeFormProps {
@@ -32,6 +33,11 @@ export default function SqueezeForm({ angle, ctaLabel, lang = 'es' }: SqueezeFor
   const [timeline, setTimeline] = useState<TimelineOption | ''>('');
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const googleAdsLead = reportsLeadToGoogleAds(angle, lang);
+
+  useEffect(() => {
+    if (googleAdsLead) loadGoogleAdsTag();
+  }, [googleAdsLead]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -64,6 +70,7 @@ export default function SqueezeForm({ angle, ctaLabel, lang = 'es' }: SqueezeFor
     );
 
     if (result.success) {
+      if (googleAdsLead) trackGoogleAdsLead(angle);
       setStatus('success');
       // Per-angle thank-you URL. Spanish stays at /gracias/<angle>;
       // English at /en/gracias/<angle>.
