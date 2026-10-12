@@ -63,7 +63,7 @@ export const submitToGHL = async (formData: FormData, trackingParams: TrackingPa
     landing_page: origin.landing_page,
     page_url: trackingParams.landing_page,
     form_name: "lotes-main-form",
-    source_label: "Google Ads",
+    source_label: trackingParams.utm_source || "",
     campaign_label: trackingParams.utm_campaign || "",
   };
 

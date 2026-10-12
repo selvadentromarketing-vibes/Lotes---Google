@@ -27,18 +27,51 @@ const pickFirst = (url: URLSearchParams, keys: string[]): string | undefined => 
   return undefined;
 };
 
+/**
+ * Ad attribution: the utm_* params plus the gclid/fbclid click IDs, kept as one
+ * block. A URL carrying any of them replaces the whole block, so one visit's
+ * utm_source is never mixed with another visit's utm_campaign. A URL without
+ * them keeps the stored block, so it survives navigation. The block expires 30
+ * days after it was saved: ad spend is decided on short windows.
+ */
+const AD_ATTRIBUTION_KEY = 'ad_attribution';
+const AD_ATTRIBUTION_TTL_MS = 30 * 24 * 60 * 60 * 1000;
+const AD_ATTRIBUTION_PARAMS = [
+  'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid',
+] as const;
+type AdAttribution = Partial<Record<(typeof AD_ATTRIBUTION_PARAMS)[number], string>>;
+
+const currentAdAttribution = (urlParams: URLSearchParams): AdAttribution => {
+  const fromUrl: AdAttribution = {};
+  AD_ATTRIBUTION_PARAMS.forEach((k) => {
+    const v = urlParams.get(k);
+    if (v) fromUrl[k] = v;
+  });
+  try {
+    if (Object.keys(fromUrl).length) {
+      localStorage.setItem(AD_ATTRIBUTION_KEY, JSON.stringify({ params: fromUrl, saved_at: Date.now() }));
+      return fromUrl;
+    }
+    const stored = JSON.parse(localStorage.getItem(AD_ATTRIBUTION_KEY) || 'null');
+    if (stored && Date.now() - stored.saved_at <= AD_ATTRIBUTION_TTL_MS) return stored.params || {};
+    localStorage.removeItem(AD_ATTRIBUTION_KEY);
+  } catch {
+    // Storage unavailable: only what the current URL carries.
+  }
+  return fromUrl;
+};
+
+// Call on every page load, so the block is saved on arrival even if the form opens on another page.
+export const captureAdAttribution = (): void => {
+  currentAdAttribution(new URLSearchParams(window.location.search));
+};
+
 export const captureTrackingParams = (): TrackingParams => {
   const urlParams = new URLSearchParams(window.location.search);
 
   const params: TrackingParams = {
     landing_page: window.location.href,
-    gclid: urlParams.get('gclid') || undefined,
-    fbclid: urlParams.get('fbclid') || undefined,
-    utm_source: urlParams.get('utm_source') || undefined,
-    utm_medium: urlParams.get('utm_medium') || undefined,
-    utm_campaign: urlParams.get('utm_campaign') || undefined,
-    utm_term: urlParams.get('utm_term') || undefined,
-    utm_content: urlParams.get('utm_content') || undefined,
+    ...currentAdAttribution(urlParams),
     // Accept multiple aliases so the ads team has flexibility in URL templates.
     ad_id: pickFirst(urlParams, ['ad_id', 'ad_source_id', 'fb_ad_id']),
     adset_id: pickFirst(urlParams, ['adset_id', 'fb_adset_id']),
@@ -55,7 +88,7 @@ export const captureTrackingParams = (): TrackingParams => {
  * Where the visitor first came from: the referrer's domain and the path of the
  * first page they saw. Captured once per visitor and kept for 90 days, so a lead
  * still carries it after navigating to other pages or coming back later. UTMs
- * are separate (captureTrackingParams) and keep following the current URL.
+ * and click IDs are tracked separately (see currentAdAttribution).
  */
 export interface VisitorOrigin {
   referrer: string;
