@@ -1,4 +1,4 @@
-import { TrackingParams, trackFormSubmission } from './tracking';
+import { TrackingParams, trackFormSubmission, getVisitorOrigin } from './tracking';
 
 const GHL_WEBHOOK_URL = "https://services.leadconnectorhq.com/hooks/crN2IhAuOBAl7D8324yI/webhook-trigger/6e1b31c7-4794-4642-95e6-29cbbd754081";
 
@@ -29,6 +29,7 @@ export interface FormData {
 }
 
 export const submitToGHL = async (formData: FormData, trackingParams: TrackingParams) => {
+  const origin = getVisitorOrigin();
   const payload = {
     first_name: formData.first_name,
     last_name: formData.last_name,
@@ -39,7 +40,8 @@ export const submitToGHL = async (formData: FormData, trackingParams: TrackingPa
     "what_attracts_you_most_to_tulum_nature_cenotes_culture_lifestyle_etc": formData.intent,
     "horizonte_de_inversion": formData.timeline,
     "presupuesto__budget": formData.budget_range,
-    "contact.source": trackingParams.utm_source || "Google Ads",
+    // No UTM = no source: organic and direct traffic must not count as paid.
+    "contact.source": trackingParams.utm_source || "",
     "contact.ad_ctwa_clid": trackingParams.gclid || trackingParams.fbclid,
     "contact.campaign": trackingParams.utm_campaign,
     // Full tracking set — same hidden fields the squeeze pages send
@@ -56,11 +58,13 @@ export const submitToGHL = async (formData: FormData, trackingParams: TrackingPa
     adset_id: trackingParams.adset_id,
     campaign_id: trackingParams.campaign_id,
     search_term: trackingParams.search_term,
-    landing_page: trackingParams.landing_page,
+    // First-visit origin (see getVisitorOrigin); page_url is the page the form was sent from.
+    referrer: origin.referrer,
+    landing_page: origin.landing_page,
     page_url: trackingParams.landing_page,
     form_name: "lotes-main-form",
     source_label: "Google Ads",
-    campaign_label: trackingParams.utm_campaign || "Direct",
+    campaign_label: trackingParams.utm_campaign || "",
   };
 
   try {

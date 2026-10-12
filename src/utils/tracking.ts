@@ -51,6 +51,56 @@ export const captureTrackingParams = (): TrackingParams => {
   return params;
 };
 
+/**
+ * Where the visitor first came from: the referrer's domain and the path of the
+ * first page they saw. Captured once per visitor and kept for 90 days, so a lead
+ * still carries it after navigating to other pages or coming back later. UTMs
+ * are separate (captureTrackingParams) and keep following the current URL.
+ */
+export interface VisitorOrigin {
+  referrer: string;
+  landing_page: string;
+}
+
+const VISITOR_ORIGIN_KEY = 'visitor_origin';
+const VISITOR_ORIGIN_TTL_MS = 90 * 24 * 60 * 60 * 1000;
+
+const referrerDomain = (): string => {
+  try {
+    return document.referrer ? new URL(document.referrer).hostname : '';
+  } catch {
+    return '';
+  }
+};
+
+// Call on every page load; it only writes when nothing (unexpired) is stored yet.
+export const captureVisitorOrigin = (): void => {
+  try {
+    const stored = JSON.parse(localStorage.getItem(VISITOR_ORIGIN_KEY) || 'null');
+    if (stored && stored.expires_at > Date.now()) return;
+    localStorage.setItem(
+      VISITOR_ORIGIN_KEY,
+      JSON.stringify({
+        referrer: referrerDomain(),
+        landing_page: window.location.pathname,
+        expires_at: Date.now() + VISITOR_ORIGIN_TTL_MS,
+      }),
+    );
+  } catch {
+    // Storage unavailable (private mode, blocked): the lead just goes without origin.
+  }
+};
+
+export const getVisitorOrigin = (): VisitorOrigin => {
+  try {
+    const stored = JSON.parse(localStorage.getItem(VISITOR_ORIGIN_KEY) || 'null');
+    if (stored) return { referrer: stored.referrer || '', landing_page: stored.landing_page || '' };
+  } catch {
+    // fall through
+  }
+  return { referrer: '', landing_page: '' };
+};
+
 export const getStoredTrackingParams = (): TrackingParams => {
   const stored = localStorage.getItem('tracking_params');
   if (stored) {

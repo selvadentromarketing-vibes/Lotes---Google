@@ -1,4 +1,4 @@
-import { TrackingParams } from './tracking';
+import { TrackingParams, getVisitorOrigin } from './tracking';
 
 /**
  * GHL inbound webhook for the squeeze landings at lotes.selvadentrotulum.com/{angle}.
@@ -99,6 +99,7 @@ export const submitSqueezeLead = async (
   tracking: TrackingParams,
   lang: PageLang = 'es',
 ): Promise<SqueezeSubmissionResult> => {
+  const origin = getVisitorOrigin();
   const payload = {
     // Contact basics
     first_name: formData.first_name,
@@ -121,9 +122,12 @@ export const submitSqueezeLead = async (
     source_label: `squeeze-${angle}`,
     form_name: `squeeze-${angle}-form`,
 
-    // Tracking — UTMs
-    landing_page: tracking.landing_page,
+    // Tracking — first-visit origin (see getVisitorOrigin); page_url is the page the form was sent from
+    referrer: origin.referrer,
+    landing_page: origin.landing_page,
     page_url: tracking.landing_page,
+
+    // Tracking — UTMs
     utm_source: tracking.utm_source,
     utm_medium: tracking.utm_medium,
     utm_campaign: tracking.utm_campaign,
@@ -142,10 +146,11 @@ export const submitSqueezeLead = async (
     search_term: tracking.search_term,
 
     // GHL-mapped contact fields (mirrors existing webhook.ts conventions)
-    'contact.source': tracking.utm_source || 'Meta Ads - Squeeze',
+    // No UTM = no source: organic and direct traffic must not count as paid.
+    'contact.source': tracking.utm_source || '',
     'contact.campaign': tracking.utm_campaign,
     'contact.ad_ctwa_clid': tracking.fbclid || tracking.gclid,
-    campaign_label: tracking.utm_campaign || 'Direct',
+    campaign_label: tracking.utm_campaign || '',
 
     // Tags
     tags: ['squeeze', angle],
