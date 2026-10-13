@@ -12,7 +12,13 @@ import {
   type TimelineOption,
 } from '../utils/squeezeWebhook';
 import { captureTrackingParams } from '../utils/tracking';
-import { reportsLeadToGoogleAds, loadGoogleAdsTag, trackGoogleAdsLead } from '../utils/googleAdsLead';
+import {
+  newLeadEventId,
+  trackLeadConversion,
+  reportsLeadToGoogleAds,
+  loadGoogleAdsTag,
+  pushLeadToDataLayer,
+} from '../utils/leadConversion';
 import { SQUEEZE_LAYOUT_T, type SqueezeLang } from '../config/squeezeContent';
 
 interface SqueezeFormProps {
@@ -70,14 +76,17 @@ export default function SqueezeForm({ angle, ctaLabel, lang = 'es' }: SqueezeFor
     );
 
     if (result.success) {
-      if (googleAdsLead) trackGoogleAdsLead(angle);
+      if (googleAdsLead) pushLeadToDataLayer(angle);
+      const conversionSent = trackLeadConversion(newLeadEventId(), {
+        content_name: `squeeze-${angle}`,
+        content_category: 'squeeze-thankyou',
+      });
       setStatus('success');
       // Per-angle thank-you URL. Spanish stays at /gracias/<angle>;
       // English at /en/gracias/<angle>.
-      setTimeout(() => {
-        const prefix = lang === 'en' ? '/en' : '';
-        window.location.href = `${prefix}/gracias/${angle}`;
-      }, 800);
+      await Promise.all([conversionSent, new Promise((r) => setTimeout(r, 800))]);
+      const prefix = lang === 'en' ? '/en' : '';
+      window.location.href = `${prefix}/gracias/${angle}`;
     } else {
       setStatus('error');
       setErrorMessage(t.errorSubmit);

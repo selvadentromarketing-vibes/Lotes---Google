@@ -86,11 +86,10 @@ export interface SqueezeSubmissionResult {
 }
 
 /**
- * NOTE: Pixel + gtag Lead events are fired from SqueezeThankYou.tsx, NOT here.
- * Firing in both places caused every submission to count as TWO leads in
- * Meta Ads Manager and TWO generate_lead events in GA4. The thank-you page
- * is the canonical conversion location: it only renders after a successful
- * submit, and it survives the post-submit redirect cleanly.
+ * NOTE: no tracking here. SqueezeForm fires the Meta Lead and the Google Ads
+ * conversion once this returns success (see leadConversion.ts), and
+ * SqueezeThankYou fires GA4 generate_lead. Firing the same event in two places
+ * once counted every submission TWICE in Meta Ads Manager and GA4.
  */
 
 export const submitSqueezeLead = async (
@@ -167,7 +166,7 @@ export const submitSqueezeLead = async (
       throw new Error(`Squeeze webhook returned ${response.status}`);
     }
 
-    // Pixel + gtag Lead events fire from SqueezeThankYou.tsx — not here.
+    // Lead + Ads conversion fire from SqueezeForm on this success — not here.
     return { success: true };
   } catch (error) {
     console.error('Squeeze submission failed:', error);

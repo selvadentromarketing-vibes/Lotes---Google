@@ -10,8 +10,9 @@ import { SQUEEZE_LAYOUT_T, type SqueezeLang } from '../config/squeezeContent';
  *   /gracias/<angle>           (Spanish — default; matches legacy Meta ad URLs)
  *   /en/gracias/<angle>        (English)
  *
- * Each URL is distinct so Meta Ads + Google Ads can fire conversion pixels
- * per-angle automatically.
+ * Each URL is distinct so visits can be told apart per angle. The Meta Lead
+ * and Google Ads conversion are NOT fired here: SqueezeForm sends them when
+ * the webhook answers OK, so a reload or reopen of this page counts nothing.
  */
 
 const VALID_ANGLES = new Set([
@@ -50,11 +51,6 @@ export default function SqueezeThankYou({ lang = 'es' }: Props) {
     document.title = `${t.thankYouDocTitle} — ${angleLabel} | Selvadentro Tulum`;
 
     if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', 'conversion', {
-        send_to: 'AW-16717627054/4jnsCKrQ3dQbEK79yqM-',
-        event_label: `squeeze-${safeAngle}`,
-        squeeze_angle: safeAngle,
-      });
       window.gtag('event', 'generate_lead', {
         event_category: 'Squeeze',
         event_label: `squeeze-${safeAngle}-thankyou`,
@@ -64,10 +60,6 @@ export default function SqueezeThankYou({ lang = 'es' }: Props) {
     }
 
     if (typeof window !== 'undefined' && window.fbq) {
-      window.fbq('track', 'Lead', {
-        content_name: `squeeze-${safeAngle}`,
-        content_category: 'squeeze-thankyou',
-      });
       window.fbq('trackCustom', `SqueezeThankYou_${safeAngle}`, {
         angle: safeAngle,
       });

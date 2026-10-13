@@ -1,20 +1,9 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { CheckCircle2, MessageCircle, MessageSquare, Home } from 'lucide-react';
 
 export default function ThankYouPage() {
-  useEffect(() => {
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'conversion', {
-        send_to: 'AW-16717627054/4jnsCKrQ3dQbEK79yqM-',
-      });
-    }
-    // Meta Pixel Lead event — pixel base is installed in index.html.
-    if (typeof window !== 'undefined' && (window as any).fbq) {
-      (window as any).fbq('track', 'Lead');
-    }
-  }, []);
-
+  // The Meta Lead and Google Ads conversion are fired by the form once the
+  // webhook answers OK (leadConversion.ts), not here: a reload counts nothing.
   const whatsappMessage = encodeURIComponent(
     "Hi! I requested lots + pricing + payment plan. Can you share availability and next steps?"
   );

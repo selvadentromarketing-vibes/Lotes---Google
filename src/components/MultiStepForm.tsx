@@ -5,6 +5,7 @@ import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import type { Value as PhoneValue } from 'react-phone-number-input';
 import { captureTrackingParams, getStoredTrackingParams } from '../utils/tracking';
 import { submitToGHL, FormData } from '../utils/webhook';
+import { newLeadEventId, trackLeadConversion } from '../utils/leadConversion';
 
 const COUNTRIES = ['USA', 'Canada', 'Mexico', 'Europe', 'Other'];
 
@@ -155,7 +156,9 @@ export default function MultiStepForm() {
     setIsSubmitting(true);
     const trackingParams = getStoredTrackingParams();
 
-    await submitToGHL({ ...formData, language: 'English' }, trackingParams);
+    const result = await submitToGHL({ ...formData, language: 'English' }, trackingParams);
+    // Only a lead the webhook accepted counts; navigate() keeps this page alive, so no need to wait.
+    if (result.success) void trackLeadConversion(newLeadEventId());
 
     setTimeout(() => {
       navigate('/thank-you');
