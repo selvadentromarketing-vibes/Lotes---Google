@@ -4,11 +4,12 @@ import { TrackingParams, getVisitorOrigin } from './tracking';
  * GHL inbound webhook for the squeeze landings at lotes.selvadentrotulum.com/{angle}.
  * This is intentionally SEPARATE from the existing webhook.ts used by /, /es and the
  * MultiStepForm. Do not consolidate without checking GHL field mapping first.
+ * The /owning-tulum event form posts to this same webhook (see eventWebhook.ts).
  *
  * Field mapping in GHL was set up using a test payload (see /Users/wififunded/.claude/plans/
  * users-wififunded-downloads-eppc-selvade-elegant-chipmunk.md). Verify in GHL before changes.
  */
-const SQUEEZE_GHL_WEBHOOK_URL =
+export const SQUEEZE_GHL_WEBHOOK_URL =
   'https://services.leadconnectorhq.com/hooks/crN2IhAuOBAl7D8324yI/webhook-trigger/9270085e-204b-40e0-a565-b2bf60861970';
 
 export type SqueezeAngle =
@@ -21,7 +22,7 @@ export type SqueezeAngle =
 /** Page language → GHL dropdown value. Matches the GHL field exactly
  *  (Spanish words, including for English/French): Inglés / Español / Francés / Otro. */
 export type PageLang = 'es' | 'en' | 'fr' | 'other';
-const LANGUAGE_FOR_GHL: Record<PageLang, 'Inglés' | 'Español' | 'Francés' | 'Otro'> = {
+export const LANGUAGE_FOR_GHL: Record<PageLang, 'Inglés' | 'Español' | 'Francés' | 'Otro'> = {
   es: 'Español',
   en: 'Inglés',
   fr: 'Francés',
@@ -52,7 +53,7 @@ export type BudgetOption = typeof BUDGET_OPTIONS[number];
  * case where the value reaches us as a bare local number — GHL needs the
  * `+<country><number>` shape to dial / WhatsApp / match contacts reliably.
  */
-const normalizeE164 = (raw: string | undefined, defaultCountryCode = '+52'): string => {
+export const normalizeE164 = (raw: string | undefined, defaultCountryCode = '+52'): string => {
   if (!raw) return '';
   const trimmed = raw.replace(/[\s()\-.]/g, '').trim();
   if (trimmed.startsWith('+')) return trimmed;
