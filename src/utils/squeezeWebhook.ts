@@ -4,7 +4,8 @@ import { TrackingParams, getVisitorOrigin } from './tracking';
  * GHL inbound webhook for the squeeze landings at lotes.selvadentrotulum.com/{angle}.
  * This is intentionally SEPARATE from the existing webhook.ts used by /, /es and the
  * MultiStepForm. Do not consolidate without checking GHL field mapping first.
- * The /owning-tulum event form posts to this same webhook (see eventWebhook.ts).
+ * Until the /owning-tulum event gets its own webhook, its form posts here too
+ * (EVENT_GHL_WEBHOOK_URL in eventWebhook.ts).
  *
  * Field mapping in GHL was set up using a test payload (see /Users/wififunded/.claude/plans/
  * users-wififunded-downloads-eppc-selvade-elegant-chipmunk.md). Verify in GHL before changes.

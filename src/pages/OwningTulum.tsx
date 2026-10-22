@@ -10,6 +10,7 @@ import {
   OWNING_TULUM_PROJECTS,
   OWNING_TULUM_AGENDA,
   OWNING_TULUM_FAQ,
+  OWNING_TULUM_META,
 } from '../config/owningTulumContent';
 
 /**
@@ -60,7 +61,7 @@ function EventDetails() {
 export default function OwningTulum() {
   useEffect(() => {
     captureTrackingParams();
-    document.title = `${EVENT.fullName} | Toronto · Nov 19`;
+    document.title = OWNING_TULUM_META.title;
   }, []);
 
   return (

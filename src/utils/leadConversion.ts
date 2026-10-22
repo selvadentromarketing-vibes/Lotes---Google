@@ -24,11 +24,16 @@ declare global {
 export const newLeadEventId = (): string =>
   crypto.randomUUID?.() ?? `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
 
+/** Meta Pixel `Lead` alone — for pages that must not report a Google Ads conversion (/owning-tulum). */
+export const trackMetaLead = (eventId: string, metaParams: Record<string, unknown> = {}) => {
+  window.fbq?.('track', 'Lead', metaParams, { eventID: eventId });
+};
+
 /** Resolves once the Google Ads hit is out (or after CONVERSION_WAIT_MS), so a redirect can't cut it off. */
 export const trackLeadConversion = (eventId: string, metaParams: Record<string, unknown> = {}) =>
   new Promise<void>((resolve) => {
     setTimeout(resolve, CONVERSION_WAIT_MS);
-    window.fbq?.('track', 'Lead', metaParams, { eventID: eventId });
+    trackMetaLead(eventId, metaParams);
     window.gtag?.('event', 'conversion', {
       send_to: LEAD_CONVERSION_SEND_TO,
       transaction_id: eventId,

@@ -8,10 +8,16 @@ import {
 } from './squeezeWebhook';
 
 /**
- * Registrations for the in-person event at /owning-tulum. They go to the SAME
- * GHL webhook as the squeeze landings, with the same payload keys, so the
- * existing field mapping (UTMs, budget, click IDs, origin) applies unchanged.
+ * Registrations for the in-person event at /owning-tulum. The payload uses the
+ * same keys as the squeeze landings (UTMs, budget, click IDs, origin).
  */
+
+/**
+ * GHL webhook for event registrations. TEMPORARY: still the squeeze (lots)
+ * webhook. When the event's own webhook exists, replace the value below with its
+ * URL — that one line is the whole change. Its workflow must map visited_tulum.
+ */
+export const EVENT_GHL_WEBHOOK_URL = SQUEEZE_GHL_WEBHOOK_URL;
 
 /** Sent as utm_campaign when the visitor arrives without one of their own. */
 export const OWNING_TULUM_DEFAULT_CAMPAIGN = 'OWNING-TULUM_TORONTO_NOV19';
@@ -101,7 +107,7 @@ export const submitEventRegistration = async (
   };
 
   try {
-    const response = await fetch(SQUEEZE_GHL_WEBHOOK_URL, {
+    const response = await fetch(EVENT_GHL_WEBHOOK_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),

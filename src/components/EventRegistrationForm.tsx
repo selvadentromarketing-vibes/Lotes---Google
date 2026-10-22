@@ -10,7 +10,7 @@ import {
   type VisitedTulumOption,
 } from '../utils/eventWebhook';
 import { captureTrackingParams } from '../utils/tracking';
-import { newLeadEventId, trackLeadConversion } from '../utils/leadConversion';
+import { newLeadEventId, trackMetaLead } from '../utils/leadConversion';
 import { SQUEEZE_LAYOUT_T } from '../config/squeezeContent';
 import { OWNING_TULUM_EVENT } from '../config/owningTulumContent';
 
@@ -71,9 +71,10 @@ export default function EventRegistrationForm() {
     );
 
     if (result.success) {
-      // Same once-per-submission Meta Lead / Google Ads conversion as the squeeze form.
-      trackLeadConversion(newLeadEventId(), {
-        content_name: OWNING_TULUM_SOURCE_LABEL,
+      // Meta Lead once per submission, as on the squeeze form — but no Google Ads
+      // conversion: event registrations must not count as lot leads there.
+      trackMetaLead(newLeadEventId(), {
+        content_name: 'owning-tulum',
         content_category: 'event-registration',
       });
       window.gtag?.('event', 'generate_lead', {
