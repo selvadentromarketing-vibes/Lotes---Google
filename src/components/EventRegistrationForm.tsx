@@ -5,7 +5,6 @@ import type { Value as PhoneValue } from 'react-phone-number-input';
 import { BUDGET_OPTIONS_USD, type BudgetOption } from '../utils/squeezeWebhook';
 import {
   submitEventRegistration,
-  OWNING_TULUM_SOURCE_LABEL,
   VISITED_TULUM_OPTIONS,
   type VisitedTulumOption,
 } from '../utils/eventWebhook';
@@ -71,17 +70,11 @@ export default function EventRegistrationForm() {
     );
 
     if (result.success) {
-      // Meta Lead once per submission, as on the squeeze form — but no Google Ads
-      // conversion: event registrations must not count as lot leads there.
+      // Only the Meta Lead, once per submission: no Google Ads conversion and no
+      // GA4 generate_lead, so event registrations never count as lot leads.
       trackMetaLead(newLeadEventId(), {
         content_name: 'owning-tulum',
         content_category: 'event-registration',
-      });
-      window.gtag?.('event', 'generate_lead', {
-        event_category: 'Event',
-        event_label: `${OWNING_TULUM_SOURCE_LABEL}-registration`,
-        currency: 'USD',
-        value: 0,
       });
       setStatus('success');
     } else {
