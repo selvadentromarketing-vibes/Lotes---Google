@@ -14,6 +14,8 @@ import SqueezeAccesibilidad from './pages/SqueezeAccesibilidad';
 import SqueezeSeguridad from './pages/SqueezeSeguridad';
 import SqueezePremium from './pages/SqueezePremium';
 import SqueezeThankYou from './pages/SqueezeThankYou';
+// In-person event landing (Toronto, Nov 19 2026) — English only.
+import OwningTulum from './pages/OwningTulum';
 
 // Fire Meta Pixel PageView on SPA route changes.
 // Initial page load already fires PageView from the script in index.html;
@@ -61,6 +63,7 @@ function App() {
         {/* Per-angle thank-you pages — one URL per angle for ad-platform tracking */}
         <Route path="/gracias/:angle" element={<SqueezeThankYou lang="es" />} />
         <Route path="/en/gracias/:angle" element={<SqueezeThankYou lang="en" />} />
+        <Route path="/owning-tulum" element={<OwningTulum />} />
       </Routes>
     </Router>
   );

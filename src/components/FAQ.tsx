@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 
-const faqs = [
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+const faqs: FaqItem[] = [
   {
     question: 'Is financing available?',
     answer: 'Yes, we offer flexible payment plan options with terms up to 48 months. No bank qualification needed—our in-house financing makes it simple to secure your lot with manageable monthly payments.',
@@ -20,12 +25,13 @@ const faqs = [
   },
 ];
 
-export default function FAQ() {
+// Pass `items` to reuse the accordion with other questions; defaults to the lot FAQ above.
+export default function FAQ({ items = faqs }: { items?: FaqItem[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
     <div className="space-y-4">
-      {faqs.map((faq, index) => (
+      {items.map((faq, index) => (
         <div
           key={index}
           className="border-2 border-stone-200 rounded-lg overflow-hidden transition-all"

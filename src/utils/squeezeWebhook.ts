@@ -21,7 +21,7 @@ export type SqueezeAngle =
 /** Page language → GHL dropdown value. Matches the GHL field exactly
  *  (Spanish words, including for English/French): Inglés / Español / Francés / Otro. */
 export type PageLang = 'es' | 'en' | 'fr' | 'other';
-const LANGUAGE_FOR_GHL: Record<PageLang, 'Inglés' | 'Español' | 'Francés' | 'Otro'> = {
+export const LANGUAGE_FOR_GHL: Record<PageLang, 'Inglés' | 'Español' | 'Francés' | 'Otro'> = {
   es: 'Español',
   en: 'Inglés',
   fr: 'Francés',
@@ -52,7 +52,7 @@ export type BudgetOption = typeof BUDGET_OPTIONS[number];
  * case where the value reaches us as a bare local number — GHL needs the
  * `+<country><number>` shape to dial / WhatsApp / match contacts reliably.
  */
-const normalizeE164 = (raw: string | undefined, defaultCountryCode = '+52'): string => {
+export const normalizeE164 = (raw: string | undefined, defaultCountryCode = '+52'): string => {
   if (!raw) return '';
   const trimmed = raw.replace(/[\s()\-.]/g, '').trim();
   if (trimmed.startsWith('+')) return trimmed;
