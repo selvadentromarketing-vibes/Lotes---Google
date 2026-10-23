@@ -1,11 +1,14 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { getStoredTrackingParams } from '../utils/tracking';
+import { whatsappThankYou, ThankYouState } from '../utils/thankYouWhatsapp';
 import { CheckCircle2, MessageCircle, MessageSquare, Home } from 'lucide-react';
 
 export default function ThankYouPage() {
   // The Meta Lead and Google Ads conversion are fired by the form once the
   // webhook answers OK (leadConversion.ts), not here: a reload counts nothing.
+  const st = (useLocation().state as ThankYouState | null) || {};
   const whatsappMessage = encodeURIComponent(
-    "Hi! I requested lots + pricing + payment plan. Can you share availability and next steps?"
+    whatsappThankYou('en', { n: st.n, ref: st.ref || getStoredTrackingParams().utm_campaign })
   );
   const smsMessage = encodeURIComponent(
     "Hi, I'd like to learn more about Selvadentro Tulum"

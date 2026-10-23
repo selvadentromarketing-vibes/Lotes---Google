@@ -6,6 +6,7 @@ import type { Value as PhoneValue } from 'react-phone-number-input';
 import { captureTrackingParams, getStoredTrackingParams } from '../utils/tracking';
 import { submitToGHL, FormData } from '../utils/webhook';
 import { newLeadEventId, trackLeadConversion } from '../utils/leadConversion';
+import { MAIN_BUDGET_OPTIONS, MAIN_TIMELINE_OPTIONS, TIMELINE_LABELS } from '../utils/thankYouWhatsapp';
 
 const COUNTRIES = ['USA', 'Canada', 'Mexico', 'Europe', 'Other'];
 
@@ -52,7 +53,7 @@ export default function MultiStepForm() {
       } else if (e.key === 'Enter' && e.shiftKey && currentStep > 1) {
         e.preventDefault();
         handleBack();
-      } else if (['1', '2', '3', '4'].includes(e.key) && [1, 2, 3].includes(currentStep)) {
+      } else if (['1', '2', '3', '4', '5'].includes(e.key) && [1, 2, 3].includes(currentStep)) {
         const options = getOptionsForStep(currentStep);
         const index = parseInt(e.key) - 1;
         if (options && index < options.length) {
@@ -75,17 +76,11 @@ export default function MultiStepForm() {
         ];
       case 2:
         return [
-          { value: 'immediately', label: 'Immediately', icon: Clock },
-          { value: '0-3', label: '0–3 months', icon: Clock },
-          { value: '3-6', label: '3–6 months', icon: Clock },
-          { value: '6-12', label: '6–12 months', icon: Clock },
+          ...MAIN_TIMELINE_OPTIONS.map((v) => ({ value: v, label: TIMELINE_LABELS.en[v], icon: Clock })),
         ];
       case 3:
         return [
-          { value: '60k-100k', label: '$60k–$100k', icon: DollarSign },
-          { value: '100k-150k', label: '$100k–$150k', icon: DollarSign },
-          { value: '150k-200k', label: '$150k–$200k', icon: DollarSign },
-          { value: '200k-250k', label: '$200k–$250k', icon: DollarSign },
+          ...MAIN_BUDGET_OPTIONS.map((v) => ({ value: v, label: v, icon: DollarSign })),
         ];
       default:
         return null;
@@ -161,7 +156,8 @@ export default function MultiStepForm() {
     if (result.success) void trackLeadConversion(newLeadEventId());
 
     setTimeout(() => {
-      navigate('/thank-you');
+      // First name and campaign for the WhatsApp button of the thank-you page.
+      navigate('/thank-you', { state: { n: formData.first_name, ref: trackingParams.utm_campaign || '' } });
     }, 500);
   };
 
@@ -441,18 +437,8 @@ export default function MultiStepForm() {
         retirement: 'For retirement/living',
         cenote_wellness: 'Cenote & Wellness Lifestyle',
       },
-      timeline: {
-        immediately: 'Immediately',
-        '0-3': '0–3 months',
-        '3-6': '3–6 months',
-        '6-12': '6–12 months',
-      },
-      budget: {
-        '60k-100k': '$60k–$100k',
-        '100k-150k': '$100k–$150k',
-        '150k-200k': '$150k–$200k',
-        '200k-250k': '$200k–$250k',
-      },
+      timeline: TIMELINE_LABELS.en,
+      budget: Object.fromEntries(MAIN_BUDGET_OPTIONS.map((v) => [v, v])),
     };
     return labels[type]?.[value] || value;
   };

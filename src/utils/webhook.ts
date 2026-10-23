@@ -38,8 +38,12 @@ export const submitToGHL = async (formData: FormData, trackingParams: TrackingPa
     country: formData.country,
     language: formData.language || "English",
     "what_attracts_you_most_to_tulum_nature_cenotes_culture_lifestyle_etc": formData.intent,
+    // Values are the GHL dropdown labels (see thankYouWhatsapp.ts). The same two values also
+    // go as budget_range / timeline, the names the squeeze and seguridad forms use.
     "horizonte_de_inversion": formData.timeline,
     "presupuesto__budget": formData.budget_range,
+    budget_range: formData.budget_range,
+    timeline: formData.timeline,
     // No UTM = no source: organic and direct traffic must not count as paid.
     "contact.source": trackingParams.utm_source || "",
     "contact.ad_ctwa_clid": trackingParams.gclid || trackingParams.fbclid,
