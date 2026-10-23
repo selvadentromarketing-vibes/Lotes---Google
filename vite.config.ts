@@ -1,6 +1,7 @@
 import { defineConfig, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
-import { OWNING_TULUM_META } from './src/config/owningTulumContent';
+import { OWNING_TULUM_META, OWNING_TULUM_CALENDAR } from './src/config/owningTulumContent';
+import { icsFile } from './src/utils/eventCalendar';
 
 const escapeAttr = (value: string) =>
   value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -12,8 +13,11 @@ const escapeAttr = (value: string) =>
  * index.html with the event's title, description and image. Netlify serves a
  * file named after the path before the /* rewrite (as with /ad-landing), so
  * /owning-tulum gets it and every other page keeps index.html untouched.
+ *
+ * It also writes the event's .ics file for "Add to calendar" on
+ * /owning-tulum?registered=1 (only in builds: `vite dev` doesn't serve it).
  */
-function owningTulumMetaPage(): Plugin {
+function owningTulumFiles(): Plugin {
   const { url, title, description, image } = OWNING_TULUM_META;
   const metaTags: [attr: 'name' | 'property', key: string, value: string][] = [
     ['name', 'description', description],
@@ -26,7 +30,7 @@ function owningTulumMetaPage(): Plugin {
   ];
 
   return {
-    name: 'owning-tulum-meta-page',
+    name: 'owning-tulum-files',
     apply: 'build',
     enforce: 'post', // after Vite has emitted index.html
     generateBundle(_, bundle) {
@@ -52,13 +56,19 @@ function owningTulumMetaPage(): Plugin {
       );
 
       this.emitFile({ type: 'asset', fileName: 'owning-tulum.html', source: html });
+      // Served as text/calendar (public/_headers) so phones open it in their calendar app.
+      this.emitFile({
+        type: 'asset',
+        fileName: OWNING_TULUM_CALENDAR.icsPath.slice(1),
+        source: icsFile(OWNING_TULUM_CALENDAR),
+      });
     },
   };
 }
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), owningTulumMetaPage()],
+  plugins: [react(), owningTulumFiles()],
   optimizeDeps: {
     exclude: ['lucide-react'],
   },

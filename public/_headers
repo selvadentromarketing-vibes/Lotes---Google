@@ -1,0 +1,4 @@
+# "Add to calendar" file on /owning-tulum?registered=1: text/calendar so phones
+# open it in their calendar app instead of showing or saving a text file.
+/events/owning-tulum/owning-tulum.ics
+  Content-Type: text/calendar; charset=utf-8
