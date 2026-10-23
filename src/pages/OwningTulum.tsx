@@ -1,9 +1,11 @@
 import { useEffect, type MouseEvent } from 'react';
-import { CalendarDays, Clock, MapPin, ArrowUpRight } from 'lucide-react';
+import { useSearchParams } from 'react-router-dom';
+import { CalendarDays, Clock, MapPin, ArrowUpRight, CheckCircle2, CalendarPlus, Download } from 'lucide-react';
 import EventRegistrationForm from '../components/EventRegistrationForm';
 import FAQ from '../components/FAQ';
 import SqueezeFooter from '../components/SqueezeFooter';
 import { captureTrackingParams } from '../utils/tracking';
+import { googleCalendarUrl } from '../utils/eventCalendar';
 import {
   OWNING_TULUM_EVENT as EVENT,
   OWNING_TULUM_LEARN,
@@ -11,12 +13,17 @@ import {
   OWNING_TULUM_AGENDA,
   OWNING_TULUM_FAQ,
   OWNING_TULUM_META,
+  OWNING_TULUM_CALENDAR,
 } from '../config/owningTulumContent';
 
 /**
  * In-person event landing: "Owning Tulum — An Investment Seminar", Toronto.
  * Same look as the squeeze landings (SqueezeLayout); copy lives in
  * owningTulumContent.ts, registrations go through eventWebhook.ts.
+ *
+ * With ?registered=1 (a link for people who already signed up) the form is
+ * replaced by their event details and "Add to calendar". No form means no Meta
+ * Lead and no conversion. Without the parameter the page is unchanged.
  */
 
 const scrollToRegister = (e: MouseEvent<HTMLAnchorElement>) => {
@@ -58,7 +65,71 @@ function EventDetails() {
   );
 }
 
+function RegisteredDetails() {
+  const button =
+    'inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm font-semibold transition';
+  return (
+    <div className="max-w-6xl mx-auto grid lg:grid-cols-5 gap-10 lg:gap-12 items-center">
+      <div className="lg:col-span-3">
+        <Eyebrow>Your registration</Eyebrow>
+        <h2 className="font-cardo text-3xl sm:text-4xl font-bold text-brand-dark-green leading-tight mb-4">
+          You’re registered — see you in Toronto
+        </h2>
+        <p className="text-stone-700 leading-relaxed mb-4 max-w-xl">
+          We’ll contact you before the event to confirm your attendance.
+        </p>
+        <p className="text-sm text-stone-600">
+          Questions? Write to{' '}
+          <a href={`mailto:${EVENT.contactEmail}`} className="underline hover:text-brand-dark-green">
+            {EVENT.contactEmail}
+          </a>
+        </p>
+      </div>
+      <div className="lg:col-span-2">
+        <div className="w-full max-w-md mx-auto bg-white rounded-2xl p-6 sm:p-8 shadow-2xl">
+          <CheckCircle2 className="w-10 h-10 text-brand-olive mb-4" />
+          <h3 className="font-cardo text-2xl sm:text-3xl font-bold text-brand-dark-green leading-tight">{EVENT.name}</h3>
+          <p className="font-cardo text-lg text-brand-copper mb-5">{EVENT.subtitle}</p>
+          <EventDetails />
+          <a
+            href={EVENT.mapUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`${button} mt-6 w-full bg-brand-olive text-white hover:bg-brand-dark-green shadow-lg`}
+          >
+            <MapPin className="w-4 h-4" />
+            Open in Google Maps
+          </a>
+          <p className="mt-6 mb-2 text-xs font-semibold uppercase tracking-wider text-stone-700">Add to calendar</p>
+          <div className="grid gap-3">
+            <a
+              href={googleCalendarUrl(OWNING_TULUM_CALENDAR)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${button} border border-stone-300 text-brand-dark-green hover:border-brand-olive`}
+            >
+              <CalendarPlus className="w-4 h-4" />
+              Google Calendar
+            </a>
+            <a
+              href={OWNING_TULUM_CALENDAR.icsPath}
+              className={`${button} border border-stone-300 text-brand-dark-green hover:border-brand-olive`}
+            >
+              <Download className="w-4 h-4" />
+              Apple / Outlook (.ics)
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function OwningTulum() {
+  const [searchParams] = useSearchParams();
+  const registered = searchParams.get('registered') === '1';
+  const ctaLabel = registered ? 'Event details' : 'Reserve your seat';
+
   useEffect(() => {
     captureTrackingParams();
     document.title = OWNING_TULUM_META.title;
@@ -81,7 +152,7 @@ export default function OwningTulum() {
             onClick={scrollToRegister}
             className="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-white/85 hover:text-white border border-white/40 hover:border-white rounded-full px-4 py-2 transition"
           >
-            Reserve your seat
+            {ctaLabel}
           </a>
         </div>
       </header>
@@ -132,7 +203,7 @@ export default function OwningTulum() {
               onClick={scrollToRegister}
               className="inline-block px-9 py-4 bg-brand-copper text-white rounded-full font-semibold hover:bg-brand-beige hover:text-brand-dark-green transition-all shadow-xl"
             >
-              Reserve your seat
+              {ctaLabel}
             </a>
             <p className="mt-4 text-xs uppercase tracking-widest text-white/60">Free entry · Limited seating</p>
           </div>
@@ -241,24 +312,28 @@ export default function OwningTulum() {
         </div>
       </section>
 
-      {/* 5. REGISTRATION */}
+      {/* 5. REGISTRATION — with ?registered=1, the attendee's details instead of the form */}
       <section id="register" className="py-16 sm:py-20 px-4 sm:px-6 bg-[#ECE5D8] scroll-mt-4">
-        <div className="max-w-6xl mx-auto grid lg:grid-cols-5 gap-10 lg:gap-12 items-center">
-          <div className="lg:col-span-3">
-            <Eyebrow>Registration</Eyebrow>
-            <h2 className="font-cardo text-3xl sm:text-4xl font-bold text-brand-dark-green leading-tight mb-4">
-              Join us at {EVENT.venueName}
-            </h2>
-            <p className="text-stone-700 leading-relaxed mb-8 max-w-xl">
-              Entry is free. Seating is limited, so we ask everyone to register in advance — it takes less than a
-              minute.
-            </p>
-            <EventDetails />
+        {registered ? (
+          <RegisteredDetails />
+        ) : (
+          <div className="max-w-6xl mx-auto grid lg:grid-cols-5 gap-10 lg:gap-12 items-center">
+            <div className="lg:col-span-3">
+              <Eyebrow>Registration</Eyebrow>
+              <h2 className="font-cardo text-3xl sm:text-4xl font-bold text-brand-dark-green leading-tight mb-4">
+                Join us at {EVENT.venueName}
+              </h2>
+              <p className="text-stone-700 leading-relaxed mb-8 max-w-xl">
+                Entry is free. Seating is limited, so we ask everyone to register in advance — it takes less than a
+                minute.
+              </p>
+              <EventDetails />
+            </div>
+            <div className="lg:col-span-2">
+              <EventRegistrationForm />
+            </div>
           </div>
-          <div className="lg:col-span-2">
-            <EventRegistrationForm />
-          </div>
-        </div>
+        )}
       </section>
 
       {/* 6. FAQ */}

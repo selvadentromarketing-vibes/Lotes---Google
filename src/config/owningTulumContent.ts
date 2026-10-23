@@ -33,6 +33,22 @@ export const OWNING_TULUM_META = {
   image: 'https://lotes.selvadentrotulum.com/events/owning-tulum/og-owning-tulum.jpg',
 };
 
+/**
+ * "Add to calendar" on /owning-tulum?registered=1: the Google Calendar link and
+ * the .ics file the build writes (vite.config.ts). Times are UTC — 7:00–9:00 PM
+ * in Toronto on Nov 19 2026 (EST, UTC−5).
+ */
+export const OWNING_TULUM_CALENDAR = {
+  uid: 'owning-tulum-toronto-2026-11-19@selvadentrotulum.com',
+  title: 'Owning Tulum — An Investment Seminar',
+  start: '20261120T000000Z',
+  end: '20261120T020000Z',
+  location: `${OWNING_TULUM_EVENT.venueName}, ${OWNING_TULUM_EVENT.venueAddress}`,
+  description: `An evening in Toronto to learn how to own in Tulum — with Selvadentro, Adhonai by Aguasanta and TROBBU.\nQuestions: ${OWNING_TULUM_EVENT.contactEmail}`,
+  url: OWNING_TULUM_META.url,
+  icsPath: '/events/owning-tulum/owning-tulum.ics',
+};
+
 export const OWNING_TULUM_LEARN = [
   {
     title: 'How a foreigner buys in Tulum',
