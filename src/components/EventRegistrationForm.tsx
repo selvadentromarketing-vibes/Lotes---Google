@@ -89,6 +89,7 @@ export default function EventRegistrationForm() {
   const [timeline, setTimeline] = useState<InvestmentTimelineOption | ''>('');
   const [investedAbroad, setInvestedAbroad] = useState<YesNoOption | ''>('');
   const [jobTitle, setJobTitle] = useState('');
+  const [companyName, setCompanyName] = useState('');
   const [budget, setBudget] = useState<EventBudgetOption | ''>('');
   const [attendance, setAttendance] = useState<AttendanceOption | ''>('');
   const [plusOne, setPlusOne] = useState<YesNoOption | ''>('');
@@ -120,6 +121,7 @@ export default function EventRegistrationForm() {
         investment_timeline: timeline,
         invested_abroad: investedAbroad,
         job_title: jobTitle.trim(),
+        company_name: companyName.trim(),
         budget,
         attendance,
         plus_one: plusOne,
@@ -268,6 +270,19 @@ export default function EventRegistrationForm() {
             placeholder="e.g. Financial advisor"
             autoComplete="organization-title"
             required
+          />
+        </label>
+
+        <label className="block">
+          <span className="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1">
+            Company name <span className="font-normal normal-case tracking-normal text-stone-500">(optional)</span>
+          </span>
+          <input
+            type="text"
+            value={companyName}
+            onChange={(e) => setCompanyName(e.target.value)}
+            className={inputClass}
+            autoComplete="organization"
           />
         </label>
 

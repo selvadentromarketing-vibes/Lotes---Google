@@ -51,6 +51,8 @@ export interface EventRegistrationData {
   investment_timeline: InvestmentTimelineOption;
   invested_abroad: YesNoOption;
   job_title: string;
+  /** Optional: '' when left blank. */
+  company_name: string;
   budget: EventBudgetOption;
   attendance: AttendanceOption;
   plus_one: YesNoOption;
@@ -72,6 +74,7 @@ interface EventWebhookPayload {
   investment_timeline: string;
   invested_abroad: string;
   job_title: string;
+  company_name: string;
   attendance: string;
   plus_one: string;
   language: string;
@@ -113,6 +116,7 @@ export const submitEventRegistration = async (
     investment_timeline: formData.investment_timeline,
     invested_abroad: formData.invested_abroad,
     job_title: formData.job_title,
+    company_name: formData.company_name,
     attendance: formData.attendance,
     plus_one: formData.plus_one,
     // GHL language dropdown value (Spanish words): "Inglés".
