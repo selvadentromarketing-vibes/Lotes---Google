@@ -16,7 +16,7 @@ export const OWNING_TULUM_EVENT = {
   venueAddress: '1214 Queen St W, Toronto, ON M6J 1J6',
   mapUrl: 'https://maps.app.goo.gl/cxBtKjcGS9zixNSH8',
   contactEmail: 'taliah@selvadentrotulum.com',
-  heroImage: '/7-selvandentro_tulum.webp',
+  heroImage: '/events/owning-tulum/hero-cenote.webp',
 };
 
 /**
@@ -82,6 +82,8 @@ export interface EventProject {
   };
   /** Background behind the logo: 'dark' for light logos, 'light' for dark ones. */
   logoBg: 'dark' | 'light';
+  /** YouTube video ID — clicking the card plays it in a modal. */
+  videoId?: string;
 }
 
 export const OWNING_TULUM_PROJECTS: EventProject[] = [
@@ -94,6 +96,7 @@ export const OWNING_TULUM_PROJECTS: EventProject[] = [
     urlLabel: 'selvadentrotulum.com',
     logo: { src: '/logo-selvandentro_tulum-cream.webp', alt: 'Selvadentro Tulum', heightClass: 'h-12' },
     logoBg: 'dark',
+    videoId: 'zFNyICgwD5c',
   },
   {
     name: 'Adhonai by Aguasanta',
@@ -106,6 +109,7 @@ export const OWNING_TULUM_PROJECTS: EventProject[] = [
     // 'light' if the new logo is dark.
     logo: { src: '/events/owning-tulum/adhonai-logo.png', alt: 'Adhonai by Aguasanta', heightClass: 'h-10' },
     logoBg: 'dark',
+    videoId: 'Xn_vnxhNGx4',
   },
   {
     name: 'TROBBU',
@@ -115,6 +119,7 @@ export const OWNING_TULUM_PROJECTS: EventProject[] = [
     urlLabel: 'trobbucollection.com',
     logo: { src: '/events/owning-tulum/trobbu-logo.svg', alt: 'TROBBU Boutique Collection', heightClass: 'h-12' },
     logoBg: 'dark',
+    videoId: '0vj0jDj64WA',
   },
 ];
 

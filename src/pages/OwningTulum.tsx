@@ -1,6 +1,6 @@
-import { useEffect, type MouseEvent } from 'react';
+import { useCallback, useEffect, useState, type MouseEvent } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { CalendarDays, Clock, MapPin, ArrowUpRight, CheckCircle2, CalendarPlus, Download } from 'lucide-react';
+import { CalendarDays, Clock, MapPin, ArrowUpRight, CheckCircle2, CalendarPlus, Download, Play, X } from 'lucide-react';
 import EventRegistrationForm from '../components/EventRegistrationForm';
 import FAQ from '../components/FAQ';
 import SqueezeFooter from '../components/SqueezeFooter';
@@ -14,6 +14,7 @@ import {
   OWNING_TULUM_FAQ,
   OWNING_TULUM_META,
   OWNING_TULUM_CALENDAR,
+  type EventProject,
 } from '../config/owningTulumContent';
 
 /**
@@ -125,10 +126,59 @@ function RegisteredDetails() {
   );
 }
 
+function VideoModal({ project, onClose }: { project: EventProject; onClose: () => void }) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
+    document.addEventListener('keydown', onKey);
+    const overflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = overflow;
+    };
+  }, [onClose]);
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${project.name} video`}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4"
+      onClick={onClose}
+    >
+      <div className="w-full max-w-4xl" onClick={(e) => e.stopPropagation()}>
+        <div className="flex items-center justify-between mb-3 text-white">
+          <p className="font-cardo text-xl font-bold">{project.name}</p>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close video"
+            autoFocus
+            className="w-10 h-10 inline-flex items-center justify-center rounded-full border border-white/40 hover:border-white transition"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+        <div className="relative aspect-video rounded-xl overflow-hidden bg-black">
+          <iframe
+            src={`https://www.youtube.com/embed/${project.videoId}?autoplay=1&rel=0&playsinline=1`}
+            title={`${project.name} video`}
+            allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+            allowFullScreen
+            className="absolute inset-0 w-full h-full border-0"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function OwningTulum() {
   const [searchParams] = useSearchParams();
   const registered = searchParams.get('registered') === '1';
   const ctaLabel = registered ? 'Event details' : 'Reserve your seat';
+  const [videoProject, setVideoProject] = useState<EventProject | null>(null);
+  const closeVideo = useCallback(() => setVideoProject(null), []);
 
   useEffect(() => {
     captureTrackingParams();
@@ -161,7 +211,7 @@ export default function OwningTulum() {
       <section
         className="relative pt-32 pb-20 sm:pt-40 sm:pb-28 px-4 sm:px-6 lg:px-10 overflow-hidden"
         style={{
-          backgroundImage: `linear-gradient(rgba(35, 47, 38, 0.78), rgba(35, 47, 38, 0.9)), url('${EVENT.heroImage}')`,
+          backgroundImage: `linear-gradient(rgba(35, 47, 38, 0.6), rgba(35, 47, 38, 0.82)), url('${EVENT.heroImage}')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -252,18 +302,28 @@ export default function OwningTulum() {
                 key={project.name}
                 className="flex flex-col rounded-2xl overflow-hidden border border-brand-dark-green/10 bg-[#F7F3EC] shadow-sm"
               >
-                <div
-                  className={`h-36 flex items-center justify-center px-8 ${
+                <button
+                  type="button"
+                  onClick={() => project.videoId && setVideoProject(project)}
+                  disabled={!project.videoId}
+                  aria-label={project.videoId ? `Watch the ${project.name} video` : undefined}
+                  className={`group relative h-36 flex items-center justify-center px-8 enabled:cursor-pointer ${
                     project.logoBg === 'dark' ? 'bg-[#232F26]' : 'bg-white'
                   }`}
                 >
                   <img
                     src={project.logo.src}
                     alt={project.logo.alt}
-                    className={`${project.logo.heightClass} w-auto max-w-full object-contain`}
+                    className={`${project.logo.heightClass} w-auto max-w-full object-contain transition group-hover:opacity-80`}
                     loading="lazy"
                   />
-                </div>
+                  {project.videoId && (
+                    <span className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-white/15 group-hover:bg-brand-copper px-3 py-1.5 text-[11px] font-semibold uppercase tracking-widest text-white transition">
+                      <Play className="w-3.5 h-3.5 fill-current" />
+                      Video
+                    </span>
+                  )}
+                </button>
                 <div className="flex flex-col flex-1 p-7">
                   {/* Cards without a role keep the line on desktop so the three titles align. */}
                   <span
@@ -275,11 +335,21 @@ export default function OwningTulum() {
                   </span>
                   <h3 className="font-cardo text-2xl font-bold text-brand-dark-green mb-3">{project.name}</h3>
                   <p className="text-stone-700 leading-relaxed flex-1">{project.description}</p>
+                  {project.videoId && (
+                    <button
+                      type="button"
+                      onClick={() => setVideoProject(project)}
+                      className="mt-6 self-start inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-olive text-white text-sm font-semibold hover:bg-brand-dark-green transition"
+                    >
+                      <Play className="w-4 h-4 fill-current" />
+                      Watch video
+                    </button>
+                  )}
                   <a
                     href={project.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-olive hover:text-brand-dark-green transition"
+                    className={`${project.videoId ? 'mt-4' : 'mt-6'} inline-flex items-center gap-1.5 text-sm font-semibold text-brand-olive hover:text-brand-dark-green transition`}
                   >
                     {project.urlLabel}
                     <ArrowUpRight className="w-4 h-4" />
@@ -357,6 +427,8 @@ export default function OwningTulum() {
 
       {/* 7. FOOTER — same as the squeeze landings */}
       <SqueezeFooter lang="en" />
+
+      {videoProject && <VideoModal project={videoProject} onClose={closeVideo} />}
     </div>
   );
 }
