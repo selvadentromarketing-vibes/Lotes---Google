@@ -38,6 +38,19 @@ function FieldLabel({ children }: { children: string }) {
   );
 }
 
+/** Small heading that splits the long form into groups. */
+function FormSection({ children, first = false }: { children: string; first?: boolean }) {
+  return (
+    <p
+      className={`text-[11px] font-semibold uppercase tracking-widest text-brand-copper ${
+        first ? '' : '!mt-6 pt-5 border-t border-stone-200'
+      }`}
+    >
+      {children}
+    </p>
+  );
+}
+
 function YesNoField({
   legend,
   name,
@@ -176,6 +189,8 @@ export default function EventRegistrationForm() {
       <p className="text-sm text-stone-600 mb-5">Free entry · Seating is limited.</p>
 
       <div className="space-y-3">
+        <FormSection first>About you</FormSection>
+
         <div className="grid grid-cols-2 gap-3">
           <label className="block">
             <FieldLabel>{t.fieldFirstName}</FieldLabel>
@@ -230,6 +245,35 @@ export default function EventRegistrationForm() {
           </div>
         </label>
 
+        <label className="block">
+          <FieldLabel>Job title</FieldLabel>
+          <input
+            type="text"
+            value={jobTitle}
+            onChange={(e) => setJobTitle(e.target.value)}
+            className={inputClass}
+            placeholder="e.g. Financial advisor"
+            autoComplete="organization-title"
+            required
+          />
+        </label>
+
+        <label className="block">
+          <span className="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1">
+            Company name <span className="font-normal normal-case tracking-normal text-stone-500">(optional)</span>
+          </span>
+          <input
+            type="text"
+            value={companyName}
+            onChange={(e) => setCompanyName(e.target.value)}
+            className={inputClass}
+            placeholder="Your company"
+            autoComplete="organization"
+          />
+        </label>
+
+        <FormSection>Your investment</FormSection>
+
         <YesNoField
           legend="Have you visited Tulum before?"
           name="visited_tulum"
@@ -260,31 +304,6 @@ export default function EventRegistrationForm() {
           onChange={setInvestedAbroad}
         />
 
-        <label className="block">
-          <FieldLabel>Job title</FieldLabel>
-          <input
-            type="text"
-            value={jobTitle}
-            onChange={(e) => setJobTitle(e.target.value)}
-            className={inputClass}
-            placeholder="e.g. Financial advisor"
-            autoComplete="organization-title"
-            required
-          />
-        </label>
-
-        <label className="block">
-          <span className="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1">
-            Company name <span className="font-normal normal-case tracking-normal text-stone-500">(optional)</span>
-          </span>
-          <input
-            type="text"
-            value={companyName}
-            onChange={(e) => setCompanyName(e.target.value)}
-            className={inputClass}
-            autoComplete="organization"
-          />
-        </label>
 
         <label className="block">
           <FieldLabel>What’s your investment budget?</FieldLabel>
@@ -301,6 +320,8 @@ export default function EventRegistrationForm() {
             ))}
           </select>
         </label>
+
+        <FormSection>The evening</FormSection>
 
         <label className="block">
           <FieldLabel>Are you available to join us in person on November 19th in Toronto?</FieldLabel>

@@ -386,15 +386,15 @@ export default function OwningTulum() {
         {registered ? (
           <RegisteredDetails />
         ) : (
-          <div className="max-w-6xl mx-auto grid lg:grid-cols-5 gap-10 lg:gap-12 items-center">
-            <div className="lg:col-span-3">
+          <div className="max-w-6xl mx-auto grid lg:grid-cols-5 gap-10 lg:gap-12 items-start">
+            <div className="lg:col-span-3 lg:sticky lg:top-12 lg:pt-8">
               <Eyebrow>Registration</Eyebrow>
               <h2 className="font-cardo text-3xl sm:text-4xl font-bold text-brand-dark-green leading-tight mb-4">
                 Join us in Toronto
               </h2>
               <p className="text-stone-700 leading-relaxed mb-8 max-w-xl">
-                Entry is free. Seating is limited, so we ask everyone to register in advance — it takes less than a
-                minute. Registered guests receive their invitation with the exact location.
+                Entry is free. Seating is limited, so we ask everyone to register in advance — it only takes a
+                couple of minutes. Registered guests receive their invitation with the exact location.
               </p>
               <EventDetails />
             </div>
