@@ -1,6 +1,6 @@
 import { parsePhoneNumber } from 'react-phone-number-input';
 import { TrackingParams, getVisitorOrigin } from './tracking';
-import { LANGUAGE_FOR_GHL, normalizeE164, type BudgetOption } from './squeezeWebhook';
+import { LANGUAGE_FOR_GHL, normalizeE164 } from './squeezeWebhook';
 
 /**
  * Registrations for the in-person event at /owning-tulum. They go to the event's
@@ -15,16 +15,44 @@ const OWNING_TULUM_DEFAULT_CAMPAIGN = 'OWNING-TULUM_TORONTO_NOV19';
 const OWNING_TULUM_TAG = 'evento-toronto-nov19';
 const OWNING_TULUM_EVENT_ID = 'owning-tulum-toronto-2026-11-19';
 
-export const VISITED_TULUM_OPTIONS = ['Yes', 'No'] as const;
-export type VisitedTulumOption = typeof VISITED_TULUM_OPTIONS[number];
+// Questions and options match the Meta lead form of the event ad word for word,
+// so GHL gets the same values whichever form the lead came from.
+export const YES_NO_OPTIONS = ['Yes', 'No'] as const;
+export type YesNoOption = typeof YES_NO_OPTIONS[number];
+
+export const INVESTMENT_TIMELINE_OPTIONS = [
+  'Within 3 months',
+  '3–6 months',
+  '6–12 months',
+  'Just exploring',
+] as const;
+export type InvestmentTimelineOption = typeof INVESTMENT_TIMELINE_OPTIONS[number];
+
+export const EVENT_BUDGET_OPTIONS = [
+  '$60K–$100K CAD',
+  '$100K–$250K CAD',
+  '$250K+ CAD',
+] as const;
+export type EventBudgetOption = typeof EVENT_BUDGET_OPTIONS[number];
+
+export const ATTENDANCE_OPTIONS = [
+  'Yes, I’ll be there',
+  'Not sure yet',
+  'No, but keep me informed',
+] as const;
+export type AttendanceOption = typeof ATTENDANCE_OPTIONS[number];
 
 export interface EventRegistrationData {
   first_name: string;
   last_name: string;
   email: string;
   phone: string;
-  budget: BudgetOption;
-  visited_tulum: VisitedTulumOption;
+  visited_tulum: YesNoOption;
+  investment_timeline: InvestmentTimelineOption;
+  invested_abroad: YesNoOption;
+  job_title: string;
+  budget: EventBudgetOption;
+  attendance: AttendanceOption;
 }
 
 /**
@@ -40,6 +68,10 @@ interface EventWebhookPayload {
   country: string;
   budget: string;
   visited_tulum: string;
+  investment_timeline: string;
+  invested_abroad: string;
+  job_title: string;
+  attendance: string;
   language: string;
   landing_page: string;
   utm_source: string;
@@ -76,6 +108,10 @@ export const submitEventRegistration = async (
     country: countryFromPhone(formData.phone),
     budget: formData.budget,
     visited_tulum: formData.visited_tulum,
+    investment_timeline: formData.investment_timeline,
+    invested_abroad: formData.invested_abroad,
+    job_title: formData.job_title,
+    attendance: formData.attendance,
     // GHL language dropdown value (Spanish words): "Inglés".
     language: LANGUAGE_FOR_GHL.en,
     // The page the form was sent from, query string included.

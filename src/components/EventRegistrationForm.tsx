@@ -2,11 +2,16 @@ import { useState, FormEvent } from 'react';
 import { Loader2, CheckCircle2 } from 'lucide-react';
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import type { Value as PhoneValue } from 'react-phone-number-input';
-import { BUDGET_OPTIONS_USD, type BudgetOption } from '../utils/squeezeWebhook';
 import {
   submitEventRegistration,
-  VISITED_TULUM_OPTIONS,
-  type VisitedTulumOption,
+  YES_NO_OPTIONS,
+  INVESTMENT_TIMELINE_OPTIONS,
+  EVENT_BUDGET_OPTIONS,
+  ATTENDANCE_OPTIONS,
+  type YesNoOption,
+  type InvestmentTimelineOption,
+  type EventBudgetOption,
+  type AttendanceOption,
 } from '../utils/eventWebhook';
 import { captureTrackingParams } from '../utils/tracking';
 import { newLeadEventId, trackMetaLead } from '../utils/leadConversion';
@@ -33,13 +38,59 @@ function FieldLabel({ children }: { children: string }) {
   );
 }
 
+function YesNoField({
+  legend,
+  name,
+  value,
+  onChange,
+}: {
+  legend: string;
+  name: string;
+  value: YesNoOption | '';
+  onChange: (value: YesNoOption) => void;
+}) {
+  return (
+    <fieldset>
+      <legend className="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-2">
+        {legend} <span className="text-brand-copper">*</span>
+      </legend>
+      <div className="grid grid-cols-2 gap-3">
+        {YES_NO_OPTIONS.map((opt) => (
+          <label
+            key={opt}
+            className={`flex items-center justify-center gap-2 px-4 py-3 border rounded-lg cursor-pointer transition text-sm ${
+              value === opt
+                ? 'border-brand-olive bg-brand-olive/10 text-brand-dark-green font-semibold'
+                : 'border-stone-300 text-stone-700 hover:border-brand-olive/60'
+            }`}
+          >
+            <input
+              type="radio"
+              name={name}
+              value={opt}
+              checked={value === opt}
+              onChange={() => onChange(opt)}
+              className="accent-brand-olive"
+            />
+            {opt}
+          </label>
+        ))}
+      </div>
+    </fieldset>
+  );
+}
+
 export default function EventRegistrationForm() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [phone, setPhone] = useState<PhoneValue | undefined>(undefined);
   const [email, setEmail] = useState('');
-  const [budget, setBudget] = useState<BudgetOption | ''>('');
-  const [visited, setVisited] = useState<VisitedTulumOption | ''>('');
+  const [visited, setVisited] = useState<YesNoOption | ''>('');
+  const [timeline, setTimeline] = useState<InvestmentTimelineOption | ''>('');
+  const [investedAbroad, setInvestedAbroad] = useState<YesNoOption | ''>('');
+  const [jobTitle, setJobTitle] = useState('');
+  const [budget, setBudget] = useState<EventBudgetOption | ''>('');
+  const [attendance, setAttendance] = useState<AttendanceOption | ''>('');
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -47,7 +98,8 @@ export default function EventRegistrationForm() {
     e.preventDefault();
     setErrorMessage(null);
 
-    if (!firstName.trim() || !lastName.trim() || !phone || !email.trim() || !budget || !visited) {
+    if (!firstName.trim() || !lastName.trim() || !phone || !email.trim()
+      || !visited || !timeline || !investedAbroad || !jobTitle.trim() || !budget || !attendance) {
       setErrorMessage(t.errorMissing);
       return;
     }
@@ -63,8 +115,12 @@ export default function EventRegistrationForm() {
         last_name: lastName.trim(),
         email: email.trim(),
         phone,
-        budget,
         visited_tulum: visited,
+        investment_timeline: timeline,
+        invested_abroad: investedAbroad,
+        job_title: jobTitle.trim(),
+        budget,
+        attendance,
       },
       captureTrackingParams(),
     );
@@ -170,49 +226,80 @@ export default function EventRegistrationForm() {
           </div>
         </label>
 
+        <YesNoField
+          legend="Have you visited Tulum before?"
+          name="visited_tulum"
+          value={visited}
+          onChange={setVisited}
+        />
+
         <label className="block">
-          <FieldLabel>{t.fieldBudget}</FieldLabel>
+          <FieldLabel>When are you planning to invest?</FieldLabel>
+          <select
+            value={timeline}
+            onChange={(e) => setTimeline(e.target.value as InvestmentTimelineOption | '')}
+            className={selectClass}
+            style={selectChevron}
+            required
+          >
+            <option value="" disabled>Select an option</option>
+            {INVESTMENT_TIMELINE_OPTIONS.map((opt) => (
+              <option key={opt} value={opt}>{opt}</option>
+            ))}
+          </select>
+        </label>
+
+        <YesNoField
+          legend="Have you invested in real estate abroad before?"
+          name="invested_abroad"
+          value={investedAbroad}
+          onChange={setInvestedAbroad}
+        />
+
+        <label className="block">
+          <FieldLabel>Job title</FieldLabel>
+          <input
+            type="text"
+            value={jobTitle}
+            onChange={(e) => setJobTitle(e.target.value)}
+            className={inputClass}
+            placeholder="e.g. Financial advisor"
+            autoComplete="organization-title"
+            required
+          />
+        </label>
+
+        <label className="block">
+          <FieldLabel>What’s your investment budget?</FieldLabel>
           <select
             value={budget}
-            onChange={(e) => setBudget(e.target.value as BudgetOption | '')}
+            onChange={(e) => setBudget(e.target.value as EventBudgetOption | '')}
             className={selectClass}
             style={selectChevron}
             required
           >
             <option value="" disabled>{t.placeholderBudget}</option>
-            {BUDGET_OPTIONS_USD.map((opt) => (
-              <option key={opt} value={opt}>{opt} USD</option>
+            {EVENT_BUDGET_OPTIONS.map((opt) => (
+              <option key={opt} value={opt}>{opt}</option>
             ))}
           </select>
         </label>
 
-        <fieldset>
-          <legend className="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-2">
-            Have you visited Tulum? <span className="text-brand-copper">*</span>
-          </legend>
-          <div className="grid grid-cols-2 gap-3">
-            {VISITED_TULUM_OPTIONS.map((opt) => (
-              <label
-                key={opt}
-                className={`flex items-center justify-center gap-2 px-4 py-3 border rounded-lg cursor-pointer transition text-sm ${
-                  visited === opt
-                    ? 'border-brand-olive bg-brand-olive/10 text-brand-dark-green font-semibold'
-                    : 'border-stone-300 text-stone-700 hover:border-brand-olive/60'
-                }`}
-              >
-                <input
-                  type="radio"
-                  name="visited_tulum"
-                  value={opt}
-                  checked={visited === opt}
-                  onChange={() => setVisited(opt)}
-                  className="accent-brand-olive"
-                />
-                {opt}
-              </label>
+        <label className="block">
+          <FieldLabel>Are you available to join us in person on November 19th in Toronto?</FieldLabel>
+          <select
+            value={attendance}
+            onChange={(e) => setAttendance(e.target.value as AttendanceOption | '')}
+            className={selectClass}
+            style={selectChevron}
+            required
+          >
+            <option value="" disabled>Select an option</option>
+            {ATTENDANCE_OPTIONS.map((opt) => (
+              <option key={opt} value={opt}>{opt}</option>
             ))}
-          </div>
-        </fieldset>
+          </select>
+        </label>
       </div>
 
       {errorMessage && (
