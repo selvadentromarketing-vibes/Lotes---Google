@@ -91,6 +91,7 @@ export default function EventRegistrationForm() {
   const [jobTitle, setJobTitle] = useState('');
   const [budget, setBudget] = useState<EventBudgetOption | ''>('');
   const [attendance, setAttendance] = useState<AttendanceOption | ''>('');
+  const [plusOne, setPlusOne] = useState<YesNoOption | ''>('');
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -99,7 +100,7 @@ export default function EventRegistrationForm() {
     setErrorMessage(null);
 
     if (!firstName.trim() || !lastName.trim() || !phone || !email.trim()
-      || !visited || !timeline || !investedAbroad || !jobTitle.trim() || !budget || !attendance) {
+      || !visited || !timeline || !investedAbroad || !jobTitle.trim() || !budget || !attendance || !plusOne) {
       setErrorMessage(t.errorMissing);
       return;
     }
@@ -121,6 +122,7 @@ export default function EventRegistrationForm() {
         job_title: jobTitle.trim(),
         budget,
         attendance,
+        plus_one: plusOne,
       },
       captureTrackingParams(),
     );
@@ -300,6 +302,13 @@ export default function EventRegistrationForm() {
             ))}
           </select>
         </label>
+
+        <YesNoField
+          legend="Will you be bringing a plus one?"
+          name="plus_one"
+          value={plusOne}
+          onChange={setPlusOne}
+        />
       </div>
 
       {errorMessage && (

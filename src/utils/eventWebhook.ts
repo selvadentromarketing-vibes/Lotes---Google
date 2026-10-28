@@ -53,6 +53,7 @@ export interface EventRegistrationData {
   job_title: string;
   budget: EventBudgetOption;
   attendance: AttendanceOption;
+  plus_one: YesNoOption;
 }
 
 /**
@@ -72,6 +73,7 @@ interface EventWebhookPayload {
   invested_abroad: string;
   job_title: string;
   attendance: string;
+  plus_one: string;
   language: string;
   landing_page: string;
   utm_source: string;
@@ -112,6 +114,7 @@ export const submitEventRegistration = async (
     invested_abroad: formData.invested_abroad,
     job_title: formData.job_title,
     attendance: formData.attendance,
+    plus_one: formData.plus_one,
     // GHL language dropdown value (Spanish words): "Inglés".
     language: LANGUAGE_FOR_GHL.en,
     // The page the form was sent from, query string included.
