@@ -40,7 +40,7 @@ function Eyebrow({ children, className = '' }: { children: string; className?: s
   );
 }
 
-function EventDetails() {
+function EventDetails({ showVenue = false }: { showVenue?: boolean }) {
   return (
     <ul className="space-y-2.5 text-sm sm:text-base text-stone-700">
       <li className="flex items-start gap-3">
@@ -53,14 +53,18 @@ function EventDetails() {
       </li>
       <li className="flex items-start gap-3">
         <MapPin className="w-5 h-5 text-brand-copper shrink-0 mt-0.5" />
-        <a
-          href={EVENT.mapUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="underline-offset-4 hover:underline hover:text-brand-dark-green"
-        >
-          {EVENT.venueName} · {EVENT.venueAddress}
-        </a>
+        {showVenue ? (
+          <a
+            href={EVENT.mapUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline-offset-4 hover:underline hover:text-brand-dark-green"
+          >
+            {EVENT.venueName} · {EVENT.venueAddress}
+          </a>
+        ) : (
+          <span>{EVENT.venuePending}</span>
+        )}
       </li>
     </ul>
   );
@@ -91,7 +95,7 @@ function RegisteredDetails() {
           <CheckCircle2 className="w-10 h-10 text-brand-olive mb-4" />
           <h3 className="font-cardo text-2xl sm:text-3xl font-bold text-brand-dark-green leading-tight">{EVENT.name}</h3>
           <p className="font-cardo text-lg text-brand-copper mb-5">{EVENT.subtitle}</p>
-          <EventDetails />
+          <EventDetails showVenue />
           <a
             href={EVENT.mapUrl}
             target="_blank"
@@ -236,15 +240,10 @@ export default function OwningTulum() {
               <Clock className="w-5 h-5 text-brand-copper" />
               {EVENT.timeLabel}
             </span>
-            <a
-              href={EVENT.mapUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 hover:text-white underline-offset-4 hover:underline"
-            >
+            <span className="inline-flex items-center gap-2">
               <MapPin className="w-5 h-5 text-brand-copper" />
-              {EVENT.venueName}, {EVENT.venueStreet}
-            </a>
+              {EVENT.venuePending}
+            </span>
           </div>
 
           <div>
@@ -391,11 +390,11 @@ export default function OwningTulum() {
             <div className="lg:col-span-3">
               <Eyebrow>Registration</Eyebrow>
               <h2 className="font-cardo text-3xl sm:text-4xl font-bold text-brand-dark-green leading-tight mb-4">
-                Join us at {EVENT.venueName}
+                Join us in Toronto
               </h2>
               <p className="text-stone-700 leading-relaxed mb-8 max-w-xl">
                 Entry is free. Seating is limited, so we ask everyone to register in advance — it takes less than a
-                minute.
+                minute. Registered guests receive their invitation with the exact location.
               </p>
               <EventDetails />
             </div>

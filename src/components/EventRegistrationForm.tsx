@@ -91,8 +91,8 @@ export default function EventRegistrationForm() {
         <CheckCircle2 className="w-12 h-12 text-brand-olive mx-auto mb-4" />
         <h3 className="font-cardo text-2xl font-bold text-brand-dark-green mb-2">Your seat is reserved</h3>
         <p className="text-stone-700 leading-relaxed">
-          Thank you, {firstName.trim()}. We look forward to seeing you on {OWNING_TULUM_EVENT.dateLabel} at{' '}
-          {OWNING_TULUM_EVENT.venueName}.
+          Thank you, {firstName.trim()}. We look forward to seeing you on {OWNING_TULUM_EVENT.dateLabel}. We’ll send
+          you your invitation with the exact location shortly.
         </p>
         <p className="mt-4 text-sm text-stone-500">
           Questions?{' '}

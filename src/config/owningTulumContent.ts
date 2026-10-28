@@ -16,6 +16,8 @@ export const OWNING_TULUM_EVENT = {
   venueAddress: '1214 Queen St W, Toronto, ON M6J 1J6',
   mapUrl: 'https://maps.app.goo.gl/cxBtKjcGS9zixNSH8',
   contactEmail: 'taliah@selvadentrotulum.com',
+  /** Shown on the public page instead of the venue, which is only revealed after registering. */
+  venuePending: 'Toronto · Exact location shared after you register',
   heroImage: '/events/owning-tulum/hero-cenote.webp',
 };
 
@@ -28,7 +30,7 @@ export const OWNING_TULUM_META = {
   url: 'https://lotes.selvadentrotulum.com/owning-tulum',
   title: 'Owning Tulum — An Investment Seminar · Toronto, Nov 19',
   description:
-    'An evening in Toronto to learn how to own in Tulum — with Selvadentro, Adhonai by Aguasanta and TROBBU. Thursday, Nov 19, 7 PM, Gladstone House.',
+    'An evening in Toronto to learn how to own in Tulum — with Selvadentro, Adhonai by Aguasanta and TROBBU. Thursday, Nov 19, 7 PM. Private event, by registration only.',
   // 1200×630. Absolute URL: several crawlers ignore relative image paths.
   image: 'https://lotes.selvadentrotulum.com/events/owning-tulum/og-owning-tulum.jpg',
 };
@@ -134,7 +136,7 @@ export const OWNING_TULUM_FAQ = [
   {
     question: 'Is seating limited?',
     answer:
-      'Yes. Seating at Gladstone House is limited, so we ask everyone to register in advance. If your plans change, let us know and we will offer your seat to someone else.',
+      'Yes. Seating is limited, so we ask everyone to register in advance. If your plans change, let us know and we will offer your seat to someone else.',
   },
   {
     question: 'Is there a cost to attend?',
@@ -146,10 +148,9 @@ export const OWNING_TULUM_FAQ = [
     answer: 'Smart casual.',
   },
   {
-    // TO CONFIRM with the venue: rate and whether event guests can reserve.
-    question: 'Is there parking?',
+    question: 'Where exactly is the event?',
     answer:
-      'Gladstone House has limited paid parking on site, and there is paid street parking nearby. The 501 Queen streetcar stops at Gladstone Avenue, right outside.',
+      'In Toronto. The venue is shared only with registered guests — once you sign up, we send you the exact location, parking and transit details with your invitation.',
   },
   {
     question: 'Who can I contact with questions?',
