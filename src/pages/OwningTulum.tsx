@@ -240,10 +240,22 @@ export default function OwningTulum() {
               <Clock className="w-5 h-5 text-brand-copper" />
               {EVENT.timeLabel}
             </span>
-            <span className="inline-flex items-center gap-2">
-              <MapPin className="w-5 h-5 text-brand-copper" />
-              {EVENT.venuePending}
-            </span>
+            {registered ? (
+              <a
+                href={EVENT.mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 hover:text-white underline-offset-4 hover:underline"
+              >
+                <MapPin className="w-5 h-5 text-brand-copper" />
+                {EVENT.venueName}, {EVENT.venueStreet}
+              </a>
+            ) : (
+              <span className="inline-flex items-center gap-2">
+                <MapPin className="w-5 h-5 text-brand-copper" />
+                {EVENT.venuePending}
+              </span>
+            )}
           </div>
 
           <div>
@@ -254,10 +266,19 @@ export default function OwningTulum() {
             >
               {ctaLabel}
             </a>
-            <p className="mt-4 text-xs uppercase tracking-widest text-white/60">Free entry · Limited seating</p>
+            <p className="mt-4 text-xs uppercase tracking-widest text-white/60">
+              {registered ? 'Your seat is reserved' : 'Free entry · Limited seating'}
+            </p>
           </div>
         </div>
       </section>
+
+      {/* With ?registered=1 the attendee's details come first, right under the hero. */}
+      {registered && (
+        <section id="register" className="py-16 sm:py-20 px-4 sm:px-6 bg-white scroll-mt-4">
+          <RegisteredDetails />
+        </section>
+      )}
 
       {/* 2. WHAT YOU'LL LEARN */}
       <section className="py-16 sm:py-20 px-4 sm:px-6 bg-[#ECE5D8]">
@@ -381,11 +402,9 @@ export default function OwningTulum() {
         </div>
       </section>
 
-      {/* 5. REGISTRATION — with ?registered=1, the attendee's details instead of the form */}
-      <section id="register" className="py-16 sm:py-20 px-4 sm:px-6 bg-[#ECE5D8] scroll-mt-4">
-        {registered ? (
-          <RegisteredDetails />
-        ) : (
+      {/* 5. REGISTRATION — not shown with ?registered=1 (their details are under the hero instead) */}
+      {!registered && (
+        <section id="register" className="py-16 sm:py-20 px-4 sm:px-6 bg-[#ECE5D8] scroll-mt-4">
           <div className="max-w-6xl mx-auto grid lg:grid-cols-5 gap-10 lg:gap-12 items-start">
             <div className="lg:col-span-3 lg:sticky lg:top-12 lg:pt-8">
               <Eyebrow>Registration</Eyebrow>
@@ -402,8 +421,8 @@ export default function OwningTulum() {
               <EventRegistrationForm />
             </div>
           </div>
-        )}
-      </section>
+        </section>
+      )}
 
       {/* 6. FAQ */}
       <section className="py-16 sm:py-20 px-4 sm:px-6 bg-white">
@@ -414,7 +433,17 @@ export default function OwningTulum() {
               Questions
             </h2>
           </div>
-          <FAQ items={OWNING_TULUM_FAQ} />
+          <FAQ
+            items={
+              registered
+                ? OWNING_TULUM_FAQ.map((item) =>
+                    item.question === 'Where exactly is the event?'
+                      ? { ...item, answer: `At ${EVENT.venueName}, ${EVENT.venueAddress}.` }
+                      : item,
+                  )
+                : OWNING_TULUM_FAQ
+            }
+          />
           <p className="mt-8 text-center text-sm text-stone-600">
             Anything else? Write to{' '}
             <a href={`mailto:${EVENT.contactEmail}`} className="underline hover:text-brand-dark-green">
