@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Brokers in Tulum and the Riviera Maya: register your Toronto and Montréal clients for Owning Tulum, an investment seminar. Toronto, Nov 19 · Montréal, Nov 25.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://lotes.selvadentrotulum.com/owning-tulum-brokers/">
+<meta property="og:title" content="Owning Tulum · Broker Partners">
+<meta property="og:description" content="Register your clients for Owning Tulum in Toronto (Nov 19) and Montréal (Nov 25).">
+<meta property="og:image" content="https://lotes.selvadentrotulum.com/events/owning-tulum/og-owning-tulum.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>Owning Tulum · Broker Partners</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&family=Lexend:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="/owning-tulum-brokers/styles.css">
+<style>
+  /* Same single light look as /owning-tulum: sand #ECE5D8, white, dark green #465241, olive, copper, beige. */
+  :root { color-scheme: light; }
+  html, body { background: #ECE5D8; color: #1c1917; }
+  body { font-family: 'Lexend', system-ui, sans-serif; }
+  .gx {
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  @media (min-width: 640px) {
+    .gx {
+      padding-left: max(24px, env(safe-area-inset-left, 0px));
+      padding-right: max(24px, env(safe-area-inset-right, 0px));
+    }
+  }
+  .hero-bg {
+    background-image: linear-gradient(rgba(35, 47, 38, 0.6), rgba(35, 47, 38, 0.82)), url('/events/owning-tulum/hero-cenote.webp');
+    background-size: cover;
+    background-position: center;
+  }
+  .site-header { top: env(safe-area-inset-top, 0px); }
+  .select-chev {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23737373'><path fill-rule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 11.06l3.71-3.83a.75.75 0 111.08 1.04l-4.25 4.39a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z' clip-rule='evenodd'/></svg>");
+  }
+  .faq-a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s ease; }
+  .faq-a > div { overflow: hidden; }
+  .faq-item.open .faq-a { grid-template-rows: 1fr; }
+  .faq-item.open .faq-chev { transform: rotate(180deg); }
+  .choice:has(input:checked) { border-color: #65713F; background: rgba(101, 113, 63, .1); color: #465241; font-weight: 600; }
+  .lang-btn { color: rgba(255, 255, 255, .8); }
+  .lang-btn:hover { color: #fff; }
+  .lang-btn[aria-pressed="true"] { background: #CF8543; color: #fff; }
+  :focus-visible { outline: 2px solid #CF8543; outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto !important; } * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<div class="min-h-screen bg-[#ECE5D8] font-lexend">
+
+  <!-- HEADER -->
+  <header class="site-header absolute left-0 right-0 z-30 gx py-4">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+      <a href="https://selvadentrotulum.com/" target="_blank" rel="noopener" aria-label="Selvadentro" class="shrink-0">
+        <img src="/logo-selvandentro_tulum-cream.webp" alt="Selvadentro Tulum" class="h-10 sm:h-12 w-auto">
+      </a>
+      <div class="flex items-center gap-3">
+        <div role="group" aria-label="Language / Idioma" class="flex rounded-full border border-white/40 p-0.5 text-[11px] sm:text-xs font-semibold tracking-widest">
+          <button type="button" id="lang_en" class="lang-btn px-3 py-1.5 rounded-full transition" data-lang="en" aria-pressed="true">EN</button>
+          <button type="button" id="lang_es" class="lang-btn px-3 py-1.5 rounded-full transition" data-lang="es" aria-pressed="false">ES</button>
+        </div>
+        <a href="#register" class="js-scroll hidden sm:inline-block text-xs font-semibold tracking-widest uppercase text-white/85 hover:text-white border border-white/40 hover:border-white rounded-full px-4 py-2 transition whitespace-nowrap" data-i18n="cta">Register a client</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 1. HERO -->
+  <section class="hero-bg relative pt-32 pb-20 sm:pt-40 sm:pb-28 gx overflow-hidden">
+    <div class="relative max-w-3xl mx-auto text-center text-white">
+      <span class="inline-block text-brand-copper text-xs sm:text-sm font-semibold tracking-widest uppercase mb-3" data-i18n="hero_eyebrow">For brokers in Tulum &amp; the Riviera Maya</span>
+      <h1 class="font-cardo font-bold leading-[1.02] text-white" style="font-size: clamp(2.6rem, 7vw, 4.75rem)">Owning Tulum</h1>
+      <p class="font-cardo text-2xl sm:text-3xl text-brand-beige mt-2 mb-6" data-i18n="hero_sub">An Investment Seminar · Broker Invitation</p>
+      <p class="text-base sm:text-lg text-white/85 leading-relaxed max-w-2xl mx-auto mb-10" data-i18n="hero_p">
+        Have clients in Toronto or Montréal looking at Tulum? Register them for our private evening, where three Tulum
+        developers explain how a foreign buyer owns in Tulum, what it really costs, and the ways to invest.
+      </p>
+
+      <div class="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-10 text-left">
+        <div class="rounded-2xl border border-white/25 bg-black/20 backdrop-blur-sm p-5">
+          <p class="text-[11px] font-semibold uppercase tracking-widest text-brand-copper mb-1" data-i18n="tor_short">Thursday · Nov 19, 2026</p>
+          <p class="font-cardo text-2xl font-bold">Toronto</p>
+          <p class="text-sm text-white/80 mt-1">Gladstone House · 1214 Queen St W</p>
+          <p class="text-sm text-white/60">7:00 – 9:00 PM</p>
+        </div>
+        <div class="rounded-2xl border border-white/25 bg-black/20 backdrop-blur-sm p-5">
+          <p class="text-[11px] font-semibold uppercase tracking-widest text-brand-copper mb-1" data-i18n="mtl_short">Wednesday · Nov 25, 2026</p>
+          <p class="font-cardo text-2xl font-bold">Montréal</p>
+          <p class="text-sm text-white/80 mt-1">Yoko Luna · 1234 Rue de la Montagne</p>
+          <p class="text-sm text-white/60">7:00 – 9:00 PM</p>
+        </div>
+      </div>
+
+      <div>
+        <a href="#register" class="js-scroll inline-block px-9 py-4 bg-brand-copper text-white rounded-full font-semibold hover:bg-brand-beige hover:text-brand-dark-green transition-all shadow-xl" data-i18n="cta">Register a client</a>
+        <p class="mt-4 text-xs uppercase tracking-widest text-white/60" data-i18n="hero_note">Free entry for your clients · Limited seating</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. HOW IT WORKS FOR BROKERS -->
+  <section class="py-16 sm:py-20 gx bg-[#ECE5D8]">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="inline-block text-brand-copper text-xs sm:text-sm font-semibold tracking-widest uppercase mb-3" data-i18n="how_eyebrow">For brokers</span>
+        <h2 class="font-cardo text-3xl sm:text-4xl font-bold text-brand-dark-green leading-tight mb-4" data-i18n="how_h">How registering a client works</h2>
+        <p class="text-stone-700 leading-relaxed" data-i18n="how_p">Every client you register is recorded under your name, so our team knows who brought them and keeps you in the loop.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
+        <div class="bg-white/70 rounded-2xl border border-brand-dark-green/10 p-7">
+          <span class="font-cardo text-3xl font-bold text-brand-copper">01</span>
+          <h3 class="font-cardo text-xl sm:text-2xl font-bold text-brand-dark-green mt-3 mb-3 leading-snug" data-i18n="s1_h">Register your client</h3>
+          <p class="text-stone-700 leading-relaxed" data-i18n="s1_p">Fill in the form below with your details and your client’s. One form per client, for the Toronto or Montréal evening.</p>
+        </div>
+        <div class="bg-white/70 rounded-2xl border border-brand-dark-green/10 p-7">
+          <span class="font-cardo text-3xl font-bold text-brand-copper">02</span>
+          <h3 class="font-cardo text-xl sm:text-2xl font-bold text-brand-dark-green mt-3 mb-3 leading-snug" data-i18n="s2_h">We confirm the seat</h3>
+          <p class="text-stone-700 leading-relaxed" data-i18n="s2_p">Our team contacts you to confirm the registration and shares the invitation, venue and arrival details for your client.</p>
+        </div>
+        <div class="bg-white/70 rounded-2xl border border-brand-dark-green/10 p-7">
+          <span class="font-cardo text-3xl font-bold text-brand-copper">03</span>
+          <h3 class="font-cardo text-xl sm:text-2xl font-bold text-brand-dark-green mt-3 mb-3 leading-snug" data-i18n="s3_h">Your client attends</h3>
+          <p class="text-stone-700 leading-relaxed" data-i18n="s3_p">They meet the three developers in person. After the event, we follow up with you on your client’s interest.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. WHAT YOUR CLIENTS WILL LEARN -->
+  <section class="py-16 sm:py-20 gx bg-white">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="inline-block text-brand-copper text-xs sm:text-sm font-semibold tracking-widest uppercase mb-3" data-i18n="evening">The evening</span>
+        <h2 class="font-cardo text-3xl sm:text-4xl font-bold text-brand-dark-green leading-tight mb-4" data-i18n="learn_h">What your clients will learn</h2>
+        <p class="text-stone-700 leading-relaxed" data-i18n="learn_p">Two hours of clear answers for anyone thinking about owning in Tulum, whether to live, to rent out, or simply to hold.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
+        <div class="bg-[#F7F3EC] rounded-2xl border border-brand-dark-green/10 p-7">
+          <h3 class="font-cardo text-xl sm:text-2xl font-bold text-brand-dark-green mb-3 leading-snug" data-i18n="l1_h">How a foreigner buys in Tulum</h3>
+          <p class="text-stone-700 leading-relaxed" data-i18n="l1_p">Tulum sits in Mexico’s restricted coastal zone, so foreign buyers hold title through a fideicomiso, a bank trust. What it is, how it is set up, and how ownership is held and passed on.</p>
+        </div>
+        <div class="bg-[#F7F3EC] rounded-2xl border border-brand-dark-green/10 p-7">
+          <h3 class="font-cardo text-xl sm:text-2xl font-bold text-brand-dark-green mb-3 leading-snug" data-i18n="l2_h">The real costs</h3>
+          <p class="text-stone-700 leading-relaxed" data-i18n="l2_p">What it takes beyond the price: closing and notary fees, setting up and keeping the trust, property tax and maintenance, so they budget for the whole picture.</p>
+        </div>
+        <div class="bg-[#F7F3EC] rounded-2xl border border-brand-dark-green/10 p-7">
+          <h3 class="font-cardo text-xl sm:text-2xl font-bold text-brand-dark-green mb-3 leading-snug" data-i18n="l3_h">Different ways to invest</h3>
+          <p class="text-stone-700 leading-relaxed" data-i18n="l3_p">Land to build on, a finished residence, or ownership by the week. How each model earns, what each one asks of the owner, and who it suits.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. THE THREE PROJECTS -->
+  <section class="py-16 sm:py-20 gx bg-[#ECE5D8]">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="inline-block text-brand-copper text-xs sm:text-sm font-semibold tracking-widest uppercase mb-3" data-i18n="proj_eyebrow">Presenting that night</span>
+        <h2 class="font-cardo text-3xl sm:text-4xl font-bold text-brand-dark-green leading-tight" data-i18n="proj_h">Three ways to own in Tulum</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
+        <article class="flex flex-col rounded-2xl overflow-hidden border border-brand-dark-green/10 bg-[#F7F3EC] shadow-sm">
+          <div class="h-36 flex items-center justify-center px-8 bg-[#232F26]">
+            <img src="/logo-selvandentro_tulum-cream.webp" alt="Selvadentro Tulum" class="h-12 w-auto max-w-full object-contain" loading="lazy">
+          </div>
+          <div class="flex flex-col flex-1 p-7">
+            <span class="block text-[11px] font-semibold uppercase tracking-widest text-brand-copper mb-1" data-i18n="host">Host</span>
+            <h3 class="font-cardo text-2xl font-bold text-brand-dark-green mb-3">Selvadentro</h3>
+            <p class="text-stone-700 leading-relaxed flex-1" data-i18n="p1">Cenote-centered residential lots in Tulum’s jungle. A low-density master plan with 9 cenotes.</p>
+            <a href="https://www.youtube.com/watch?v=zFNyICgwD5c" target="_blank" rel="noopener noreferrer" class="mt-6 self-start inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-olive text-white text-sm font-semibold hover:bg-brand-dark-green transition">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg><span data-i18n="watch">Watch video</span>
+            </a>
+            <a href="https://selvadentrotulum.com" target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-olive hover:text-brand-dark-green transition">selvadentrotulum.com <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+        <article class="flex flex-col rounded-2xl overflow-hidden border border-brand-dark-green/10 bg-[#F7F3EC] shadow-sm">
+          <div class="h-36 flex items-center justify-center px-8 bg-[#232F26]">
+            <img src="/events/owning-tulum/adhonai-logo.png" alt="Adhonai by Aguasanta" class="h-10 w-auto max-w-full object-contain" loading="lazy">
+          </div>
+          <div class="flex flex-col flex-1 p-7">
+            <span class="hidden md:block text-[11px] font-semibold uppercase tracking-widest text-brand-copper mb-1">&nbsp;</span>
+            <h3 class="font-cardo text-2xl font-bold text-brand-dark-green mb-3">Adhonai by Aguasanta</h3>
+            <p class="text-stone-700 leading-relaxed flex-1" data-i18n="p2">A signature boutique development in La Veleta, Tulum. Timeless architecture in natural stone, chukum and tzalam wood, from studios to penthouses.</p>
+            <a href="https://www.youtube.com/watch?v=Xn_vnxhNGx4" target="_blank" rel="noopener noreferrer" class="mt-6 self-start inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-olive text-white text-sm font-semibold hover:bg-brand-dark-green transition">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg><span data-i18n="watch">Watch video</span>
+            </a>
+            <a href="https://www.aguasantatulum.com" target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-olive hover:text-brand-dark-green transition">aguasantatulum.com <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+        <article class="flex flex-col rounded-2xl overflow-hidden border border-brand-dark-green/10 bg-[#F7F3EC] shadow-sm">
+          <div class="h-36 flex items-center justify-center px-8 bg-[#232F26]">
+            <img src="/events/owning-tulum/trobbu-logo.svg" alt="TROBBU Boutique Collection" class="h-12 w-auto max-w-full object-contain" loading="lazy">
+          </div>
+          <div class="flex flex-col flex-1 p-7">
+            <span class="hidden md:block text-[11px] font-semibold uppercase tracking-widest text-brand-copper mb-1">&nbsp;</span>
+            <h3 class="font-cardo text-2xl font-bold text-brand-dark-green mb-3">TROBBU</h3>
+            <p class="text-stone-700 leading-relaxed flex-1" data-i18n="p3">Ten boutique jungle villas in Tulum with private infinity pools and an all-inclusive hotel experience, owned by the week through the TROBBU Owners Club.</p>
+            <a href="https://www.youtube.com/watch?v=0vj0jDj64WA" target="_blank" rel="noopener noreferrer" class="mt-6 self-start inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-olive text-white text-sm font-semibold hover:bg-brand-dark-green transition">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg><span data-i18n="watch">Watch video</span>
+            </a>
+            <a href="https://trobbucollection.com" target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-olive hover:text-brand-dark-green transition">trobbucollection.com <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. AGENDA -->
+  <section class="py-16 sm:py-20 gx bg-brand-dark-green text-white">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-10">
+        <span class="inline-block text-brand-copper text-xs sm:text-sm font-semibold tracking-widest uppercase mb-3" data-i18n="agenda_eyebrow">Toronto · Nov 19 &nbsp;|&nbsp; Montréal · Nov 25</span>
+        <h2 class="font-cardo text-3xl sm:text-4xl font-bold leading-tight" data-i18n="agenda_h">The evening’s agenda</h2>
+        <p class="text-white/70 mt-3 text-sm" data-i18n="agenda_p">Same program in both cities.</p>
+      </div>
+      <ol class="border-t border-white/15">
+        <li class="flex gap-6 sm:gap-10 py-5 border-b border-white/15">
+          <span class="font-cardo text-xl sm:text-2xl font-bold text-brand-copper w-24 shrink-0">7:00 PM</span>
+          <div><p class="text-lg sm:text-xl text-white" data-i18n="ag1">Welcome drinks</p></div>
+        </li>
+        <li class="flex gap-6 sm:gap-10 py-5 border-b border-white/15">
+          <span class="font-cardo text-xl sm:text-2xl font-bold text-brand-copper w-24 shrink-0">7:30 PM</span>
+          <div><p class="text-lg sm:text-xl text-white" data-i18n="ag2">Presentations</p><p class="text-sm text-white/65 mt-1">Selvadentro, Adhonai by Aguasanta, TROBBU</p></div>
+        </li>
+        <li class="flex gap-6 sm:gap-10 py-5 border-b border-white/15">
+          <span class="font-cardo text-xl sm:text-2xl font-bold text-brand-copper w-24 shrink-0">8:30 PM</span>
+          <div><p class="text-lg sm:text-xl text-white" data-i18n="ag3">Q&amp;A &amp; cocktail</p></div>
+        </li>
+        <li class="flex gap-6 sm:gap-10 py-5 border-b border-white/15">
+          <span class="font-cardo text-xl sm:text-2xl font-bold text-brand-copper w-24 shrink-0">9:00 PM</span>
+          <div><p class="text-lg sm:text-xl text-white" data-i18n="ag4">Close</p></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 6. REGISTRATION -->
+  <section id="register" class="py-16 sm:py-20 gx bg-[#ECE5D8] scroll-mt-4">
+    <div class="max-w-6xl mx-auto grid lg:grid-cols-5 gap-10 lg:gap-12 items-start">
+      <div class="lg:col-span-3 lg:sticky lg:top-12 lg:pt-8 min-w-0">
+        <span class="inline-block text-brand-copper text-xs sm:text-sm font-semibold tracking-widest uppercase mb-3" data-i18n="reg_eyebrow">Client registration</span>
+        <h2 class="font-cardo text-3xl sm:text-4xl font-bold text-brand-dark-green leading-tight mb-4" data-i18n="reg_h">Register your client</h2>
+        <p class="text-stone-700 leading-relaxed mb-8 max-w-xl" data-i18n="reg_p">
+          Entry is free for your clients. Seating is limited, so register them as early as you can. Send one form per
+          client; the registration is saved under your name.
+        </p>
+        <div class="grid sm:grid-cols-2 gap-6 max-w-xl">
+          <ul class="space-y-2.5 text-sm sm:text-base text-stone-700">
+            <li class="font-cardo text-xl font-bold text-brand-dark-green">Toronto</li>
+            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-brand-copper shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span data-i18n="tor_long">Thursday, November 19, 2026</span></li>
+            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-brand-copper shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span>7:00 – 9:00 PM</span></li>
+            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-brand-copper shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><a href="https://maps.app.goo.gl/cxBtKjcGS9zixNSH8" target="_blank" rel="noopener noreferrer" class="underline-offset-4 hover:underline hover:text-brand-dark-green">Gladstone House · 1214 Queen St W, Toronto, ON M6J 1J6</a></li>
+          </ul>
+          <ul class="space-y-2.5 text-sm sm:text-base text-stone-700">
+            <li class="font-cardo text-xl font-bold text-brand-dark-green">Montréal</li>
+            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-brand-copper shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span data-i18n="mtl_long">Wednesday, November 25, 2026</span></li>
+            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-brand-copper shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span>7:00 – 9:00 PM</span></li>
+            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-brand-copper shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><span>Yoko Luna · 1234 Rue de la Montagne, Montréal, QC H3G 1Z1</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lg:col-span-2 min-w-0">
+        <!-- Success -->
+        <div id="success" class="w-full max-w-md mx-auto bg-white rounded-2xl p-8 shadow-2xl text-center" role="status" hidden>
+          <svg class="w-12 h-12 text-brand-olive mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg>
+          <h3 class="font-cardo text-2xl font-bold text-brand-dark-green mb-2" data-i18n="success_h">Client registered</h3>
+          <p id="successText" class="text-stone-700 leading-relaxed"></p>
+          <button id="another" type="button" class="mt-6 px-6 py-3 rounded-full border border-stone-300 text-brand-dark-green text-sm font-semibold hover:border-brand-olive transition" data-i18n="another">Register another client</button>
+        </div>
+
+        <!-- Form -->
+        <form id="brokerForm" class="w-full max-w-md mx-auto bg-white rounded-2xl p-6 sm:p-8 shadow-2xl" novalidate>
+          <h3 class="font-cardo text-2xl sm:text-3xl font-bold text-brand-dark-green mb-1 leading-tight" data-i18n="form_h">Register a client</h3>
+          <p class="text-sm text-stone-600 mb-5" data-i18n="form_sub">Free entry · Seating is limited.</p>
+
+          <div class="space-y-3">
+            <p class="text-[11px] font-semibold uppercase tracking-widest text-brand-copper" data-i18n="sec_broker">About you (broker)</p>
+
+            <div class="grid grid-cols-2 gap-3">
+              <label class="block min-w-0">
+                <span class="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1"><span data-i18n="f_first">First name</span> <span class="text-brand-copper">*</span></span>
+                <input id="broker_first_name" name="broker_first_name" type="text" autocomplete="given-name" required data-i18n-ph="f_first" placeholder="First name" class="w-full px-4 py-3 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-olive/40 focus:border-brand-olive transition">
+              </label>
+              <label class="block min-w-0">
+                <span class="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1"><span data-i18n="f_last">Last name</span> <span class="text-brand-copper">*</span></span>
+                <input id="broker_last_name" name="broker_last_name" type="text" autocomplete="family-name" required data-i18n-ph="f_last" placeholder="Last name" class="w-full px-4 py-3 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-olive/40 focus:border-brand-olive transition">
+              </label>
+            </div>
+            <label class="block">
+              <span class="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1"><span data-i18n="f_company">Brokerage / agency</span> <span class="text-brand-copper">*</span></span>
+              <input id="broker_company" name="broker_company" type="text" autocomplete="organization" required data-i18n-ph="ph_company" placeholder="Your brokerage" class="w-full px-4 py-3 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-olive/40 focus:border-brand-olive transition">
+            </label>
+            <label class="block">
+              <span class="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1"><span data-i18n="f_email">Email</span> <span class="text-brand-copper">*</span></span>
+              <input id="broker_email" name="broker_email" type="email" autocomplete="email" required placeholder="you@brokerage.com" class="w-full px-4 py-3 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-olive/40 focus:border-brand-olive transition">
+            </label>
+            <label class="block">
+              <span class="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1"><span data-i18n="f_bphone">Phone / WhatsApp</span> <span class="text-brand-copper">*</span></span>
+              <input id="broker_phone" name="broker_phone" type="tel" autocomplete="tel" required placeholder="+52 984 123 4567" class="w-full px-4 py-3 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-olive/40 focus:border-brand-olive transition">
+            </label>
+
+            <p class="text-[11px] font-semibold uppercase tracking-widest text-brand-copper !mt-6 pt-5 border-t border-stone-200" data-i18n="sec_client">Your client</p>
+
+            <div class="grid grid-cols-2 gap-3">
+              <label class="block min-w-0">
+                <span class="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1"><span data-i18n="f_first">First name</span> <span class="text-brand-copper">*</span></span>
+                <input id="client_first_name" name="client_first_name" type="text" autocomplete="off" required data-i18n-ph="f_first" placeholder="First name" class="w-full px-4 py-3 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-olive/40 focus:border-brand-olive transition">
+              </label>
+              <label class="block min-w-0">
+                <span class="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1"><span data-i18n="f_last">Last name</span> <span class="text-brand-copper">*</span></span>
+                <input id="client_last_name" name="client_last_name" type="text" autocomplete="off" required data-i18n-ph="f_last" placeholder="Last name" class="w-full px-4 py-3 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-olive/40 focus:border-brand-olive transition">
+              </label>
+            </div>
+            <label class="block">
+              <span class="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1"><span data-i18n="f_email">Email</span> <span class="text-brand-copper">*</span></span>
+              <input id="client_email" name="client_email" type="email" autocomplete="off" required placeholder="client@email.com" class="w-full px-4 py-3 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-olive/40 focus:border-brand-olive transition">
+            </label>
+            <label class="block">
+              <span class="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1"><span data-i18n="f_cphone">Phone · last 4 digits</span> <span class="text-brand-copper">*</span></span>
+              <input id="client_phone_last4" name="client_phone_last4" type="text" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" autocomplete="off" required placeholder="0123" class="w-32 px-4 py-3 border border-stone-300 rounded-lg tracking-[0.3em] tabular-nums focus:outline-none focus:ring-2 focus:ring-brand-olive/40 focus:border-brand-olive transition">
+            </label>
+
+            <p class="text-[11px] font-semibold uppercase tracking-widest text-brand-copper !mt-6 pt-5 border-t border-stone-200" data-i18n="evening">The evening</p>
+
+            <fieldset>
+              <legend class="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-2"><span data-i18n="f_event">Which event?</span> <span class="text-brand-copper">*</span></legend>
+              <div class="grid gap-3">
+                <label class="choice flex items-center gap-3 px-4 py-3 border border-stone-300 rounded-lg cursor-pointer transition text-sm text-stone-700 hover:border-brand-olive/60">
+                  <input type="radio" id="event_toronto" name="event" value="Toronto · Nov 19, 2026" class="accent-brand-olive">
+                  <span data-i18n="ev_tor">Toronto · Thu, Nov 19</span>
+                </label>
+                <label class="choice flex items-center gap-3 px-4 py-3 border border-stone-300 rounded-lg cursor-pointer transition text-sm text-stone-700 hover:border-brand-olive/60">
+                  <input type="radio" id="event_montreal" name="event" value="Montréal · Nov 25, 2026" class="accent-brand-olive">
+                  <span data-i18n="ev_mtl">Montréal · Wed, Nov 25</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend class="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-2"><span data-i18n="f_plus">Will they bring a plus one?</span> <span class="text-brand-copper">*</span></legend>
+              <div class="grid grid-cols-2 gap-3">
+                <label class="choice flex items-center justify-center gap-2 px-4 py-3 border border-stone-300 rounded-lg cursor-pointer transition text-sm text-stone-700 hover:border-brand-olive/60">
+                  <input type="radio" id="plus_one_yes" name="plus_one" value="Yes" class="accent-brand-olive"><span data-i18n="yes">Yes</span>
+                </label>
+                <label class="choice flex items-center justify-center gap-2 px-4 py-3 border border-stone-300 rounded-lg cursor-pointer transition text-sm text-stone-700 hover:border-brand-olive/60">
+                  <input type="radio" id="plus_one_no" name="plus_one" value="No" class="accent-brand-olive"><span>No</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <label class="block">
+              <span class="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1"><span data-i18n="f_notes">Notes about your client</span> <span class="font-normal normal-case tracking-normal text-stone-500" data-i18n="optional">(optional)</span></span>
+              <textarea id="notes" name="notes" rows="3" data-i18n-ph="ph_notes" placeholder="What they’re looking for, best time to reach them…" class="w-full px-4 py-3 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-olive/40 focus:border-brand-olive transition resize-y"></textarea>
+            </label>
+          </div>
+
+          <p id="formError" class="mt-3 text-sm text-red-600" role="alert" hidden></p>
+
+          <button id="submitBtn" type="submit" class="mt-5 w-full px-6 py-4 bg-brand-olive text-white rounded-full font-semibold text-base hover:bg-brand-dark-green transition-all shadow-lg disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2" data-i18n="submit">Register client</button>
+
+          <p class="mt-3 text-[11px] text-stone-500 text-center leading-relaxed">
+            <span data-i18n="consent">Your client’s details are used only to manage this event registration. See our</span>
+            <a href="https://selvadentrotulum.com/privacy-policy/" target="_blank" rel="noopener noreferrer" class="underline hover:text-brand-dark-green transition-colors" data-i18n="privacy">Privacy Policy</a>.
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. FAQ -->
+  <section class="py-16 sm:py-20 gx bg-white">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-10">
+        <span class="inline-block text-brand-copper text-xs sm:text-sm font-semibold tracking-widest uppercase mb-3" data-i18n="faq_eyebrow">Good to know</span>
+        <h2 class="font-cardo text-3xl sm:text-4xl font-bold text-brand-dark-green leading-tight" data-i18n="faq_h">Questions from brokers</h2>
+      </div>
+      <div class="space-y-4" id="faq">
+        <div class="faq-item border-2 border-stone-200 rounded-lg overflow-hidden">
+          <button type="button" class="w-full flex items-center justify-between gap-4 p-5 text-left hover:bg-stone-50 transition-colors" aria-expanded="false">
+            <span class="font-medium text-stone-800" data-i18n="q1">Is there a cost for my clients?</span>
+            <svg class="faq-chev w-5 h-5 text-stone-500 shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-a"><div><p class="p-5 pt-0 text-stone-600 leading-relaxed" data-i18n="a1">No. Entry is free. Registration is all we ask.</p></div></div>
+        </div>
+        <div class="faq-item border-2 border-stone-200 rounded-lg overflow-hidden">
+          <button type="button" class="w-full flex items-center justify-between gap-4 p-5 text-left hover:bg-stone-50 transition-colors" aria-expanded="false">
+            <span class="font-medium text-stone-800" data-i18n="q2">How many clients can I register?</span>
+            <svg class="faq-chev w-5 h-5 text-stone-500 shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-a"><div><p class="p-5 pt-0 text-stone-600 leading-relaxed" data-i18n="a2">Send one form per client. Seating is limited in both cities, so we confirm each registration with you directly.</p></div></div>
+        </div>
+        <div class="faq-item border-2 border-stone-200 rounded-lg overflow-hidden">
+          <button type="button" class="w-full flex items-center justify-between gap-4 p-5 text-left hover:bg-stone-50 transition-colors" aria-expanded="false">
+            <span class="font-medium text-stone-800" data-i18n="q3">Will my client know I registered them?</span>
+            <svg class="faq-chev w-5 h-5 text-stone-500 shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-a"><div><p class="p-5 pt-0 text-stone-600 leading-relaxed" data-i18n="a3">Yes. The registration is saved under your name, and our team mentions you when we confirm their seat.</p></div></div>
+        </div>
+        <div class="faq-item border-2 border-stone-200 rounded-lg overflow-hidden">
+          <button type="button" class="w-full flex items-center justify-between gap-4 p-5 text-left hover:bg-stone-50 transition-colors" aria-expanded="false">
+            <span class="font-medium text-stone-800" data-i18n="q4">Where exactly are the events?</span>
+            <svg class="faq-chev w-5 h-5 text-stone-500 shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-a"><div><p class="p-5 pt-0 text-stone-600 leading-relaxed" data-i18n="a4">Toronto: Gladstone House, 1214 Queen St W, Toronto, ON M6J 1J6, on Thursday, November 19. Montréal: Yoko Luna, 1234 Rue de la Montagne, Montréal, QC H3G 1Z1, on Wednesday, November 25. Both run from 7:00 to 9:00 PM local time.</p></div></div>
+        </div>
+        <div class="faq-item border-2 border-stone-200 rounded-lg overflow-hidden">
+          <button type="button" class="w-full flex items-center justify-between gap-4 p-5 text-left hover:bg-stone-50 transition-colors" aria-expanded="false">
+            <span class="font-medium text-stone-800" data-i18n="q5">Is there a dress code?</span>
+            <svg class="faq-chev w-5 h-5 text-stone-500 shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-a"><div><p class="p-5 pt-0 text-stone-600 leading-relaxed" data-i18n="a5">Smart casual.</p></div></div>
+        </div>
+        <div class="faq-item border-2 border-stone-200 rounded-lg overflow-hidden">
+          <button type="button" class="w-full flex items-center justify-between gap-4 p-5 text-left hover:bg-stone-50 transition-colors" aria-expanded="false">
+            <span class="font-medium text-stone-800" data-i18n="q6">Who can I contact with questions?</span>
+            <svg class="faq-chev w-5 h-5 text-stone-500 shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-a"><div><p class="p-5 pt-0 text-stone-600 leading-relaxed" data-i18n="a6">Write to info@selvadentrotulum.com or call +52 999 489 0828 and we will get back to you.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-[#1F2A22] text-white/60 text-xs py-6 gx">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+      <span>
+        © 2026 Selvadentro Tulum · <span data-i18n="rights">All rights reserved</span> ·
+        <a href="https://selvadentrotulum.com/privacy-policy/" target="_blank" rel="noopener noreferrer" class="hover:text-white underline" data-i18n="privacy">Privacy Policy</a> ·
+        <a href="https://selvadentrotulum.com/terms-and-conditions/" target="_blank" rel="noopener noreferrer" class="hover:text-white underline" data-i18n="terms">Terms &amp; Conditions</a>
+      </span>
+      <span class="select-all">+52 999 489 0828 · info@selvadentrotulum.com</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+  // Spanish strings; English is read from the page itself on load.
+  const ES = {
+    cta: 'Registrar cliente',
+    hero_eyebrow: 'Para brokers de Tulum y la Riviera Maya',
+    hero_sub: 'Seminario de inversión · Invitación para brokers',
+    hero_p: '¿Tienes clientes en Toronto o Montréal interesados en Tulum? Regístralos a nuestra velada privada, donde tres desarrolladores de Tulum explican cómo compra un extranjero en Tulum, cuánto cuesta realmente y las distintas formas de invertir.',
+    tor_short: 'Jueves · 19 nov 2026',
+    mtl_short: 'Miércoles · 25 nov 2026',
+    hero_note: 'Entrada gratuita para tus clientes · Cupo limitado',
+    how_eyebrow: 'Para brokers',
+    how_h: 'Cómo registrar a un cliente',
+    how_p: 'Cada cliente que registras queda guardado a tu nombre, así nuestro equipo sabe quién lo trajo y te mantiene al tanto.',
+    s1_h: 'Registra a tu cliente',
+    s1_p: 'Llena el formulario de abajo con tus datos y los de tu cliente. Un formulario por cliente, para la velada de Toronto o la de Montréal.',
+    s2_h: 'Confirmamos su lugar',
+    s2_p: 'Nuestro equipo te contacta para confirmar el registro y te comparte la invitación, el lugar y los detalles de llegada para tu cliente.',
+    s3_h: 'Tu cliente asiste',
+    s3_p: 'Conoce en persona a los tres desarrolladores. Después del evento te damos seguimiento sobre el interés de tu cliente.',
+    evening: 'La velada',
+    learn_h: 'Lo que aprenderán tus clientes',
+    learn_p: 'Dos horas de respuestas claras para quien está pensando en tener una propiedad en Tulum, ya sea para vivir, rentar o simplemente conservar.',
+    l1_h: 'Cómo compra un extranjero en Tulum',
+    l1_p: 'Tulum está en la zona restringida costera de México, así que los compradores extranjeros tienen la propiedad a través de un fideicomiso bancario. Qué es, cómo se constituye y cómo se conserva y se hereda la propiedad.',
+    l2_h: 'Los costos reales',
+    l2_p: 'Lo que implica más allá del precio: gastos de cierre y notaría, constitución y mantenimiento del fideicomiso, predial y mantenimiento, para presupuestar el panorama completo.',
+    l3_h: 'Distintas formas de invertir',
+    l3_p: 'Terreno para construir, una residencia terminada o propiedad por semanas. Cómo genera cada modelo, qué le pide al propietario y para quién es.',
+    proj_eyebrow: 'Presentan esa noche',
+    proj_h: 'Tres formas de ser dueño en Tulum',
+    host: 'Anfitrión',
+    p1: 'Lotes residenciales alrededor de cenotes en la selva de Tulum. Un plan maestro de baja densidad con 9 cenotes.',
+    p2: 'Un desarrollo boutique de autor en La Veleta, Tulum. Arquitectura atemporal en piedra natural, chukum y madera de tzalam, de estudios a penthouses.',
+    p3: 'Diez villas boutique en la selva de Tulum con alberca infinita privada y experiencia de hotel todo incluido, en propiedad por semanas a través del TROBBU Owners Club.',
+    watch: 'Ver video',
+    agenda_eyebrow: 'Toronto · 19 nov &nbsp;|&nbsp; Montréal · 25 nov',
+    agenda_h: 'Agenda de la velada',
+    agenda_p: 'El mismo programa en ambas ciudades.',
+    ag1: 'Bebidas de bienvenida',
+    ag2: 'Presentaciones',
+    ag3: 'Preguntas y respuestas y cóctel',
+    ag4: 'Cierre',
+    reg_eyebrow: 'Registro de clientes',
+    reg_h: 'Registra a tu cliente',
+    reg_p: 'La entrada es gratuita para tus clientes. El cupo es limitado, así que regístralos lo antes posible. Envía un formulario por cliente; el registro queda guardado a tu nombre.',
+    tor_long: 'Jueves 19 de noviembre de 2026',
+    mtl_long: 'Miércoles 25 de noviembre de 2026',
+    success_h: 'Cliente registrado',
+    another: 'Registrar otro cliente',
+    form_h: 'Registra a un cliente',
+    form_sub: 'Entrada gratuita · Cupo limitado.',
+    sec_broker: 'Tus datos (broker)',
+    f_first: 'Nombre',
+    f_last: 'Apellido',
+    f_company: 'Inmobiliaria / agencia',
+    ph_company: 'Tu inmobiliaria',
+    f_email: 'Correo',
+    f_bphone: 'Teléfono / WhatsApp',
+    sec_client: 'Tu cliente',
+    f_cphone: 'Teléfono · últimos 4 dígitos',
+    f_event: '¿A qué evento?',
+    ev_tor: 'Toronto · jue 19 nov',
+    ev_mtl: 'Montréal · mié 25 nov',
+    f_plus: '¿Llevará acompañante?',
+    yes: 'Sí',
+    f_notes: 'Notas sobre tu cliente',
+    optional: '(opcional)',
+    ph_notes: 'Qué busca, mejor horario para contactarlo…',
+    submit: 'Registrar cliente',
+    consent: 'Los datos de tu cliente se usan solo para gestionar este registro. Consulta nuestro',
+    privacy: 'Aviso de Privacidad',
+    faq_eyebrow: 'Para saber',
+    faq_h: 'Preguntas de brokers',
+    q1: '¿Tiene costo para mis clientes?',
+    a1: 'No. La entrada es gratuita. Solo pedimos el registro.',
+    q2: '¿Cuántos clientes puedo registrar?',
+    a2: 'Envía un formulario por cliente. El cupo es limitado en ambas ciudades, así que confirmamos cada registro directamente contigo.',
+    q3: '¿Mi cliente sabrá que yo lo registré?',
+    a3: 'Sí. El registro queda guardado a tu nombre y nuestro equipo te menciona cuando le confirma su lugar.',
+    q4: '¿Dónde son exactamente los eventos?',
+    a4: 'Toronto: Gladstone House, 1214 Queen St W, Toronto, ON M6J 1J6, el jueves 19 de noviembre. Montréal: Yoko Luna, 1234 Rue de la Montagne, Montréal, QC H3G 1Z1, el miércoles 25 de noviembre. Ambos de 7:00 a 9:00 PM, hora local.',
+    q5: '¿Hay código de vestimenta?',
+    a5: 'Smart casual.',
+    q6: '¿A quién contacto si tengo dudas?',
+    a6: 'Escribe a info@selvadentrotulum.com o llama al +52 999 489 0828 y te respondemos.',
+    rights: 'Todos los derechos reservados',
+    terms: 'Términos y Condiciones',
+  };
+
+  const MSG = {
+    en: {
+      missing: 'Please complete all required fields.',
+      email: 'Please check the email addresses.',
+      last4: 'Enter the last 4 digits of your client’s phone number.',
+      save: 'We couldn’t save the registration. Please try again or write to info@selvadentrotulum.com.',
+      sending: 'Sending…',
+      done: (name, ev) => `${name} is registered for ${ev}. Our team will contact you to confirm the seat and send the invitation.`,
+    },
+    es: {
+      missing: 'Completa todos los campos obligatorios.',
+      email: 'Revisa los correos electrónicos.',
+      last4: 'Escribe los últimos 4 dígitos del teléfono de tu cliente.',
+      save: 'No pudimos guardar el registro. Inténtalo de nuevo o escribe a info@selvadentrotulum.com.',
+      sending: 'Enviando…',
+      done: (name, ev) => `${name} quedó registrado para ${ev}. Nuestro equipo te contactará para confirmar su lugar y enviar la invitación.`,
+    },
+  };
+
+  const EN = {};
+  document.querySelectorAll('[data-i18n]').forEach((el) => { EN[el.dataset.i18n] ??= el.innerHTML.trim(); });
+  document.querySelectorAll('[data-i18n-ph]').forEach((el) => { EN['ph:' + el.dataset.i18nPh] ??= el.placeholder; });
+
+  let lang = 'en';
+  function setLang(next) {
+    lang = next === 'es' ? 'es' : 'en';
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-i18n]').forEach((el) => {
+      const k = el.dataset.i18n;
+      el.innerHTML = lang === 'es' && ES[k] ? ES[k] : EN[k];
+    });
+    document.querySelectorAll('[data-i18n-ph]').forEach((el) => {
+      const k = el.dataset.i18nPh;
+      el.placeholder = lang === 'es' && ES[k] ? ES[k] : EN['ph:' + k];
+    });
+    document.querySelectorAll('.lang-btn').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+    try { localStorage.setItem('ot-broker-lang', lang); } catch (e) {}
+  }
+
+  let initial = 'en';
+  try { initial = localStorage.getItem('ot-broker-lang') || ''; } catch (e) { initial = ''; }
+  if (!initial) initial = (navigator.language || '').toLowerCase().startsWith('es') ? 'es' : 'en';
+  setLang(initial);
+  document.querySelectorAll('.lang-btn').forEach((b) => b.addEventListener('click', () => setLang(b.dataset.lang)));
+
+  document.getElementById('client_phone_last4').addEventListener('input', (e) => {
+    e.target.value = e.target.value.replace(/\D/g, '').slice(0, 4);
+  });
+
+  document.querySelectorAll('.js-scroll').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('register').scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  document.querySelectorAll('#faq .faq-item > button').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const open = !item.classList.contains('open');
+      document.querySelectorAll('#faq .faq-item').forEach((i) => {
+        i.classList.remove('open');
+        i.querySelector('button').setAttribute('aria-expanded', 'false');
+      });
+      if (open) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+    });
+  });
+
+  // Hook for the CRM: replace the body with the real request (webhook / API). Must resolve true on success.
+  async function sendBrokerRegistration(payload) {
+    console.log('broker_registration', payload);
+    return true;
+  }
+
+  const form = document.getElementById('brokerForm');
+  const errorEl = document.getElementById('formError');
+  const submitBtn = document.getElementById('submitBtn');
+  const success = document.getElementById('success');
+
+  function showError(text) {
+    errorEl.textContent = text;
+    errorEl.hidden = false;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errorEl.hidden = true;
+    const t = MSG[lang];
+    const data = Object.fromEntries(new FormData(form));
+    const required = ['broker_first_name', 'broker_last_name', 'broker_company', 'broker_email', 'broker_phone',
+      'client_first_name', 'client_last_name', 'client_email', 'client_phone_last4', 'event', 'plus_one'];
+    if (required.some((k) => !String(data[k] ?? '').trim())) return showError(t.missing);
+    const emailOk = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+    if (!emailOk(data.broker_email) || !emailOk(data.client_email)) return showError(t.email);
+    if (!/^\d{4}$/.test(data.client_phone_last4)) return showError(t.last4);
+
+    // Field values stay in English so the CRM gets the same values in both languages.
+    const payload = {
+      source: 'owning-tulum-brokers',
+      language: lang,
+      submitted_at: new Date().toISOString(),
+      broker: {
+        first_name: data.broker_first_name.trim(),
+        last_name: data.broker_last_name.trim(),
+        company: data.broker_company.trim(),
+        email: data.broker_email.trim(),
+        phone: data.broker_phone.trim(),
+      },
+      client: {
+        first_name: data.client_first_name.trim(),
+        last_name: data.client_last_name.trim(),
+        email: data.client_email.trim(),
+        phone_last4: data.client_phone_last4,
+      },
+      event: data.event,
+      plus_one: data.plus_one,
+      notes: (data.notes || '').trim(),
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = t.sending;
+    let ok = false;
+    try { ok = await sendBrokerRegistration(payload); } catch (err) { ok = false; }
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = lang === 'es' ? ES.submit : EN.submit;
+
+    if (!ok) return showError(t.save);
+
+    const evLabel = form.querySelector('input[name="event"]:checked').nextElementSibling.textContent;
+    document.getElementById('successText').textContent =
+      t.done(`${payload.client.first_name} ${payload.client.last_name}`, evLabel);
+    form.hidden = true;
+    success.hidden = false;
+    success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+
+  document.getElementById('another').addEventListener('click', () => {
+    form.reset();
+    success.hidden = true;
+    form.hidden = false;
+    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+</script>
+</body>
+</html>
