@@ -279,6 +279,10 @@
         <form id="brokerForm" class="w-full max-w-md mx-auto bg-white rounded-2xl p-6 sm:p-8 shadow-2xl" novalidate>
           <h3 class="font-cardo text-2xl sm:text-3xl font-bold text-brand-dark-green mb-1 leading-tight" data-i18n="form_h">Register a client</h3>
           <p class="text-sm text-stone-600 mb-5" data-i18n="form_sub">Free entry · Seating is limited.</p>
+          <div aria-hidden="true" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden">
+            <label for="website">Website</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+          </div>
 
           <div class="space-y-3">
             <p class="text-[11px] font-semibold uppercase tracking-widest text-brand-copper" data-i18n="sec_broker">About you (broker)</p>
@@ -598,10 +602,25 @@
     });
   });
 
-  // Hook for the CRM: replace the body with the real request (webhook / API). Must resolve true on success.
+  // GHL workflow for broker registrations (not the /owning-tulum client webhook). The site is static, so this posts from the browser.
+  const GHL_WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/crN2IhAuOBAl7D8324yI/webhook-trigger/9c166223-d2b3-4708-8570-01e3cd97bb9f';
+  const SOURCE_URL = 'https://lotes.selvadentrotulum.com/owning-tulum-brokers/';
+  const EVENT_FOR_GHL = { event_toronto: 'Toronto', event_montreal: 'Montreal' };
+
   async function sendBrokerRegistration(payload) {
-    console.log('broker_registration', payload);
-    return true;
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 15000);
+    try {
+      const res = await fetch(GHL_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        signal: controller.signal,
+      });
+      return res.status === 200;
+    } finally {
+      clearTimeout(timer);
+    }
   }
 
   const form = document.getElementById('brokerForm');
@@ -614,8 +633,18 @@
     errorEl.hidden = false;
   }
 
+  function showSuccess(name, evLabel) {
+    document.getElementById('successText').textContent = MSG[lang].done(name, evLabel);
+    form.hidden = true;
+    success.hidden = false;
+    success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  let sending = false;
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    if (sending) return;
     errorEl.hidden = true;
     const t = MSG[lang];
     const data = Object.fromEntries(new FormData(form));
@@ -626,44 +655,42 @@
     if (!emailOk(data.broker_email) || !emailOk(data.client_email)) return showError(t.email);
     if (!/^\d{4}$/.test(data.client_phone_last4)) return showError(t.last4);
 
-    // Field values stay in English so the CRM gets the same values in both languages.
+    const eventRadio = form.querySelector('input[name="event"]:checked');
+    const evLabel = eventRadio.nextElementSibling.textContent;
+    const clientName = `${data.client_first_name.trim()} ${data.client_last_name.trim()}`;
+
+    // Honeypot filled: a bot. Pretend it worked and send nothing.
+    if (String(data.website ?? '').trim()) return showSuccess(clientName, evLabel);
+
+    // Flat keys, all strings, exactly as the GHL workflow maps them.
     const payload = {
-      source: 'owning-tulum-brokers',
-      language: lang,
-      submitted_at: new Date().toISOString(),
-      broker: {
-        first_name: data.broker_first_name.trim(),
-        last_name: data.broker_last_name.trim(),
-        company: data.broker_company.trim(),
-        email: data.broker_email.trim(),
-        phone: data.broker_phone.trim(),
-      },
-      client: {
-        first_name: data.client_first_name.trim(),
-        last_name: data.client_last_name.trim(),
-        email: data.client_email.trim(),
-        phone_last4: data.client_phone_last4,
-      },
-      event: data.event,
+      broker_first_name: data.broker_first_name.trim(),
+      broker_last_name: data.broker_last_name.trim(),
+      broker_agency: data.broker_company.trim(),
+      broker_email: data.broker_email.trim(),
+      broker_phone: data.broker_phone.trim(),
+      client_first_name: data.client_first_name.trim(),
+      client_last_name: data.client_last_name.trim(),
+      client_email: data.client_email.trim(),
+      client_phone_last4: data.client_phone_last4,
+      event: EVENT_FOR_GHL[eventRadio.id],
       plus_one: data.plus_one,
-      notes: (data.notes || '').trim(),
+      notes: String(data.notes ?? '').trim(),
+      language: lang.toUpperCase(),
+      source_url: SOURCE_URL,
     };
 
+    sending = true;
     submitBtn.disabled = true;
     submitBtn.textContent = t.sending;
     let ok = false;
     try { ok = await sendBrokerRegistration(payload); } catch (err) { ok = false; }
+    sending = false;
     submitBtn.disabled = false;
     submitBtn.innerHTML = lang === 'es' ? ES.submit : EN.submit;
 
     if (!ok) return showError(t.save);
-
-    const evLabel = form.querySelector('input[name="event"]:checked').nextElementSibling.textContent;
-    document.getElementById('successText').textContent =
-      t.done(`${payload.client.first_name} ${payload.client.last_name}`, evLabel);
-    form.hidden = true;
-    success.hidden = false;
-    success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    showSuccess(clientName, evLabel);
   });
 
   document.getElementById('another').addEventListener('click', () => {
