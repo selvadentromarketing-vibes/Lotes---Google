@@ -14,8 +14,9 @@ import SqueezeAccesibilidad from './pages/SqueezeAccesibilidad';
 import SqueezeSeguridad from './pages/SqueezeSeguridad';
 import SqueezePremium from './pages/SqueezePremium';
 import SqueezeThankYou from './pages/SqueezeThankYou';
-// In-person event landing (Toronto, Nov 19 2026) — English only.
+// In-person event landings, one per city — English only (owningTulumContent.ts).
 import OwningTulum from './pages/OwningTulum';
+import { OWNING_TULUM_TORONTO, OWNING_TULUM_MONTREAL } from './config/owningTulumContent';
 
 // Fire Meta Pixel PageView on SPA route changes.
 // Initial page load already fires PageView from the script in index.html;
@@ -63,7 +64,8 @@ function App() {
         {/* Per-angle thank-you pages — one URL per angle for ad-platform tracking */}
         <Route path="/gracias/:angle" element={<SqueezeThankYou lang="es" />} />
         <Route path="/en/gracias/:angle" element={<SqueezeThankYou lang="en" />} />
-        <Route path="/owning-tulum" element={<OwningTulum />} />
+        <Route path={OWNING_TULUM_TORONTO.path} element={<OwningTulum key="toronto" config={OWNING_TULUM_TORONTO} />} />
+        <Route path={OWNING_TULUM_MONTREAL.path} element={<OwningTulum key="montreal" config={OWNING_TULUM_MONTREAL} />} />
       </Routes>
     </Router>
   );

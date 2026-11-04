@@ -1,19 +1,14 @@
 import { parsePhoneNumber } from 'react-phone-number-input';
 import { TrackingParams, getVisitorOrigin } from './tracking';
 import { LANGUAGE_FOR_GHL, normalizeE164 } from './squeezeWebhook';
+import type { OwningTulumEventConfig } from '../config/owningTulumContent';
 
 /**
- * Registrations for the in-person event at /owning-tulum. They go to the event's
- * own GHL webhook — not the lots webhook in squeezeWebhook.ts — so they never
- * enter the lots flow. Only this page posts here.
+ * Registrations for the in-person events (/owning-tulum, /owning-tulum-montreal…).
+ * Each city posts to its own GHL webhook, with its own tag, event id and default
+ * utm_campaign — all from the city's config in owningTulumContent.ts. Never the
+ * lots webhook in squeezeWebhook.ts, so they never enter the lots flow.
  */
-export const EVENT_GHL_WEBHOOK_URL =
-  'https://services.leadconnectorhq.com/hooks/crN2IhAuOBAl7D8324yI/webhook-trigger/7cf9d992-7736-45c6-aa7b-ae21648b5ffd';
-
-/** Sent as utm_campaign when the visitor arrives without one of their own. */
-const OWNING_TULUM_DEFAULT_CAMPAIGN = 'OWNING-TULUM_TORONTO_NOV19';
-const OWNING_TULUM_TAG = 'evento-toronto-nov19';
-const OWNING_TULUM_EVENT_ID = 'owning-tulum-toronto-2026-11-19';
 
 // Questions and options match the Meta lead form of the event ad word for word,
 // so GHL gets the same values whichever form the lead came from.
@@ -104,7 +99,15 @@ const countryFromPhone = (phone: string): string => {
 export const submitEventRegistration = async (
   formData: EventRegistrationData,
   tracking: TrackingParams,
+  webhook: OwningTulumEventConfig['webhook'],
 ): Promise<{ success: boolean; error?: unknown }> => {
+  // A city without its webhook yet must not post anywhere (above all, not to another city's flow).
+  if (!webhook.url) {
+    const error = new Error(`No GHL webhook configured for ${webhook.eventId}`);
+    console.error('Event registration failed:', error);
+    return { success: false, error };
+  }
+
   const payload: EventWebhookPayload = {
     first_name: formData.first_name,
     last_name: formData.last_name,
@@ -125,19 +128,19 @@ export const submitEventRegistration = async (
     landing_page: tracking.landing_page,
     utm_source: tracking.utm_source ?? '',
     utm_medium: tracking.utm_medium ?? '',
-    utm_campaign: tracking.utm_campaign || OWNING_TULUM_DEFAULT_CAMPAIGN,
+    utm_campaign: tracking.utm_campaign || webhook.defaultCampaign,
     utm_content: tracking.utm_content ?? '',
     utm_term: tracking.utm_term ?? '',
     fbclid: tracking.fbclid ?? '',
     gclid: tracking.gclid ?? '',
     // Domain the visitor first arrived from (kept 90 days, see getVisitorOrigin).
     referrer: getVisitorOrigin().referrer,
-    tag: OWNING_TULUM_TAG,
-    event: OWNING_TULUM_EVENT_ID,
+    tag: webhook.tag,
+    event: webhook.eventId,
   };
 
   try {
-    const response = await fetch(EVENT_GHL_WEBHOOK_URL, {
+    const response = await fetch(webhook.url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
