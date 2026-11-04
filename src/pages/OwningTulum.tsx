@@ -6,21 +6,13 @@ import FAQ from '../components/FAQ';
 import SqueezeFooter from '../components/SqueezeFooter';
 import { captureTrackingParams } from '../utils/tracking';
 import { googleCalendarUrl } from '../utils/eventCalendar';
-import {
-  OWNING_TULUM_EVENT as EVENT,
-  OWNING_TULUM_LEARN,
-  OWNING_TULUM_PROJECTS,
-  OWNING_TULUM_AGENDA,
-  OWNING_TULUM_FAQ,
-  OWNING_TULUM_META,
-  OWNING_TULUM_CALENDAR,
-  type EventProject,
-} from '../config/owningTulumContent';
+import type { EventProject, OwningTulumEventConfig } from '../config/owningTulumContent';
 
 /**
- * In-person event landing: "Owning Tulum — An Investment Seminar", Toronto.
- * Same look as the squeeze landings (SqueezeLayout); copy lives in
- * owningTulumContent.ts, registrations go through eventWebhook.ts.
+ * In-person event landing: "Owning Tulum — An Investment Seminar", one route per
+ * city (App.tsx). Same look as the squeeze landings (SqueezeLayout); everything
+ * city-specific comes from the city's config in owningTulumContent.ts,
+ * registrations go through eventWebhook.ts.
  *
  * With ?registered=1 (a link for people who already signed up) the form is
  * replaced by their event details and "Add to calendar". No form means no Meta
@@ -40,7 +32,7 @@ function Eyebrow({ children, className = '' }: { children: string; className?: s
   );
 }
 
-function EventDetails({ showVenue = false }: { showVenue?: boolean }) {
+function EventDetails({ event: EVENT, showVenue = false }: { event: OwningTulumEventConfig['event']; showVenue?: boolean }) {
   return (
     <ul className="space-y-2.5 text-sm sm:text-base text-stone-700">
       <li className="flex items-start gap-3">
@@ -70,7 +62,8 @@ function EventDetails({ showVenue = false }: { showVenue?: boolean }) {
   );
 }
 
-function RegisteredDetails() {
+function RegisteredDetails({ config }: { config: OwningTulumEventConfig }) {
+  const { event: EVENT, calendar } = config;
   const button =
     'inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm font-semibold transition';
   return (
@@ -78,7 +71,7 @@ function RegisteredDetails() {
       <div className="lg:col-span-3">
         <Eyebrow>Your registration</Eyebrow>
         <h2 className="font-cardo text-3xl sm:text-4xl font-bold text-brand-dark-green leading-tight mb-4">
-          You’re registered — see you in Toronto
+          {`You’re registered — see you in ${EVENT.city}`}
         </h2>
         <p className="text-stone-700 leading-relaxed mb-4 max-w-xl">
           We’ll contact you before the event to confirm your attendance.
@@ -95,7 +88,7 @@ function RegisteredDetails() {
           <CheckCircle2 className="w-10 h-10 text-brand-olive mb-4" />
           <h3 className="font-cardo text-2xl sm:text-3xl font-bold text-brand-dark-green leading-tight">{EVENT.name}</h3>
           <p className="font-cardo text-lg text-brand-copper mb-5">{EVENT.subtitle}</p>
-          <EventDetails showVenue />
+          <EventDetails event={EVENT} showVenue />
           <a
             href={EVENT.mapUrl}
             target="_blank"
@@ -108,7 +101,7 @@ function RegisteredDetails() {
           <p className="mt-6 mb-2 text-xs font-semibold uppercase tracking-wider text-stone-700">Add to calendar</p>
           <div className="grid gap-3">
             <a
-              href={googleCalendarUrl(OWNING_TULUM_CALENDAR)}
+              href={googleCalendarUrl(calendar)}
               target="_blank"
               rel="noopener noreferrer"
               className={`${button} border border-stone-300 text-brand-dark-green hover:border-brand-olive`}
@@ -117,7 +110,7 @@ function RegisteredDetails() {
               Google Calendar
             </a>
             <a
-              href={OWNING_TULUM_CALENDAR.icsPath}
+              href={calendar.icsPath}
               className={`${button} border border-stone-300 text-brand-dark-green hover:border-brand-olive`}
             >
               <Download className="w-4 h-4" />
@@ -177,7 +170,8 @@ function VideoModal({ project, onClose }: { project: EventProject; onClose: () =
   );
 }
 
-export default function OwningTulum() {
+export default function OwningTulum({ config }: { config: OwningTulumEventConfig }) {
+  const { event: EVENT } = config;
   const [searchParams] = useSearchParams();
   const registered = searchParams.get('registered') === '1';
   const ctaLabel = registered ? 'Event details' : 'Reserve your seat';
@@ -186,8 +180,8 @@ export default function OwningTulum() {
 
   useEffect(() => {
     captureTrackingParams();
-    document.title = OWNING_TULUM_META.title;
-  }, []);
+    document.title = config.meta.title;
+  }, [config.meta.title]);
 
   return (
     <div className="min-h-screen bg-[#ECE5D8] font-lexend">
@@ -221,7 +215,7 @@ export default function OwningTulum() {
         }}
       >
         <div className="relative max-w-3xl mx-auto text-center text-white">
-          <Eyebrow>An evening in Toronto</Eyebrow>
+          <Eyebrow>{`An evening in ${EVENT.city}`}</Eyebrow>
           <h1 className="font-cardo font-bold leading-[1.02] text-white" style={{ fontSize: 'clamp(2.6rem, 7vw, 4.75rem)' }}>
             {EVENT.name}
           </h1>
@@ -276,7 +270,7 @@ export default function OwningTulum() {
       {/* With ?registered=1 the attendee's details come first, right under the hero. */}
       {registered && (
         <section id="register" className="py-16 sm:py-20 px-4 sm:px-6 bg-white scroll-mt-4">
-          <RegisteredDetails />
+          <RegisteredDetails config={config} />
         </section>
       )}
 
@@ -294,7 +288,7 @@ export default function OwningTulum() {
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-            {OWNING_TULUM_LEARN.map((item, i) => (
+            {config.learn.map((item, i) => (
               <div key={item.title} className="bg-white/70 rounded-2xl border border-brand-dark-green/10 p-7">
                 <span className="font-cardo text-3xl font-bold text-brand-copper">0{i + 1}</span>
                 <h3 className="font-cardo text-xl sm:text-2xl font-bold text-brand-dark-green mt-3 mb-3 leading-snug">
@@ -317,7 +311,7 @@ export default function OwningTulum() {
             </h2>
           </div>
           <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-            {OWNING_TULUM_PROJECTS.map((project) => (
+            {config.projects.map((project) => (
               <article
                 key={project.name}
                 className="flex flex-col rounded-2xl overflow-hidden border border-brand-dark-green/10 bg-[#F7F3EC] shadow-sm"
@@ -389,7 +383,7 @@ export default function OwningTulum() {
             <h2 className="font-cardo text-3xl sm:text-4xl font-bold leading-tight">The evening's agenda</h2>
           </div>
           <ol className="border-t border-white/15">
-            {OWNING_TULUM_AGENDA.map((item) => (
+            {config.agenda.map((item) => (
               <li key={item.time} className="flex gap-6 sm:gap-10 py-5 border-b border-white/15">
                 <span className="font-cardo text-xl sm:text-2xl font-bold text-brand-copper w-24 shrink-0">{item.time}</span>
                 <div>
@@ -409,16 +403,16 @@ export default function OwningTulum() {
             <div className="lg:col-span-3 lg:sticky lg:top-12 lg:pt-8">
               <Eyebrow>Registration</Eyebrow>
               <h2 className="font-cardo text-3xl sm:text-4xl font-bold text-brand-dark-green leading-tight mb-4">
-                Join us in Toronto
+                {`Join us in ${EVENT.city}`}
               </h2>
               <p className="text-stone-700 leading-relaxed mb-8 max-w-xl">
                 Entry is free. Seating is limited, so we ask everyone to register in advance — it only takes a
                 couple of minutes. Registered guests receive their invitation with the exact location.
               </p>
-              <EventDetails />
+              <EventDetails event={EVENT} />
             </div>
             <div className="lg:col-span-2">
-              <EventRegistrationForm />
+              <EventRegistrationForm config={config} />
             </div>
           </div>
         </section>
@@ -436,12 +430,10 @@ export default function OwningTulum() {
           <FAQ
             items={
               registered
-                ? OWNING_TULUM_FAQ.map((item) =>
-                    item.question === 'Where exactly is the event?'
-                      ? { ...item, answer: `At ${EVENT.venueName}, ${EVENT.venueAddress}.` }
-                      : item,
+                ? config.faq.map((item) =>
+                    item.revealsVenue ? { ...item, answer: `At ${EVENT.venueName}, ${EVENT.venueAddress}.` } : item,
                   )
-                : OWNING_TULUM_FAQ
+                : config.faq
             }
           />
           <p className="mt-8 text-center text-sm text-stone-600">

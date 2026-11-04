@@ -16,7 +16,7 @@ import {
 import { captureTrackingParams } from '../utils/tracking';
 import { newLeadEventId, trackMetaLead } from '../utils/leadConversion';
 import { SQUEEZE_LAYOUT_T } from '../config/squeezeContent';
-import { OWNING_TULUM_EVENT } from '../config/owningTulumContent';
+import type { OwningTulumEventConfig } from '../config/owningTulumContent';
 
 // Field labels, placeholders and consent copy are shared with the English squeeze form.
 const t = SQUEEZE_LAYOUT_T.en;
@@ -93,7 +93,8 @@ function YesNoField({
   );
 }
 
-export default function EventRegistrationForm() {
+export default function EventRegistrationForm({ config }: { config: OwningTulumEventConfig }) {
+  const { event } = config;
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [phone, setPhone] = useState<PhoneValue | undefined>(undefined);
@@ -140,20 +141,21 @@ export default function EventRegistrationForm() {
         plus_one: plusOne,
       },
       captureTrackingParams(),
+      config.webhook,
     );
 
     if (result.success) {
       // Only the Meta Lead, once per submission: no Google Ads conversion and no
       // GA4 generate_lead, so event registrations never count as lot leads.
       trackMetaLead(newLeadEventId(), {
-        content_name: 'owning-tulum',
+        content_name: config.leadContentName,
         content_category: 'event-registration',
       });
       setStatus('success');
     } else {
       setStatus('error');
       setErrorMessage(
-        `We couldn’t save your registration. Please try again or write to ${OWNING_TULUM_EVENT.contactEmail}.`,
+        `We couldn’t save your registration. Please try again or write to ${event.contactEmail}.`,
       );
     }
   };
@@ -164,13 +166,13 @@ export default function EventRegistrationForm() {
         <CheckCircle2 className="w-12 h-12 text-brand-olive mx-auto mb-4" />
         <h3 className="font-cardo text-2xl font-bold text-brand-dark-green mb-2">Your seat is reserved</h3>
         <p className="text-stone-700 leading-relaxed">
-          Thank you, {firstName.trim()}. We look forward to seeing you on {OWNING_TULUM_EVENT.dateLabel}. We’ll send
+          Thank you, {firstName.trim()}. We look forward to seeing you on {event.dateLabel}. We’ll send
           you your invitation with the exact location shortly.
         </p>
         <p className="mt-4 text-sm text-stone-500">
           Questions?{' '}
-          <a href={`mailto:${OWNING_TULUM_EVENT.contactEmail}`} className="underline hover:text-brand-dark-green">
-            {OWNING_TULUM_EVENT.contactEmail}
+          <a href={`mailto:${event.contactEmail}`} className="underline hover:text-brand-dark-green">
+            {event.contactEmail}
           </a>
         </p>
       </div>
@@ -324,7 +326,7 @@ export default function EventRegistrationForm() {
         <FormSection>The evening</FormSection>
 
         <label className="block">
-          <FieldLabel>Are you available to join us in person on November 19th in Toronto?</FieldLabel>
+          <FieldLabel>{config.form.attendanceQuestion}</FieldLabel>
           <select
             value={attendance}
             onChange={(e) => setAttendance(e.target.value as AttendanceOption | '')}
