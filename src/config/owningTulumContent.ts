@@ -302,9 +302,8 @@ export const OWNING_TULUM_MONTREAL: OwningTulumEventConfig = {
     attendanceQuestion: 'Are you available to join us in person on November 25th in Montreal?',
   },
   webhook: {
-    // PENDING: URL of the GHL workflow "Owning Tulum - registro web (Montreal Nov 25)".
-    // Never Toronto's. While empty, the form refuses to submit (eventWebhook.ts).
-    url: '',
+    // GHL workflow "Owning Tulum - registro web (Montreal Nov 25)". Never Toronto's.
+    url: 'https://services.leadconnectorhq.com/hooks/crN2IhAuOBAl7D8324yI/webhook-trigger/LOEiJhFcUYjUslTLEgeb',
     tag: 'evento-montreal-nov25',
     eventId: 'owning-tulum-montreal-2026-11-25',
     defaultCampaign: 'OWNING-TULUM_MONTREAL_NOV25',
