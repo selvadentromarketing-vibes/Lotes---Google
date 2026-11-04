@@ -179,7 +179,7 @@ const faq = (city: string, contactEmail: string): EventFaqItem[] => [
     answer: 'No. Entry is free of charge — registration is all we ask.',
   },
   {
-    // TO CONFIRM with the team.
+    // Confirmed by the team for Toronto and Montreal.
     question: 'Is there a dress code?',
     answer: 'Smart casual.',
   },
